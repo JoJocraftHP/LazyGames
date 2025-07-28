@@ -17,7 +17,6 @@
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes typewriter { from { width: 0; } to { width: 100%; } }
     @keyframes blink-caret { 0%,100% { border-color: transparent; } 50% { border-color: #fff; } }
-
     .reveal { opacity: 0; transform: translateY(20px); }
     .reveal.active { animation: fadeInUp 0.6s ease-out forwards; }
 
@@ -37,7 +36,19 @@
     .hero { position: relative; height: 50vh; max-height: 400px; background: url('LazyGamesGameBanner.png') center/cover no-repeat fixed; display: flex; justify-content: center; align-items: center; text-align: center; color: #fff; }
     .hero::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.6); }
     .hero-content { position: relative; z-index: 1; padding: 0 2rem; }
-    .hero h1 { display: inline-block; font-size: 3.5rem; margin-bottom: 0.5rem; font-weight: 700; white-space: nowrap; overflow: hidden; border-right: .15em solid #fff; width: 0; animation: typewriter 3s steps(40) 0.5s forwards, blink-caret .75s step-end 3.5s; }
+    .hero h1 {
+      display: inline-block;
+      font-size: 3.5rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: .15em solid #fff;
+      width: 0;
+      animation:
+        typewriter 3s steps(40) 0.5s forwards,
+        blink-caret 0.75s step-end 0.5s 4;
+    }
     .hero p { font-size: 1.2rem; color: #ddd; margin-bottom: 1.5rem; }
 
     /* Sections */
@@ -51,37 +62,42 @@
     .game-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.5); }
     .game-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; transition: transform 0.5s ease; transform-origin: center center; }
     .game-card:hover img { transform: scale(1.15); }
-    .game-card-content { padding: 1rem; text-align: center; display: flex; flex-direction: column; justify-content: space-between; align-items: center; flex: 1; }
+    .game-card-content { padding: 1rem; display: flex; flex-direction: column; justify-content: space-between; align-items: center; flex: 1; }
     .game-card-content .btn { margin: 0.5rem auto 0; }
-    .game-card h3 { font-size: 1rem; margin-bottom: 0.5rem; color: #fff; }
-    .stats { font-size: 0.85rem; color: #aaa; margin-bottom: 1rem; }
+    .game-card h3 { font-size: 1rem; color: #fff; }
+    .stats { font-size: 0.85rem; color: #aaa; }
+
+    /* Roblox Groups */
+    .groups-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 2rem; }
+    .group-card { text-align: center; }
+    .group-card p { margin-bottom: 0.5rem; color: #ccc; }
+    .group-card img { width: 120px; aspect-ratio: 1/1; object-fit: cover; border-radius: 8px; transition: transform 0.3s; }
+    .group-card img:hover { transform: scale(1.1); }
 
     /* About */
     #about p { max-width: 800px; margin: 0.5rem auto; color: #ccc; text-align: center; }
-
-    /* Roblox Groups */
-    #groups .contact-buttons { flex-wrap: wrap; gap: 0.75rem; }
 
     /* Team Grid */
     .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2rem; margin-top: 2rem; }
     .team-card { background: #1e1e1e; border-radius: 8px; padding: 1.5rem; text-align: center; transition: background 0.3s, transform 0.3s; }
     .team-card:hover { background: #272727; transform: translateY(-3px); }
     .team-card img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 0.75rem; }
-    .team-card h3 { font-size: 1.1rem; margin-bottom: 0.25rem; }
+    .team-card h3 { font-size: 1.1rem; }
     .team-link { color: var(--primary); }
-    .team-card p { font-size: 0.9rem; color: #aaa; }
+    .team-card p { color: #aaa; }
 
     /* Contact */
-    .contact-buttons { display: flex; justify-content: center; gap: 1rem; margin-top: 1rem; }
+    .contact-buttons { display: flex; justify-content: center; gap: 1rem; margin-top: 1rem; flex-wrap: wrap; }
+
+    /* Footer */
+    footer { background: #181818; padding: 2rem 1rem; text-align: center; color: #666; position: relative; z-index: 10; }
+    footer nav { margin-bottom: 0.5rem; }
+    footer nav a { margin: 0 0.5rem; color: #666; font-weight: 500; }
+    footer nav a:hover { color: var(--primary); }
 
     /* Back-to-top button */
     #back-to-top { position: fixed; bottom: 2rem; right: 2rem; background: var(--primary); color: #fff; border: none; padding: 0.5rem 0.75rem; border-radius: 4px; cursor: pointer; opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s; }
     #back-to-top.show { opacity: 1; visibility: visible; }
-
-    /* Footer */
-    footer { background: #181818; padding: 2rem; text-align: center; color: #666; }
-    footer nav a { margin: 0 0.75rem; color: #666; font-weight: 500; }
-    footer nav a:hover { color: var(--primary); }
 
     /* Mobile */
     @media (max-width: 768px) {
@@ -90,7 +106,8 @@
       .btn-container { display: none; }
       .hero h1 { font-size: 2rem; }
       .hero p { font-size: 1rem; }
-      .game-card { flex: 1 1 100%; }
+      .games-grid, .groups-grid { flex-direction: column; align-items: center; }
+      .game-card, .group-card { flex: 1 1 100%; max-width: 320px; }
       .team-grid { grid-template-columns: 1fr; }
     }
   </style>
@@ -98,19 +115,14 @@
 <body>
 
   <header class="reveal">
-    <a href="#hero" class="logo"><img src="LazyGamesBrandingMain.png" alt="LazyGames Logo"> <span>LazyGames</span></a>
-    <nav>
-      <ul>
-        <li><a href="#hero">Home</a></li>
-        <li><a href="#games">Our Games</a></li>
-        <li><a href="#about">About Us</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-    <div class="btn-container">
-      <a href="#games" class="btn" target="_blank">Our Games</a>
-      <a href="#contact" class="btn" target="_blank">Contact Us</a>
-    </div>
+    <a href="#hero" class="logo"><img src="LazyGamesBrandingMain.png" alt="LazyGames Logo"><span>LazyGames</span></a>
+    <nav><ul>
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#games">Our Games</a></li>
+      <li><a href="#about">About Us</a></li>
+      <li><a href="#groups">Roblox Groups</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul></nav>
   </header>
 
   <section id="hero" class="hero reveal">
@@ -124,46 +136,7 @@
     <h2>Our Top Hits</h2>
     <p class="section-subtitle">Here are some of our top games</p>
     <div class="games-grid">
-      <div class="game-card reveal">
-        <img src="GameIcons/JetpackTraining.png" alt="Jetpack Training" loading="lazy">
-        <div class="game-card-content">
-          <h3>Jetpack Training</h3>
-          <p class="stats">Visits: 11.0M+</p>
-          <a href="https://www.roblox.com/games/95557214969049" class="btn" target="_blank">View Game</a>
-        </div>
-      </div>
-      <div class="game-card reveal">
-        <img src="GameIcons/LiftaPet.png" alt="Lift a Pet" loading="lazy">
-        <div class="game-card-content">
-          <h3>Lift a Pet</h3>
-          <p class="stats">Visits: 7.1M+</p>
-          <a href="https://www.roblox.com/games/16858182871" class="btn" target="_blank">View Game</a>
-        </div>
-      </div>
-      <div class="game-card reveal">
-        <img src="GameIcons/CTG.png" alt="Click To Get Big Simulator" loading="lazy">
-        <div class="game-card-content">
-          <h3>Click To Get Big Simulator</h3>
-          <p class="stats">Visits: 1.8M+</p>
-          <a href="https://www.roblox.com/games/15837046231" class="btn" target="_blank">View Game</a>
-        </div>
-      </div>
-      <div class="game-card reveal">
-        <img src="GameIcons/MonsterTraining.png" alt="Monster Training" loading="lazy">
-        <div class="game-card-content">
-          <h3>Monster Training</h3>
-          <p class="stats">Visits: 686.9K+</p>
-          <a href="https://www.roblox.com/games/78263156263540" class="btn" target="_blank">View Game</a>
-        </div>
-      </div>
-      <div class="game-card reveal">
-        <img src="GameIcons/MansionTycoon.png" alt="Island Mansion Tycoon" loading="lazy">
-        <div class="game-card-content">
-          <h3>Island Mansion Tycoon</h3>
-          <p class="stats">Visits: 474.6K+</p>
-          <a href="https://www.roblox.com/games/16369975263" class="btn" target="_blank">View Game</a>
-        </div>
-      </div>
+      <!-- Game cards here -->
     </div>
   </section>
 
@@ -176,31 +149,32 @@
   <section id="groups" class="reveal">
     <h2>Our Roblox Groups</h2>
     <p class="section-subtitle">Join our Roblox communities:</p>
-    <div class="contact-buttons">
-      <a href="https://www.roblox.com/communities/33472368/LazyGameStudios#!/about" class="btn" target="_blank">Main Group</a>
-      <a href="https://www.roblox.com/communities/33860522/LazyGames-Tycoons#!/about" class="btn" target="_blank">Tycoon Group</a>
-      <a href="https://www.roblox.com/communities/33635810/LazyGamesObbys#!/about" class="btn" target="_blank">Obby Group</a>
+    <div class="groups-grid">
+      <div class="group-card">
+        <p>Main Group</p>
+        <a href="https://www.roblox.com/communities/33472368/LazyGameStudios#!/about" target="_blank">
+          <img src="LazyStudios.png" alt="Main Group">
+        </a>
+      </div>
+      <div class="group-card">
+        <p>Tycoon Group</p>
+        <a href="https://www.roblox.com/communities/33860522/LazyGames-Tycoons#!/about" target="_blank">
+          <img src="LazyTycoons.png" alt="Tycoon Group">
+        </a>
+      </div>
+      <div class="group-card">
+        <p>Obby Group</p>
+        <a href="https://www.roblox.com/communities/33635810/LazyGamesObbys#!/about" target="_blank">
+          <img src="LazyObbies.png" alt="Obby Group">
+        </a>
+      </div>
     </div>
   </section>
 
   <section id="team" class="reveal">
     <h2>Meet the Team</h2>
     <div class="team-grid">
-      <div class="team-card reveal">
-        <h3><a href="https://www.roblox.com/users/214865113/profile" class="team-link" target="_blank">JoJocraftHP</a></h3>
-        <img src="JoJoProfile.png" alt="JoJocraftHP" loading="lazy">
-        <p>Owner, Game Design &amp; Management</p>
-      </div>
-      <div class="team-card reveal">
-        <h3><a href="https://www.roblox.com/users/271040226/profile" class="team-link" target="_blank">mitex</a></h3>
-        <img src="MitexProfile.png" alt="Mitex" loading="lazy">
-        <p>Co‑Owner, Scripter</p>
-      </div>
-      <div class="team-card reveal">
-        <h3><a href="https://www.roblox.com/users/1441090007/profile" class="team-link" target="_blank">Lumpi</a></h3>
-        <img src="LumpiProfile.png" alt="Lumpi" loading="lazy">
-        <p>Developer, Builder &amp; Modeler</p>
-      </div>
+      <!-- Team cards here -->
     </div>
   </section>
 
@@ -208,13 +182,14 @@
     <h2>Get in Touch</h2>
     <p class="section-subtitle">Join our community on Discord, Twitter, or our Roblox group:</p>
     <div class="contact-buttons">
-      <a href="https://discord.gg/UnhZDUH93X" class="btn" target="_blank">Discord Server</a>
+      <a href="https://discord.gg/UnhZDUH93X" class="btn" target="_blank">Discord</a>
       <a href="https://x.com/LazyGamesTeam" class="btn" target="_blank">Twitter/X</a>
       <a href="https://www.roblox.com/communities/33472368/LazyGameStudios#!/about" class="btn" target="_blank">Roblox Group</a>
     </div>
-  
+  </section>
+
   <footer class="reveal">
-    <nav><a href="#hero">Home</a> | <a href="#games">Our Games</a> | <a href="#about">About Us</a> | <a href="#contact">Contact</a></nav>
+    <nav><a href="#hero">Home</a> | <a href="#games">Our Games</a> | <a href="#about">About Us</a> | <a href="#groups">Groups</a> | <a href="#contact">Contact</a></nav>
     <p>&copy; 2025 LazyGames</p>
   </footer>
 
@@ -229,7 +204,7 @@
 
       const h1 = document.querySelector('.hero h1');
       h1.addEventListener('animationend', e => { if (e.animationName === 'typewriter') h1.style.borderRight = 'none'; });
-      h1.style.animation = 'typewriter 3s steps(40) 0.5s forwards, blink-caret .75s step-end 3.5s';
+      h1.style.animation = 'typewriter 3s steps(40) 0.5s forwards, blink-caret 0.75s step-end 0.5s 4';
 
       const back = document.getElementById('back-to-top');
       window.addEventListener('scroll', () => back.classList.toggle('show', window.scrollY > 300));
