@@ -48,10 +48,11 @@
     /* Games Grid */
     .games-grid { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; }
     .game-card { background: #1e1e1e; border-radius: 8px; flex: 1 1 calc(20% - 1rem); display: flex; flex-direction: column; overflow: hidden; transition: transform 0.3s; }
-    .game-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; transition: transform 0.3s ease; }
+    .game-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; transition: transform 0.3s ease; transform-origin: center center; }
     .game-card:hover { transform: translateY(-5px); }
     .game-card:hover img { transform: scale(1.08); }
-    .game-card-content { padding: 1rem; text-align: center; display: flex; flex-direction: column; justify-content: space-between; flex: 1; }
+    .game-card-content { padding: 1rem; text-align: center; display: flex; flex-direction: column; justify-content: space-between; align-items: center; flex: 1; }
+    .game-card-content .btn { margin-left: 0; }
     .game-card h3 { font-size: 1rem; margin-bottom: 0.5rem; color: #fff; }
     .stats { font-size: 0.85rem; color: #aaa; margin-bottom: 1rem; }
 
@@ -80,7 +81,15 @@
     footer nav a:hover { color: var(--primary); }
 
     /* Mobile */
-    @media (max-width: 768px) { header { flex-direction: column; align-items: flex-start; padding: 0.5rem 1rem; } nav ul { flex-wrap: wrap; gap: 1rem; margin: 0.5rem 0; justify-content: flex-start; } .btn-container { display: flex; flex-direction: row; gap: 0.5rem; } .btn { margin: 0; padding: 0.4rem 0.8rem; font-size: 0.9rem; } .hero h1 { font-size: 2rem; } .hero p { font-size: 1rem; } .game-card { flex: 1 1 100%; } .team-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) {
+      header { flex-direction: column; align-items: flex-start; padding: 0.5rem 1rem; }
+      nav ul { flex-wrap: wrap; gap: 1rem; margin: 0.5rem 0; justify-content: flex-start; }
+      .btn-container { display: none; }
+      .hero h1 { font-size: 2rem; }
+      .hero p { font-size: 1rem; }
+      .game-card { flex: 1 1 100%; }
+      .team-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -200,26 +209,19 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Scroll-reveal
       const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('active'); obs.unobserve(e.target); } });
       }, { threshold: 0.1 });
       document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-      // Typewriter start
       const h1 = document.querySelector('.hero h1');
-      h1.addEventListener('animationend', e => {
-        if (e.animationName === 'typewriter') h1.style.borderRight = 'none';
-      });
-      // trigger typewriter
+      h1.addEventListener('animationend', e => { if (e.animationName === 'typewriter') h1.style.borderRight = 'none'; });
       h1.style.animation = 'typewriter 3s steps(40) 0.5s forwards, blink-caret .75s step-end 3.5s';
 
-      // Back-to-top
       const back = document.getElementById('back-to-top');
       window.addEventListener('scroll', () => back.classList.toggle('show', window.scrollY > 300));
       back.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   </script>
-
 </body>
 </html>
