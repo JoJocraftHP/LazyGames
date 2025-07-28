@@ -5,29 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>LazyGames</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-
-  <!-- Favicon & PWA manifest -->
-  <link rel="icon" href="/favicon.ico">
-  <link rel="manifest" href="/site.webmanifest">
-
-  <!-- SEO -->
-  <meta name="description" content="LazyGames – Roblox studio behind Jetpack Training, Lift a Pet, and more.">
-  <meta name="keywords" content="Roblox, simulator games, LazyGames, Jetpack Training, Lift a Pet">
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="LazyGames Studio">
-  <meta property="og:description" content="Top‑quality Roblox simulators & new genres coming soon.">
-  <meta property="og:image" content="https://yourdomain.com/LazyGamesBanner.png">
-  <meta property="og:url" content="https://yourdomain.com/">
-  <meta property="og:type" content="website">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@LazyGamesTeam">
-  <meta name="twitter:title" content="LazyGames Studio">
-  <meta name="twitter:description" content="Top‑quality Roblox simulators & new genres coming soon.">
-  <meta name="twitter:image" content="https://yourdomain.com/LazyGamesBanner.png">
-
   <style>
     /* Reset & Base */
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -59,7 +36,19 @@
     .hero { position: relative; height: 50vh; max-height: 400px; background: url('LazyGamesGameBanner.png') center/cover no-repeat fixed; display: flex; justify-content: center; align-items: center; text-align: center; color: #fff; }
     .hero::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.6); }
     .hero-content { position: relative; z-index: 1; padding: 0 2rem; }
-    .hero h1 { display: inline-block; font-size: 3.5rem; margin-bottom: 0.5rem; font-weight: 700; white-space: nowrap; overflow: hidden; border-right: .15em solid #fff; width: 0; animation: typewriter 3s steps(40) 0.5s forwards, blink-caret 0.75s step-end 0.5s 4; }
+    .hero h1 {
+      display: inline-block;
+      font-size: 3.5rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: .15em solid #fff;
+      width: 0;
+      animation:
+        typewriter 3s steps(40) 0.5s forwards,
+        blink-caret 0.75s step-end 0.5s 4;
+    }
     .hero p { font-size: 1.2rem; color: #ddd; margin-bottom: 1.5rem; }
 
     /* Sections */
@@ -146,40 +135,113 @@
     <h2>Our Top Hits</h2>
     <p class="section-subtitle">Here are some of our top games</p>
     <div class="games-grid">
-      <!-- game cards... -->
+      <div class="game-card reveal">
+        <img src="GameIcons/JetpackTraining.png" alt="Jetpack Training" loading="lazy">
+        <div class="game-card-content">
+          <h3>Jetpack Training</h3>
+          <p class="stats">Visits: 11.0M+</p>
+          <a href="https://www.roblox.com/games/95557214969049" class="btn" target="_blank">View Game</a>
+        </div>
+      </div>
+      <div class="game-card reveal">
+        <img src="GameIcons/LiftaPet.png" alt="Lift a Pet" loading="lazy">
+        <div class="game-card-content">
+          <h3>Lift a Pet</h3>
+          <p class="stats">Visits: 7.1M+</p>
+          <a href="https://www.roblox.com/games/16858182871" class="btn" target="_blank">View Game</a>
+        </div>
+      </div>
+      <div class="game-card reveal">
+        <img src="GameIcons/CTG.png" alt="Click To Get Big Simulator" loading="lazy">
+        <div class="game-card-content">
+          <h3>Click To Get Big Simulator</h3>
+          <p class="stats">Visits: 1.8M+</p>
+          <a href="https://www.roblox.com/games/15837046231" class="btn" target="_blank">View Game</a>
+        </div>
+      </div>
+      <div class="game-card reveal">
+        <img src="GameIcons/MonsterTraining.png" alt="Monster Training" loading="lazy">
+        <div class="game-card-content">
+          <h3>Monster Training</h3>
+          <p class="stats">Visits: 686.9K+</p>
+          <a href="https://www.roblox.com/games/78263156263540" class="btn" target="_blank">View Game</a>
+        </div>
+      </div>
+      <div class="game-card reveal">
+        <img src="GameIcons/MansionTycoon.png" alt="Island Mansion Tycoon" loading="lazy">
+        <div class="game-card-content">
+          <h3>Island Mansion Tycoon</h3>
+          <p class="stats">Visits: 474.6K+</p>
+          <a href="https://www.roblox.com/games/16369975263" class="btn" target="_blank">View Game</a>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Live Stats Section -->
-  <section id="stats" class="reveal">
-    <h2>Live Studio Stats</h2>
-    <ul>
-      <li>Monster Training: <span id="visits-7676176341">Loading…</span></li>
-      <li>Lift a Pet: <span id="visits-5792683386">Loading…</span></li>
-      <li>Jetpack Training: <span id="visits-7017269091">Loading…</span></li>
-      <li>Click To Get Big: <span id="visits-5476431443">Loading…</span></li>
-      <li>Island Mansion Tycoon: <span id="visits-5644782538">Loading…</span></li>
-    </ul>
-  </section>
-
   <section id="about" class="reveal">
-    <!-- about content... -->
+    <h2>About Us</h2>
+    <p>LazyGames is a Roblox studio founded in 2023 by developers active since 2017.</p>
+    <p>We’re best known for our simulator games, but we’re expanding into new genres with fresh ideas. From concept to launch, we focus on creating fun, high‑quality experiences for players worldwide.</p>
   </section>
 
   <section id="groups" class="reveal">
-    <!-- groups content... -->
+    <h2>Our Roblox Groups</h2>
+    <p class="section-subtitle">Join our Roblox communities:</p>
+    <div class="groups-grid">
+      <div class="group-card">
+        <p>Main Group</p>
+        <a href="https://www.roblox.com/communities/33472368/LazyGameStudios#!/about" target="_blank">
+          <img src="LazyStudios.png" alt="Main Group">
+        </a>
+      </div>
+      <div class="group-card">
+        <p>Tycoon Group</p>
+        <a href="https://www.roblox.com/communities/33860522/LazyGames-Tycoons#!/about" target="_blank">
+          <img src="LazyTycoons.png" alt="Tycoon Group">
+        </a>
+      </div>
+      <div class="group-card">
+        <p>Obby Group</p>
+        <a href="https://www.roblox.com/communities/33635810/LazyGamesObbys#!/about" target="_blank">
+          <img src="LazyObbies.png" alt="Obby Group">
+        </a>
+      </div>
+    </div>
   </section>
 
   <section id="team" class="reveal">
-    <!-- team content... -->
+    <h2>Meet the Team</h2>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <h3><a href="https://www.roblox.com/users/214865113/profile" class="team-link" target="_blank">JoJocraftHP</a></h3>
+        <img src="JoJoProfile.png" alt="JoJocraftHP" loading="lazy">
+        <p>Owner, Game Design &amp; Management</p>
+      </div>
+      <div class="team-card reveal">
+        <h3><a href="https://www.roblox.com/users/271040226/profile" class="team-link" target="_blank">mitex</a></h3>
+        <img src="MitexProfile.png" alt="Mitex" loading="lazy">
+        <p>Co‑Owner, Scripter</p>
+      </div>
+      <div class="team-card reveal">
+        <h3><a href="https://www.roblox.com/users/1441090007/profile" class="team-link" target="_blank">Lumpi</a></h3>
+        <img src="LumpiProfile.png" alt="Lumpi" loading="lazy">
+        <p>Developer, Builder &amp; Modeler</p>
+      </div>
+    </div>
   </section>
 
   <section id="contact" class="reveal">
-    <!-- contact content... -->
+    <h2>Get in Touch</h2>
+    <p class="section-subtitle">Join our community on Discord, Twitter, or our Roblox group:</p>
+    <div class="contact-buttons">
+      <a href="https://discord.gg/UnhZDUH93X" class="btn" target="_blank">Discord</a>
+      <a href="https://x.com/LazyGamesTeam" class="btn" target="_blank">Twitter/X</a>
+      <a href="https://www.roblox.com/communities/33472368/LazyGameStudios#!/about" class="btn" target="_blank">Roblox Group</a>
+    </div>
   </section>
 
   <footer class="reveal">
-    <!-- footer nav... -->
+    <nav><a href="#hero">Home</a> | <a href="#games">Our Games</a> | <a href="#about">About Us</a> | <a href="#groups">Groups</a> | <a href="#contact">Contact</a></nav>
     <p>&copy; 2025 LazyGames</p>
   </footer>
 
@@ -188,50 +250,18 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const observer = new IntersectionObserver((entries, obs) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            e.target.classList.add('active');
-            obs.unobserve(e.target);
-          }
-        });
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('active'); obs.unobserve(e.target); } });
       }, { threshold: 0.1 });
       document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
       const h1 = document.querySelector('.hero h1');
-      h1.addEventListener('animationend', e => {
-        if (e.animationName === 'typewriter') h1.style.borderRight = 'none';
-      });
+      h1.addEventListener('animationend', e => { if (e.animationName === 'typewriter') h1.style.borderRight = 'none'; });
       h1.style.animation = 'typewriter 3s steps(40) 0.5s forwards, blink-caret 0.75s step-end 0.5s 4';
 
       const back = document.getElementById('back-to-top');
       window.addEventListener('scroll', () => back.classList.toggle('show', window.scrollY > 300));
       back.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-  </script>
-
-  <script>
-    const universes = [
-      { id: '7676176341', label: 'visits-7676176341' },
-      { id: '5792683386', label: 'visits-5792683386' },
-      { id: '7017269091', label: 'visits-7017269091' },
-      { id: '5476431443', label: 'visits-5476431443' },
-      { id: '5644782538', label: 'visits-5644782538' },
-    ];
-    const ids = universes.map(u => u.id).join(',');
-    fetch(`https://games.roblox.com/v1/games?universeIds=${ids}`)
-      .then(res => res.json())
-      .then(data => {
-        data.data.forEach(game => {
-          const match = universes.find(u => u.id === String(game.id));
-          const el = document.getElementById(match.label);
-          if (el) el.textContent = game.visits.toLocaleString();
-        });
-      })
-      .catch(() => {
-        universes.forEach(u => {
-          document.getElementById(u.label).textContent = 'Error';
-        });
-      });
   </script>
 </body>
 </html>
