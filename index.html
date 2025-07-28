@@ -59,6 +59,9 @@
     /* About */
     #about p { max-width: 800px; margin: 0.5rem auto; color: #ccc; text-align: center; }
 
+    /* Roblox Groups */
+    #groups .contact-buttons { flex-wrap: wrap; gap: 0.75rem; }
+
     /* Team Grid */
     .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2rem; margin-top: 2rem; }
     .team-card { background: #1e1e1e; border-radius: 8px; padding: 1.5rem; text-align: center; transition: background 0.3s, transform 0.3s; }
@@ -70,7 +73,6 @@
 
     /* Contact */
     .contact-buttons { display: flex; justify-content: center; gap: 1rem; margin-top: 1rem; }
-    .contact-buttons .btn:nth-child(3) { background: #0066cc; color: #fff; } /* Roblox group button style */
 
     /* Back-to-top button */
     #back-to-top { position: fixed; bottom: 2rem; right: 2rem; background: var(--primary); color: #fff; border: none; padding: 0.5rem 0.75rem; border-radius: 4px; cursor: pointer; opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s; }
@@ -122,7 +124,46 @@
     <h2>Our Top Hits</h2>
     <p class="section-subtitle">Here are some of our top games</p>
     <div class="games-grid">
-      <!-- game cards -->
+      <div class="game-card reveal">
+        <img src="GameIcons/JetpackTraining.png" alt="Jetpack Training" loading="lazy">
+        <div class="game-card-content">
+          <h3>Jetpack Training</h3>
+          <p class="stats">Visits: 11.0M+</p>
+          <a href="https://www.roblox.com/games/95557214969049" class="btn" target="_blank">View Game</a>
+        </div>
+      </div>
+      <div class="game-card reveal">
+        <img src="GameIcons/LiftaPet.png" alt="Lift a Pet" loading="lazy">
+        <div class="game-card-content">
+          <h3>Lift a Pet</h3>
+          <p class="stats">Visits: 7.1M+</p>
+          <a href="https://www.roblox.com/games/16858182871" class="btn" target="_blank">View Game</a>
+        </div>
+      </div>
+      <div class="game-card reveal">
+        <img src="GameIcons/CTG.png" alt="Click To Get Big Simulator" loading="lazy">
+        <div class="game-card-content">
+          <h3>Click To Get Big Simulator</h3>
+          <p class="stats">Visits: 1.8M+</p>
+          <a href="https://www.roblox.com/games/15837046231" class="btn" target="_blank">View Game</a>
+        </div>
+      </div>
+      <div class="game-card reveal">
+        <img src="GameIcons/MonsterTraining.png" alt="Monster Training" loading="lazy">
+        <div class="game-card-content">
+          <h3>Monster Training</h3>
+          <p class="stats">Visits: 686.9K+</p>
+          <a href="https://www.roblox.com/games/78263156263540" class="btn" target="_blank">View Game</a>
+        </div>
+      </div>
+      <div class="game-card reveal">
+        <img src="GameIcons/MansionTycoon.png" alt="Island Mansion Tycoon" loading="lazy">
+        <div class="game-card-content">
+          <h3>Island Mansion Tycoon</h3>
+          <p class="stats">Visits: 474.6K+</p>
+          <a href="https://www.roblox.com/games/16369975263" class="btn" target="_blank">View Game</a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -132,10 +173,34 @@
     <p>We’re best known for our simulator games, but we’re expanding into new genres with fresh ideas. From concept to launch, we focus on creating fun, high‑quality experiences for players worldwide.</p>
   </section>
 
+  <section id="groups" class="reveal">
+    <h2>Our Roblox Groups</h2>
+    <p class="section-subtitle">Join our Roblox communities:</p>
+    <div class="contact-buttons">
+      <a href="https://www.roblox.com/communities/33472368/LazyGameStudios#!/about" class="btn" target="_blank">Main Group</a>
+      <a href="https://www.roblox.com/communities/33860522/LazyGames-Tycoons#!/about" class="btn" target="_blank">Tycoon Group</a>
+      <a href="https://www.roblox.com/communities/33635810/LazyGamesObbys#!/about" class="btn" target="_blank">Obby Group</a>
+    </div>
+  </section>
+
   <section id="team" class="reveal">
     <h2>Meet the Team</h2>
     <div class="team-grid">
-      <!-- team cards -->
+      <div class="team-card reveal">
+        <h3><a href="https://www.roblox.com/users/214865113/profile" class="team-link" target="_blank">JoJocraftHP</a></h3>
+        <img src="JoJoProfile.png" alt="JoJocraftHP" loading="lazy">
+        <p>Owner, Game Design &amp; Management</p>
+      </div>
+      <div class="team-card reveal">
+        <h3><a href="https://www.roblox.com/users/271040226/profile" class="team-link" target="_blank">mitex</a></h3>
+        <img src="MitexProfile.png" alt="Mitex" loading="lazy">
+        <p>Co‑Owner, Scripter</p>
+      </div>
+      <div class="team-card reveal">
+        <h3><a href="https://www.roblox.com/users/1441090007/profile" class="team-link" target="_blank">Lumpi</a></h3>
+        <img src="LumpiProfile.png" alt="Lumpi" loading="lazy">
+        <p>Developer, Builder &amp; Modeler</p>
+      </div>
     </div>
   </section>
 
@@ -147,8 +212,7 @@
       <a href="https://x.com/LazyGamesTeam" class="btn" target="_blank">Twitter/X</a>
       <a href="https://www.roblox.com/communities/33472368/LazyGameStudios#!/about" class="btn" target="_blank">Roblox Group</a>
     </div>
-  </section>
-
+  
   <footer class="reveal">
     <nav><a href="#hero">Home</a> | <a href="#games">Our Games</a> | <a href="#about">About Us</a> | <a href="#contact">Contact</a></nav>
     <p>&copy; 2025 LazyGames</p>
