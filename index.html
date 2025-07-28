@@ -12,31 +12,19 @@
     body { background: #111; color: #eee; line-height: 1.6; }
     a { text-decoration: none; }
     :root { --primary: rgb(208,24,98); --primary-dark: rgb(180,20,85); }
-    a.team-link { color: var(--primary); }
 
     /* Animations */
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     .reveal { opacity: 0; transform: translateY(20px); }
     .reveal.active { animation: fadeInUp 0.6s ease-out forwards; }
-
     @keyframes typewriter { from { width: 0; } to { width: 100%; } }
     @keyframes blink-caret { 0%,100% { border-color: transparent; } 50% { border-color: #fff; } }
 
     /* Header */
-    header {
-      position: sticky; top: 0;
-      background: rgba(20,20,20,0.95);
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 1rem 2rem; z-index: 100;
-    }
-    .logo {
-      display: inline-flex; align-items: center; gap: 0.75rem;
-      font-size: 1.75rem; font-weight: 700; color: var(--primary);
-      padding: 0.25rem 0.5rem; border-radius: 4px;
-      transition: background 0.2s;
-    }
+    header { position: sticky; top: 0; background: rgba(20,20,20,0.95); display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; z-index: 100; }
+    .logo { display: inline-flex; align-items: center; gap: 0.75rem; font-size: 1.75rem; font-weight: 700; color: var(--primary); padding: 0.25rem 0.5rem; border-radius: 4px; transition: background 0.2s; }
     .logo:hover { background: rgba(255,255,255,0.1); cursor: pointer; }
-    .logo img { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; aspect-ratio: 1/1; }
+    .logo img { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; }
     nav ul { display: flex; list-style: none; gap: 2rem; }
     nav a { color: #ccc; font-weight: 500; position: relative; }
     nav a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--primary); transition: width 0.3s; }
@@ -45,18 +33,10 @@
     .btn:hover { background: var(--primary-dark); transform: scale(1.05); }
 
     /* Hero */
-    .hero {
-      position: relative; height: 50vh; max-height: 400px;
-      background: url('LazyGamesGameBanner.png') center/cover no-repeat fixed;
-      display: flex; justify-content: center; align-items: center; text-align: center; color: #fff;
-    }
+    .hero { position: relative; height: 50vh; max-height: 400px; background: url('LazyGamesGameBanner.png') center/cover no-repeat fixed; display: flex; justify-content: center; align-items: center; text-align: center; color: #fff; }
     .hero::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.6); }
     .hero-content { position: relative; z-index: 1; padding: 0 2rem; }
-    .hero h1 {
-      font-size: 3.5rem; margin-bottom: 0.5rem; font-weight: 700; overflow: hidden; white-space: nowrap;
-      border-right: .15em solid #fff; width: 0;
-      animation: typewriter 3s steps(40) 0.5s forwards, blink-caret .75s step-end 0.5s 4;
-    }
+    .hero h1 { font-size: 3.5rem; margin-bottom: 0.5rem; font-weight: 700; overflow: hidden; white-space: nowrap; border-right: .15em solid #fff; width: 0; animation: typewriter 3s steps(40) 0.5s forwards, blink-caret .75s step-end 0.5s 4; }
     .hero p { font-size: 1.2rem; color: #ddd; margin-bottom: 1.5rem; }
 
     /* Sections */
@@ -69,6 +49,7 @@
     .game-card { background: #1e1e1e; border-radius: 8px; flex: 1 1 calc(20% - 1rem); display: flex; flex-direction: column; overflow: hidden; transition: transform 0.3s; }
     .game-card:hover { transform: translateY(-5px); }
     .game-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; }
+    .game-card img[loading] { loading: lazy; }
     .game-card-content { padding: 1rem; text-align: center; display: flex; flex-direction: column; justify-content: space-between; flex: 1; }
     .game-card h3 { font-size: 1rem; margin-bottom: 0.5rem; color: #fff; }
     .stats { font-size: 0.85rem; color: #aaa; margin-bottom: 1rem; }
@@ -77,10 +58,11 @@
     #about p { max-width: 800px; margin: 0.5rem auto; color: #ccc; text-align: center; }
 
     /* Team Grid */
-    .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 2rem; margin-top: 2rem; }
+    .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2rem; margin-top: 2rem; }
     .team-card { background: #1e1e1e; border-radius: 8px; padding: 1.5rem; text-align: center; transition: background 0.3s, transform 0.3s; }
     .team-card:hover { background: #272727; transform: translateY(-3px); }
     .team-card img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 0.75rem; }
+    .team-card img[loading] { loading: lazy; }
     .team-card h3 { font-size: 1.1rem; margin-bottom: 0.25rem; color: #fff; }
     .team-card p { font-size: 0.9rem; color: #aaa; }
 
@@ -113,12 +95,14 @@
 
   <header class="reveal">
     <a href="#hero" class="logo"><img src="LazyGamesBrandingMain.png" alt="LazyGames Logo"> <span>LazyGames</span></a>
-    <nav><ul>
+    <nav>
+      <ul>
         <li><a href="#hero">Home</a></li>
         <li><a href="#games">Our Games</a></li>
         <li><a href="#about">About Us</a></li>
         <li><a href="#contact">Contact</a></li>
-      </ul></nav>
+      </ul>
+    </nav>
     <div class="btn-container">
       <a href="#games" class="btn">Our Games</a>
       <a href="#contact" class="btn">Contact Us</a>
@@ -226,31 +210,20 @@
     document.addEventListener('DOMContentLoaded', () => {
       // Scroll-reveal
       const observer = new IntersectionObserver((entries, obs) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            e.target.classList.add('active');
-            obs.unobserve(e.target);
-          }
-        });
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('active'); obs.unobserve(e.target); } });
       }, { threshold: 0.1 });
       document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-      // Remove caret after typing
+      // Remove caret
       const h1 = document.querySelector('.hero h1');
-      if (h1) {
-        h1.addEventListener('animationend', e => {
-          if (e.animationName === 'typewriter') h1.style.borderRight = 'none';
-        });
-      }
+      h1.addEventListener('animationend', e => {
+        if (e.animationName === 'typewriter') h1.style.borderRight = 'none';
+      });
 
       // Back-to-top
       const back = document.getElementById('back-to-top');
-      if (back) {
-        window.addEventListener('scroll', () => {
-          back.classList.toggle('show', window.scrollY > 300);
-        });
-        back.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
+      window.addEventListener('scroll', () => back.classList.toggle('show', window.scrollY > 300));
+      back.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   </script>
 
