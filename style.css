@@ -87,7 +87,7 @@ nav a:hover::after { width: 100%; }
   z-index: 101; /* Ensure it's above other content */
 }
 
-/* Hero */
+/* Hero Section - UPDATED FOR FULL WIDTH BACKGROUND */
 .hero {
   position: relative;
   height: 50vh;
@@ -98,9 +98,20 @@ nav a:hover::after { width: 100%; }
   align-items: center;
   text-align: center;
   color: #fff;
+  /* Override general section rules for full width */
+  width: 100%; /* Ensures it takes full viewport width */
+  padding: 0; /* Remove any padding that might push the background in */
+  margin: 0; /* Remove margin: auto from the general section rule */
 }
-.hero::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.6); }
-.hero-content { position: relative; z-index: 1; padding: 0 2rem; }
+/* Hero Content - Constrain the text content within the full-width banner */
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 0 2rem;
+  max-width: 1200px; /* Constrain content width */
+  width: 100%; /* Ensure it takes full width up to max-width */
+  margin: auto; /* Center the content */
+}
 .hero h1 {
   display: inline-block;
   font-size: 3.5rem;
@@ -116,7 +127,7 @@ nav a:hover::after { width: 100%; }
 }
 .hero p { font-size: 1.2rem; color: #ddd; margin-bottom: 1.5rem; }
 
-/* Sections */
+/* Sections (general rule remains for other sections) */
 section { padding: 4rem 2rem; max-width: 1200px; margin: auto; }
 h2 { font-size: 2rem; margin-bottom: 0.5rem; color: var(--primary); text-align: center; }
 .section-subtitle { text-align: center; color: #ccc; margin-bottom: 2rem; }
