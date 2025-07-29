@@ -40,8 +40,9 @@ header {
   height: 40px;
   border-radius: 8px;
   object-fit: cover;
+  /* Optional: Fine-tune vertical alignment of logo image */
   position: relative;
-  top: -1px;
+  top: -1px; /* Adjust as needed based on your specific image and font */
 }
 nav ul {
   display: flex;
@@ -75,17 +76,18 @@ nav a:hover::after { width: 100%; }
 }
 .btn:hover { background: var(--primary-dark); transform: scale(1.05); }
 
+/* Hamburger menu button */
 .hamburger {
-  display: none;
+  display: none; /* Hidden by default on desktop */
   background: none;
   border: none;
   color: #eee;
   font-size: 2rem;
   cursor: pointer;
-  z-index: 101;
+  z-index: 101; /* Ensure it's above other content */
 }
 
-/* Hero Section - CORRECTED FOR FULL WIDTH BACKGROUND */
+/* Hero */
 .hero {
   position: relative;
   height: 50vh;
@@ -96,20 +98,9 @@ nav a:hover::after { width: 100%; }
   align-items: center;
   text-align: center;
   color: #fff;
-  /* Overrides for full width */
-  width: 100%;
-  padding: 0;
-  margin: 0;
-  max-width: none; /* <--- THIS IS THE KEY CHANGE! */
 }
-.hero-content {
-  position: relative;
-  z-index: 1;
-  padding: 0 2rem;
-  max-width: 1200px;
-  width: 100%;
-  margin: auto;
-}
+.hero::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.6); }
+.hero-content { position: relative; z-index: 1; padding: 0 2rem; }
 .hero h1 {
   display: inline-block;
   font-size: 3.5rem;
@@ -125,7 +116,7 @@ nav a:hover::after { width: 100%; }
 }
 .hero p { font-size: 1.2rem; color: #ddd; margin-bottom: 1.5rem; }
 
-/* Sections (general rule remains for other sections) */
+/* Sections */
 section { padding: 4rem 2rem; max-width: 1200px; margin: auto; }
 h2 { font-size: 2rem; margin-bottom: 0.5rem; color: var(--primary); text-align: center; }
 .section-subtitle { text-align: center; color: #ccc; margin-bottom: 2rem; }
@@ -179,51 +170,51 @@ footer nav a:hover { color: var(--primary); }
     flex-direction: column;
     align-items: flex-start;
     padding: 0.5rem 1rem;
-    position: relative;
+    position: relative; /* Needed for absolute positioning of nav on mobile */
   }
   nav {
-    width: 100%;
-    position: absolute;
-    top: 100%;
+    width: 100%; /* Take full width */
+    position: absolute; /* Position relative to header */
+    top: 100%; /* Below the header content */
     left: 0;
-    background: rgba(20,20,20,0.98);
-    max-height: 0;
+    background: rgba(20,20,20,0.98); /* Slightly darker background */
+    max-height: 0; /* Hidden by default */
     overflow: hidden;
     transition: max-height 0.3s ease-out;
   }
   nav.active {
-    max-height: 300px;
+    max-height: 300px; /* Adjust based on your menu item count */
   }
   nav ul {
-    flex-direction: column;
-    gap: 0;
+    flex-direction: column; /* Stack menu items vertically */
+    gap: 0; /* Remove gap between stacked items */
     margin: 0;
     justify-content: flex-start;
-    padding: 1rem 1rem 0.5rem 1rem;
+    padding: 1rem 1rem 0.5rem 1rem; /* Add padding inside dropdown */
   }
   nav ul li {
     width: 100%;
     padding: 0.75rem 0;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.1); /* Separator */
   }
   nav ul li:last-child {
     border-bottom: none;
   }
   nav a {
-    display: block;
+    display: block; /* Make links take full width */
     padding: 0.5rem 0;
     text-align: center;
   }
-  nav a::after {
+  nav a::after { /* Remove hover underline for mobile menu, or adjust */
     display: none;
   }
   .hamburger {
-    display: block;
+    display: block; /* Show hamburger button */
   }
   .hero h1 { font-size: 2.5rem; }
   .hero p { font-size: 1.1rem; }
   section {
-    padding: 3rem 1.5rem;
+    padding: 3rem 1.5rem; /* Adjusted horizontal padding */
   }
   .games-grid, .groups-grid {
     flex-direction: column;
@@ -241,7 +232,7 @@ footer nav a:hover { color: var(--primary); }
   .hero h1 { font-size: 2rem; }
   .hero p { font-size: 1rem; }
   section {
-    padding: 2rem 1rem;
+    padding: 2rem 1rem; /* Further reduced padding for very small screens */
   }
   h2 { font-size: 1.75rem; }
   .game-card-content h3 { font-size: 0.95rem; }
