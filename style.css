@@ -40,9 +40,8 @@ header {
   height: 40px;
   border-radius: 8px;
   object-fit: cover;
-  /* Optional: Fine-tune vertical alignment of logo image */
   position: relative;
-  top: -1px; /* Adjust as needed based on your specific image and font */
+  top: -1px;
 }
 nav ul {
   display: flex;
@@ -76,18 +75,17 @@ nav a:hover::after { width: 100%; }
 }
 .btn:hover { background: var(--primary-dark); transform: scale(1.05); }
 
-/* Hamburger menu button */
 .hamburger {
-  display: none; /* Hidden by default on desktop */
+  display: none;
   background: none;
   border: none;
   color: #eee;
   font-size: 2rem;
   cursor: pointer;
-  z-index: 101; /* Ensure it's above other content */
+  z-index: 101;
 }
 
-/* Hero Section - UPDATED FOR FULL WIDTH BACKGROUND */
+/* Hero Section - CORRECTED FOR FULL WIDTH BACKGROUND */
 .hero {
   position: relative;
   height: 50vh;
@@ -98,19 +96,19 @@ nav a:hover::after { width: 100%; }
   align-items: center;
   text-align: center;
   color: #fff;
-  /* Override general section rules for full width */
-  width: 100%; /* Ensures it takes full viewport width */
-  padding: 0; /* Remove any padding that might push the background in */
-  margin: 0; /* Remove margin: auto from the general section rule */
+  /* Overrides for full width */
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  max-width: none; /* <--- THIS IS THE KEY CHANGE! */
 }
-/* Hero Content - Constrain the text content within the full-width banner */
 .hero-content {
   position: relative;
   z-index: 1;
   padding: 0 2rem;
-  max-width: 1200px; /* Constrain content width */
-  width: 100%; /* Ensure it takes full width up to max-width */
-  margin: auto; /* Center the content */
+  max-width: 1200px;
+  width: 100%;
+  margin: auto;
 }
 .hero h1 {
   display: inline-block;
@@ -181,51 +179,51 @@ footer nav a:hover { color: var(--primary); }
     flex-direction: column;
     align-items: flex-start;
     padding: 0.5rem 1rem;
-    position: relative; /* Needed for absolute positioning of nav on mobile */
+    position: relative;
   }
   nav {
-    width: 100%; /* Take full width */
-    position: absolute; /* Position relative to header */
-    top: 100%; /* Below the header content */
+    width: 100%;
+    position: absolute;
+    top: 100%;
     left: 0;
-    background: rgba(20,20,20,0.98); /* Slightly darker background */
-    max-height: 0; /* Hidden by default */
+    background: rgba(20,20,20,0.98);
+    max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease-out;
   }
   nav.active {
-    max-height: 300px; /* Adjust based on your menu item count */
+    max-height: 300px;
   }
   nav ul {
-    flex-direction: column; /* Stack menu items vertically */
-    gap: 0; /* Remove gap between stacked items */
+    flex-direction: column;
+    gap: 0;
     margin: 0;
     justify-content: flex-start;
-    padding: 1rem 1rem 0.5rem 1rem; /* Add padding inside dropdown */
+    padding: 1rem 1rem 0.5rem 1rem;
   }
   nav ul li {
     width: 100%;
     padding: 0.75rem 0;
-    border-bottom: 1px solid rgba(255,255,255,0.1); /* Separator */
+    border-bottom: 1px solid rgba(255,255,255,0.1);
   }
   nav ul li:last-child {
     border-bottom: none;
   }
   nav a {
-    display: block; /* Make links take full width */
+    display: block;
     padding: 0.5rem 0;
     text-align: center;
   }
-  nav a::after { /* Remove hover underline for mobile menu, or adjust */
+  nav a::after {
     display: none;
   }
   .hamburger {
-    display: block; /* Show hamburger button */
+    display: block;
   }
   .hero h1 { font-size: 2.5rem; }
   .hero p { font-size: 1.1rem; }
   section {
-    padding: 3rem 1.5rem; /* Adjusted horizontal padding */
+    padding: 3rem 1.5rem;
   }
   .games-grid, .groups-grid {
     flex-direction: column;
@@ -243,7 +241,7 @@ footer nav a:hover { color: var(--primary); }
   .hero h1 { font-size: 2rem; }
   .hero p { font-size: 1rem; }
   section {
-    padding: 2rem 1rem; /* Further reduced padding for very small screens */
+    padding: 2rem 1rem;
   }
   h2 { font-size: 1.75rem; }
   .game-card-content h3 { font-size: 0.95rem; }
