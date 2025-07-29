@@ -4,124 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>LazyGames</title>
-  <link rel="icon" href="LGSFavIcon.png" type="image/png"> <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-  <style>
-    /* Reset & Base */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; font-family: 'Poppins', sans-serif; }
-    body { background: #111; color: #eee; line-height: 1.6; }
-    a { text-decoration: none; }
-    :root { --primary: rgb(208,24,98); --primary-dark: rgb(180,20,85); }
-
-    /* Animations */
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes typewriter { from { width: 0; } to { width: 100%; } }
-    @keyframes blink-caret { 0%,100% { border-color: transparent; } 50% { border-color: #fff; } }
-    .reveal { opacity: 0; transform: translateY(20px); }
-    .reveal.active { animation: fadeInUp 0.6s ease-out forwards; }
-
-    /* Header */
-    header { position: sticky; top: 0; background: rgba(20,20,20,0.95); display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; z-index: 100; }
-    .logo { display: inline-flex; align-items: center; gap: 0.75rem; font-size: 1.75rem; font-weight: 700; color: var(--primary); padding: 0.25rem 0.5rem; border-radius: 4px; transition: background 0.2s; }
-    .logo:hover { background: rgba(255,255,255,0.1); cursor: pointer; }
-    .logo img { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; }
-    nav ul { display: flex; list-style: none; gap: 2rem; }
-    nav a { color: #ccc; font-weight: 500; position: relative; }
-    nav a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--primary); transition: width 0.3s; }
-    nav a:hover::after { width: 100%; }
-    .btn { font-weight: 500; padding: 0.6rem 1.2rem; border-radius: 4px; background: var(--primary); color: #111; transition: background 0.3s, transform 0.2s; margin-left: 1rem; }
-    .btn:hover { background: var(--primary-dark); transform: scale(1.05); }
-
-    /* Hero */
-    .hero { position: relative; height: 50vh; max-height: 400px; background: url('LazyGamesGameBanner.png') center/cover no-repeat fixed; display: flex; justify-content: center; align-items: center; text-align: center; color: #fff; }
-    .hero::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.6); }
-    .hero-content { position: relative; z-index: 1; padding: 0 2rem; }
-    .hero h1 {
-      display: inline-block;
-      font-size: 3.5rem;
-      margin-bottom: 0.5rem;
-      font-weight: 700;
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: .15em solid #fff;
-      width: 0;
-      animation:
-        typewriter 3s steps(40) 0.5s forwards,
-        blink-caret 0.75s step-end 0.5s 4;
-    }
-    .hero p { font-size: 1.2rem; color: #ddd; margin-bottom: 1.5rem; }
-
-    /* Sections */
-    section { padding: 4rem 2rem; max-width: 1200px; margin: auto; }
-    h2 { font-size: 2rem; margin-bottom: 0.5rem; color: var(--primary); text-align: center; }
-    .section-subtitle { text-align: center; color: #ccc; margin-bottom: 2rem; }
-
-    /* Games Grid */
-    .games-grid { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; }
-    .game-card { background: #1e1e1e; border-radius: 8px; flex: 1 1 calc(20% - 1rem); display: flex; flex-direction: column; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; }
-    .game-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.5); }
-    .game-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; transition: transform 0.5s ease; transform-origin: center center; }
-    .game-card:hover img { transform: scale(1.08); }
-    .game-card-content { padding: 1rem; display: flex; flex-direction: column; justify-content: space-between; align-items: center; flex: 1; }
-    .game-card-content .btn { margin: 0.5rem auto 0; }
-    .game-card h3 { font-size: 1rem; color: #fff; }
-    .stats { font-size: 0.85rem; color: #aaa; }
-
-    /* Roblox Groups */
-    .groups-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 2rem; }
-    .group-card { text-align: center; }
-    .group-card p { margin-bottom: 0.5rem; color: #ccc; }
-    .group-card img { width: 120px; aspect-ratio: 1/1; object-fit: cover; border-radius: 8px; transition: transform 0.3s; }
-    .group-card img:hover { transform: scale(1.1); }
-
-    /* About */
-    #about p { max-width: 800px; margin: 0.5rem auto; color: #ccc; text-align: center; }
-
-    /* Team Grid */
-    .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2rem; margin-top: 2rem; }
-    .team-card { background: #1e1e1e; border-radius: 8px; padding: 1.5rem; text-align: center; transition: background 0.3s, transform 0.3s; }
-    .team-card:hover { background: #272727; transform: translateY(-3px); }
-    .team-card img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 0.75rem; }
-    .team-card h3 { font-size: 1.1rem; }
-    .team-link { color: var(--primary); }
-    .team-card p { color: #aaa; }
-
-    /* Contact */
-    .contact-buttons { display: flex; justify-content: center; gap: 1rem; margin-top: 1rem; flex-wrap: wrap; }
-
-    /* Footer */
-    footer { background: #181818; padding: 2rem 1rem; text-align: center; color: #666; position: relative; z-index: 10; }
-    footer nav { margin-bottom: 0.5rem; }
-    footer nav a { margin: 0 0.5rem; color: #666; font-weight: 500; }
-    footer nav a:hover { color: var(--primary); }
-
-    /* Back-to-top button */
-    #back-to-top { position: fixed; bottom: 2rem; right: 2rem; background: var(--primary); color: #fff; border: none; padding: 0.5rem 0.75rem; border-radius: 4px; cursor: pointer; opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s; }
-    #back-to-top.show { opacity: 1; visibility: visible; }
-
-    /* Mobile */
-    @media (max-width: 768px) {
-      header { flex-direction: column; align-items: flex-start; padding: 0.5rem 1rem; }
-      nav ul { flex-wrap: wrap; gap: 1rem; margin: 0.5rem 0; justify-content: flex-start; }
-      .btn-container { display: none; }
-      .hero h1 { font-size: 2rem; }
-      .hero p { font-size: 1rem; }
-      .games-grid, .groups-grid { flex-direction: column; align-items: center; }
-      .game-card, .group-card { flex: 1 1 100%; max-width: 320px; }
-      .team-grid { grid-template-columns: 1fr; }
-    }
-  </style>
-</head>
+  <link rel="icon" href="lgsdocument.png" type="image/png"> <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"> </head>
 <body>
 
   <header class="reveal">
     <a href="#hero" class="logo"><img src="LazyGamesBrandingMain.png" alt="LazyGames Logo"><span>LazyGames</span></a>
-    <nav><ul>
-      <li><a href="#hero">Home</a></li>
-      <li><a href="#games">Our Games</a></li>
-      <li><a href="#about">About Us</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul></nav>
+    <button class="hamburger" aria-label="Toggle navigation">&#9776;</button> <nav>
+      <ul>
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#games">Our Games</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
   </header>
 
   <section id="hero" class="hero reveal">
@@ -242,25 +138,50 @@
 
   <footer class="reveal">
     <nav><a href="#hero">Home</a> | <a href="#games">Our Games</a> | <a href="#about">About Us</a> | <a href="#groups">Groups</a> | <a href="#contact">Contact</a></nav>
-    <p>&copy; 2025 LazyGames</p>
-  </footer>
+    <p>&copy; <span id="current-year"></span> LazyGames</p> </footer>
 
   <button id="back-to-top" aria-label="Back to top">↑</button>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // Intersection Observer for reveals
       const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('active'); obs.unobserve(e.target); } });
       }, { threshold: 0.1 });
       document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+      // Hero H1 typewriter animation
       const h1 = document.querySelector('.hero h1');
-      h1.addEventListener('animationend', e => { if (e.animationName === 'typewriter') h1.style.borderRight = 'none'; });
-      h1.style.animation = 'typewriter 3s steps(40) 0.5s forwards, blink-caret 0.75s step-end 0.5s 4';
+      // No need to set animation property here again, it's in CSS
+      h1.addEventListener('animationend', e => {
+        if (e.animationName === 'typewriter') {
+          h1.style.borderRight = 'none';
+        }
+      });
 
+      // Back to top button functionality
       const back = document.getElementById('back-to-top');
       window.addEventListener('scroll', () => back.classList.toggle('show', window.scrollY > 300));
       back.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Dynamic current year in footer
+      document.getElementById('current-year').textContent = new Date().getFullYear();
+
+      // Hamburger menu functionality
+      const hamburger = document.querySelector('.hamburger');
+      const nav = document.querySelector('nav');
+      const navLinks = document.querySelectorAll('nav ul li a');
+
+      hamburger.addEventListener('click', () => {
+        nav.classList.toggle('active');
+      });
+
+      // Close menu when a link is clicked (for single-page navigation)
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          nav.classList.remove('active');
+        });
+      });
     });
   </script>
 </body>
