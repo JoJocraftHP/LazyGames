@@ -4,13 +4,36 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>LazyGames</title>
-  <link rel="icon" href="lgsdocument.png" type="image/png"> <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css"> </head>
+
+  <!-- Favicon -->
+  <link rel="icon" href="lgsdocument.png" type="image/png">
+
+  <!-- Open Graph Meta Tags for rich previews -->
+  <meta property="og:title" content="LazyGames – Innovative Roblox Experiences" />
+  <meta property="og:description" content="Discover our top Roblox games and join the LazyGames community for fun and creativity." />
+  <meta property="og:url" content="https://lazygames.dev" />
+  <meta property="og:image" content="https://lazygames.dev/LGSCard.png" />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="LazyGames – Innovative Roblox Experiences" />
+  <meta name="twitter:description" content="Discover our top Roblox games and join the LazyGames community for fun and creativity." />
+  <meta name="twitter:image" content="https://lazygames.dev/LGSCard.png" />
+
+  <!-- Stylesheets -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
 <body>
 
   <header class="reveal">
-    <a href="#hero" class="logo"><img src="LazyGamesBrandingMain.png" alt="LazyGames Logo"><span>LazyGames</span></a>
-    <button class="hamburger" aria-label="Toggle navigation">&#9776;</button> <nav>
+    <a href="#hero" class="logo">
+      <img src="LazyGamesBrandingMain.png" alt="LazyGames Logo">
+      <span>LazyGames</span>
+    </a>
+    <button class="hamburger" aria-label="Toggle navigation">&#9776;</button>
+    <nav>
       <ul>
         <li><a href="#hero">Home</a></li>
         <li><a href="#games">Our Games</a></li>
@@ -77,7 +100,7 @@
   <section id="about" class="reveal">
     <h2>About Us</h2>
     <p>LazyGames is a Roblox studio founded in 2023 by developers active since 2017.</p>
-    <p>We’re best known for our simulator games, but we’re expanding into new genres with fresh ideas. From concept to launch, we focus on creating fun, high‑quality experiences for players worldwide.</p>
+    <p>We’re best known for our simulator games, but we’re expanding into new genres with fresh ideas. From concept to launch, we focus on creating fun, high-quality experiences for players worldwide.</p>
   </section>
 
   <section id="groups" class="reveal">
@@ -114,14 +137,14 @@
         <p>Owner, Game Design &amp; Management</p>
       </div>
       <div class="team-card reveal">
-        <h3><a href="https://www.roblox.com/users/271040226/profile" class="team-link" target="_blank">mitex</a></h3>
+        <h3><a href="https://www.roblox.com/users/271040226/profile" class="team-link" target="_blank">Mitex</a></h3>
         <img src="MitexProfile.png" alt="Mitex" loading="lazy">
-        <p>Co‑Owner, Scripter</p>
+        <p>Co‑Owner, Scripting</p>
       </div>
       <div class="team-card reveal">
         <h3><a href="https://www.roblox.com/users/1441090007/profile" class="team-link" target="_blank">Lumpi</a></h3>
         <img src="LumpiProfile.png" alt="Lumpi" loading="lazy">
-        <p>Developer, Builder &amp; Modeler</p>
+        <p>Lead Developer, Builder &amp; Modeler</p>
       </div>
     </div>
   </section>
@@ -137,52 +160,14 @@
   </section>
 
   <footer class="reveal">
-    <nav><a href="#hero">Home</a> | <a href="#games">Our Games</a> | <a href="#about">About Us</a> | <a href="#groups">Groups</a> | <a href="#contact">Contact</a></nav>
-    <p>&copy; <span id="current-year"></span> LazyGames</p> </footer>
+    <nav>
+      <a href="#hero">Home</a> | <a href="#games">Our Games</a> | <a href="#about">About Us</a> | <a href="#groups">Groups</a> | <a href="#contact">Contact</a>
+    </nav>
+    <p>&copy; <span id="current-year"></span> LazyGames</p>
+  </footer>
 
   <button id="back-to-top" aria-label="Back to top">↑</button>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Intersection Observer for reveals
-      const observer = new IntersectionObserver((entries, obs) => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('active'); obs.unobserve(e.target); } });
-      }, { threshold: 0.1 });
-      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-      // Hero H1 typewriter animation
-      const h1 = document.querySelector('.hero h1');
-      // No need to set animation property here again, it's in CSS
-      h1.addEventListener('animationend', e => {
-        if (e.animationName === 'typewriter') {
-          h1.style.borderRight = 'none';
-        }
-      });
-
-      // Back to top button functionality
-      const back = document.getElementById('back-to-top');
-      window.addEventListener('scroll', () => back.classList.toggle('show', window.scrollY > 300));
-      back.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-
-      // Dynamic current year in footer
-      document.getElementById('current-year').textContent = new Date().getFullYear();
-
-      // Hamburger menu functionality
-      const hamburger = document.querySelector('.hamburger');
-      const nav = document.querySelector('nav');
-      const navLinks = document.querySelectorAll('nav ul li a');
-
-      hamburger.addEventListener('click', () => {
-        nav.classList.toggle('active');
-      });
-
-      // Close menu when a link is clicked (for single-page navigation)
-      navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-          nav.classList.remove('active');
-        });
-      });
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
