@@ -1,199 +1,308 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LazyGames</title>
-  <link rel="icon" href="lgsdocument.png" type="image/png">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LazyGames — Roblox Studio</title>
+  <meta name="description" content="LazyGames is a Roblox studio building high‑quality simulators and fresh concepts. Explore our games, meet the team, and join our community." />
+  <link rel="canonical" href="https://www.lazygames.dev/" />
+  <meta name="theme-color" content="#111111" />
 
-  <meta property="og:title" content="LazyGames - Innovative Roblox Game Development">
-  <meta property="og:description" content="LazyGames is a Roblox studio specializing in simulators and innovative game concepts. Explore our top games like Jetpack Training and Lift a Pet, and join our community!">
-  <meta property="og:image" content="https://www.lazygames.dev/LGSCard.png"> <meta property="og:url" content="https://www.lazygames.dev/"> <meta property="og:type" content="website">
+  <!-- Icons -->
+  <link rel="icon" href="/lgsdocument.png" type="image/png" />
 
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@LazyGamesTeam"> <meta name="twitter:title" content="LazyGames - Innovative Roblox Game Development">
-  <meta name="twitter:description" content="LazyGames is a Roblox studio specializing in simulators and innovative game concepts. Explore our top games like Jetpack Training and Lift a Pet, and join our community!">
-  <meta name="twitter:image" content="https://www.lazygames.dev/LGSCard.png"> </head>
+  <!-- Social / Open Graph -->
+  <meta property="og:title" content="LazyGames — Innovative Roblox Game Development" />
+  <meta property="og:description" content="LazyGames is a Roblox studio specializing in simulators and innovative game concepts. Explore top games like Jetpack Training and Lift a Pet." />
+  <meta property="og:image" content="https://www.lazygames.dev/LGSCard.png" />
+  <meta property="og:url" content="https://www.lazygames.dev/" />
+  <meta property="og:type" content="website" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@LazyGamesTeam" />
+  <meta name="twitter:title" content="LazyGames — Innovative Roblox Game Development" />
+  <meta name="twitter:description" content="LazyGames is a Roblox studio specializing in simulators and innovative game concepts. Explore our games and join the community!" />
+  <meta name="twitter:image" content="https://www.lazygames.dev/LGSCard.png" />
+
+  <!-- Fonts (fast) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/assets/style.css?v=1" />
+</head>
 <body>
+  <a class="sr-only" href="#main">Skip to content</a>
+  <div class="progress" id="progress"></div>
 
-  <header class="reveal">
-    <a href="#hero" class="logo"><img src="LazyGamesBrandingMain.png" alt="LazyGames Logo"><span>LazyGames</span></a>
-    <button class="hamburger" aria-label="Toggle navigation">&#9776;</button>
-    <nav>
-      <ul>
-        <li><a href="#hero">Home</a></li>
-        <li><a href="#games">Our Games</a></li>
-        <li><a href="#about">About Us</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#hero" aria-label="LazyGames Home">
+        <img src="/LazyGamesBrandingMain.png" alt="LazyGames Logo" width="36" height="36" />
+        <span>LazyGames</span>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation">☰</button>
+      <nav class="links" id="links">
+        <a href="#hero">Home</a>
+        <a href="#games">Our Games</a>
+        <a href="#about">About</a>
+        <a href="#groups">Groups</a>
+        <a href="#team">Team</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
   </header>
 
-  <section id="hero" class="hero reveal">
-    <div class="hero-content">
-      <h1>Welcome to LazyGames</h1>
-      <p>We are an experienced Roblox studio specializing in simulators and innovative game concepts.</p>
-    </div>
-  </section>
-
-  <section id="games" class="reveal">
-    <h2>Our Top Hits</h2>
-    <p class="section-subtitle">Here are some of our top games</p>
-    <div class="games-grid">
-      <div class="game-card reveal">
-        <img src="GameIcons/JetpackTraining.png" alt="Jetpack Training" loading="lazy">
-        <div class="game-card-content">
-          <h3>Jetpack Training</h3>
-          <p class="stats">Visits: 11.0M+</p>
-          <a href="https://www.roblox.com/games/95557214969049" class="btn" target="_blank">View Game</a>
+  <main id="main">
+    <!-- =============== Hero =============== -->
+    <section id="hero" class="hero">
+      <div class="hero-media" aria-hidden="true"></div>
+      <div class="container reveal">
+        <h1 class="type" id="type">Welcome to LazyGames</h1>
+        <p>We are an experienced Roblox studio specializing in simulators and innovative game concepts.</p>
+        <div class="badges" aria-hidden="true">
+          <span class="badge">Simulators &amp; Systems</span>
+          <span class="badge">High CTR Branding</span>
+          <span class="badge">Live‑ops &amp; Monetization</span>
         </div>
       </div>
-      <div class="game-card reveal">
-        <img src="GameIcons/LiftaPet.png" alt="Lift a Pet" loading="lazy">
-        <div class="game-card-content">
-          <h3>Lift a Pet</h3>
-          <p class="stats">Visits: 7.1M+</p>
-          <a href="https://www.roblox.com/games/16858182871" class="btn" target="_blank">View Game</a>
-        </div>
+    </section>
+
+    <!-- =============== Games =============== -->
+    <section id="games" class="container">
+      <h2>Our Top Hits</h2>
+      <p class="subtitle">Here are some of our top games.</p>
+      <div class="games">
+        <!-- Jetpack Training -->
+        <article class="card reveal" aria-label="Jetpack Training">
+          <div class="media">
+            <picture>
+              <source srcset="/GameIcons/JetpackTraining.webp" type="image/webp" />
+              <img src="/GameIcons/JetpackTraining.png" alt="Jetpack Training game icon" loading="lazy" width="512" height="512" />
+            </picture>
+          </div>
+          <div class="content">
+            <h3>Jetpack Training</h3>
+            <div class="stats">Visits: 11.0M+</div>
+            <a class="btn" href="https://www.roblox.com/games/95557214969049" target="_blank" rel="noopener">View Game</a>
+          </div>
+        </article>
+        <!-- Lift a Pet -->
+        <article class="card reveal" aria-label="Lift a Pet">
+          <div class="media">
+            <picture>
+              <source srcset="/GameIcons/LiftaPet.webp" type="image/webp" />
+              <img src="/GameIcons/LiftaPet.png" alt="Lift a Pet game icon" loading="lazy" width="512" height="512" />
+            </picture>
+          </div>
+          <div class="content">
+            <h3>Lift a Pet</h3>
+            <div class="stats">Visits: 7.1M+</div>
+            <a class="btn" href="https://www.roblox.com/games/16858182871" target="_blank" rel="noopener">View Game</a>
+          </div>
+        </article>
+        <!-- CTG -->
+        <article class="card reveal" aria-label="Click To Get Big Simulator">
+          <div class="media">
+            <picture>
+              <source srcset="/GameIcons/CTG.webp" type="image/webp" />
+              <img src="/GameIcons/CTG.png" alt="Click To Get Big Simulator game icon" loading="lazy" width="512" height="512" />
+            </picture>
+          </div>
+          <div class="content">
+            <h3>Click To Get Big Simulator</h3>
+            <div class="stats">Visits: 1.8M+</div>
+            <a class="btn" href="https://www.roblox.com/games/15837046231" target="_blank" rel="noopener">View Game</a>
+          </div>
+        </article>
+        <!-- Monster Training -->
+        <article class="card reveal" aria-label="Monster Training">
+          <div class="media">
+            <picture>
+              <source srcset="/GameIcons/MonsterTraining.webp" type="image/webp" />
+              <img src="/GameIcons/MonsterTraining.png" alt="Monster Training game icon" loading="lazy" width="512" height="512" />
+            </picture>
+          </div>
+          <div class="content">
+            <h3>Monster Training</h3>
+            <div class="stats">Visits: 686.9K+</div>
+            <a class="btn" href="https://www.roblox.com/games/78263156263540" target="_blank" rel="noopener">View Game</a>
+          </div>
+        </article>
+        <!-- Island Mansion Tycoon -->
+        <article class="card reveal" aria-label="Island Mansion Tycoon">
+          <div class="media">
+            <picture>
+              <source srcset="/GameIcons/MansionTycoon.webp" type="image/webp" />
+              <img src="/GameIcons/MansionTycoon.png" alt="Island Mansion Tycoon game icon" loading="lazy" width="512" height="512" />
+            </picture>
+          </div>
+          <div class="content">
+            <h3>Island Mansion Tycoon</h3>
+            <div class="stats">Visits: 474.6K+</div>
+            <a class="btn" href="https://www.roblox.com/games/16369975263" target="_blank" rel="noopener">View Game</a>
+          </div>
+        </article>
       </div>
-      <div class="game-card reveal">
-        <img src="GameIcons/CTG.png" alt="Click To Get Big Simulator" loading="lazy">
-        <div class="game-card-content">
-          <h3>Click To Get Big Simulator</h3>
-          <p class="stats">Visits: 1.8M+</p>
-          <a href="https://www.roblox.com/games/15837046231" class="btn" target="_blank">View Game</a>
-        </div>
+    </section>
+
+    <!-- =============== About =============== -->
+    <section id="about" class="container reveal">
+      <h2>About Us</h2>
+      <p>LazyGames is a Roblox studio founded in 2023 by developers active since 2017. We’re best known for simulator games, and we’re expanding into new genres with fresh ideas. From concept to launch, we focus on fun, polish, and smart live‑ops.</p>
+    </section>
+
+    <!-- =============== Groups =============== -->
+    <section id="groups" class="container reveal">
+      <h2>Our Roblox Groups</h2>
+      <p class="subtitle">Join our communities:</p>
+      <div class="groups">
+        <article class="group">
+          <p>Main Group</p>
+          <a href="https://www.roblox.com/communities/33472368/LazyGameStudios#!/about" target="_blank" rel="noopener"><img src="/StudioIcons/LazyStudios.png" alt="LazyGames Main Group" width="120" height="120" /></a>
+        </article>
+        <article class="group">
+          <p>Tycoon Group</p>
+          <a href="https://www.roblox.com/communities/33860522/LazyGames-Tycoons#!/about" target="_blank" rel="noopener"><img src="/StudioIcons/LazyTycoons.png" alt="LazyGames Tycoons Group" width="120" height="120" /></a>
+        </article>
+        <article class="group">
+          <p>Obby Group</p>
+          <a href="https://www.roblox.com/communities/33635810/LazyGamesObbys#!/about" target="_blank" rel="noopener"><img src="/StudioIcons/LazyObbies.png" alt="LazyGames Obbies Group" width="120" height="120" /></a>
+        </article>
       </div>
-      <div class="game-card reveal">
-        <img src="GameIcons/MonsterTraining.png" alt="Monster Training" loading="lazy">
-        <div class="game-card-content">
-          <h3>Monster Training</h3>
-          <p class="stats">Visits: 686.9K+</p>
-          <a href="https://www.roblox.com/games/78263156263540" class="btn" target="_blank">View Game</a>
-        </div>
+    </section>
+
+    <!-- =============== Team =============== -->
+    <section id="team" class="container reveal">
+      <h2>Meet the Team</h2>
+      <div class="team">
+        <article class="person">
+          <h3><a href="https://www.roblox.com/users/214865113/profile" class="team-link" target="_blank" rel="noopener">JoJocraftHP</a></h3>
+          <img src="/JoJoProfile.png" alt="JoJocraftHP" width="96" height="96" />
+          <p>Owner — Game Design &amp; Management</p>
+        </article>
+        <article class="person">
+          <h3><a href="https://www.roblox.com/users/271040226/profile" class="team-link" target="_blank" rel="noopener">mitex</a></h3>
+          <img src="/MitexProfile.png" alt="Mitex" width="96" height="96" />
+          <p>Co‑Owner — Scripter</p>
+        </article>
+        <article class="person">
+          <h3><a href="https://www.roblox.com/users/1441090007/profile" class="team-link" target="_blank" rel="noopener">Lumpi</a></h3>
+          <img src="/LumpiProfile.png" alt="Lumpi" width="96" height="96" />
+          <p>Developer — Builder &amp; Modeler</p>
+        </article>
       </div>
-      <div class="game-card reveal">
-        <img src="GameIcons/MansionTycoon.png" alt="Island Mansion Tycoon" loading="lazy">
-        <div class="game-card-content">
-          <h3>Island Mansion Tycoon</h3>
-          <p class="stats">Visits: 474.6K+</p>
-          <a href="https://www.roblox.com/games/16369975263" class="btn" target="_blank">View Game</a>
-        </div>
+    </section>
+
+    <!-- =============== Contact =============== -->
+    <section id="contact" class="container reveal">
+      <h2>Get in Touch</h2>
+      <p class="subtitle">Join our community on Discord, X (Twitter), or our Roblox group:</p>
+      <div class="cta">
+        <a class="btn" href="https://discord.gg/UnhZDUH93X" target="_blank" rel="noopener" aria-label="Join our Discord">Discord</a>
+        <a class="btn" href="https://x.com/LazyGamesTeam" target="_blank" rel="noopener" aria-label="Follow on X">Twitter/X</a>
+        <a class="btn" href="https://www.roblox.com/communities/33472368/LazyGameStudios#!/about" target="_blank" rel="noopener" aria-label="Join our Roblox Group">Roblox Group</a>
       </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <nav>
+        <a href="#hero">Home</a>·
+        <a href="#games">Our Games</a>·
+        <a href="#about">About</a>·
+        <a href="#groups">Groups</a>·
+        <a href="#team">Team</a>·
+        <a href="#contact">Contact</a>
+      </nav>
+      <p>© <span id="year"></span> LazyGames</p>
     </div>
-  </section>
-
-  <section id="about" class="reveal">
-    <h2>About Us</h2>
-    <p>LazyGames is a Roblox studio founded in 2023 by developers active since 2017.</p>
-    <p>We’re best known for our simulator games, but we’re expanding into new genres with fresh ideas. From concept to launch, we focus on creating fun, high‑quality experiences for players worldwide.</p>
-  </section>
-
-  <section id="groups" class="reveal">
-    <h2>Our Roblox Groups</h2>
-    <p class="section-subtitle">Join our Roblox communities:</p>
-    <div class="groups-grid">
-      <div class="group-card">
-        <p>Main Group</p>
-        <a href="https://www.roblox.com/communities/33472368/LazyGameStudios#!/about" target="_blank">
-          <img src="StudioIcons/LazyStudios.png" alt="Main Group">
-        </a>
-      </div>
-      <div class="group-card">
-        <p>Tycoon Group</p>
-        <a href="https://www.roblox.com/communities/33860522/LazyGames-Tycoons#!/about" target="_blank">
-          <img src="StudioIcons/LazyTycoons.png" alt="Tycoon Group">
-        </a>
-      </div>
-      <div class="group-card">
-        <p>Obby Group</p>
-        <a href="https://www.roblox.com/communities/33635810/LazyGamesObbys#!/about" target="_blank">
-          <img src="StudioIcons/LazyObbies.png" alt="Obby Group">
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section id="team" class="reveal">
-    <h2>Meet the Team</h2>
-    <div class="team-grid">
-      <div class="team-card reveal">
-        <h3><a href="https://www.roblox.com/users/214865113/profile" class="team-link" target="_blank">JoJocraftHP</a></h3>
-        <img src="JoJoProfile.png" alt="JoJocraftHP" loading="lazy">
-        <p>Owner, Game Design &amp; Management</p>
-      </div>
-      <div class="team-card reveal">
-        <h3><a href="https://www.roblox.com/users/271040226/profile" class="team-link" target="_blank">mitex</a></h3>
-        <img src="MitexProfile.png" alt="Mitex" loading="lazy">
-        <p>Co‑Owner, Scripter</p>
-      </div>
-      <div class="team-card reveal">
-        <h3><a href="https://www.roblox.com/users/1441090007/profile" class="team-link" target="_blank">Lumpi</a></h3>
-        <img src="LumpiProfile.png" alt="Lumpi" loading="lazy">
-        <p>Developer, Builder &amp; Modeler</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact" class="reveal">
-    <h2>Get in Touch</h2>
-    <p class="section-subtitle">Join our community on Discord, Twitter, or our Roblox group:</p>
-    <div class="contact-buttons">
-      <a href="https://discord.gg/UnhZDUH93X" class="btn" target="_blank">Discord</a>
-      <a href="https://x.com/LazyGamesTeam" class="btn" target="_blank">Twitter/X</a>
-      <a href="https://www.roblox.com/communities/33472368/LazyGameStudios#!/about" class="btn" target="_blank">Roblox Group</a>
-    </div>
-  </section>
-
-  <footer class="reveal">
-    <nav><a href="#hero">Home</a> | <a href="#games">Our Games</a> | <a href="#about">About Us</a> | <a href="#groups">Groups</a> | <a href="#contact">Contact</a></nav>
-    <p>&copy; <span id="current-year"></span> LazyGames</p>
   </footer>
 
-  <button id="back-to-top" aria-label="Back to top">↑</button>
+  <button id="backToTop" aria-label="Back to top">↑</button>
+
+  <!-- Schema.org JSON-LD (update image URLs if you change file names) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"LazyGames",
+    "url":"https://www.lazygames.dev/",
+    "logo":"https://www.lazygames.dev/LazyGamesBrandingMain.png",
+    "sameAs":[
+      "https://x.com/LazyGamesTeam",
+      "https://www.roblox.com/communities/33472368/LazyGameStudios#!/about",
+      "https://discord.gg/UnhZDUH93X"
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"ItemList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"item":{"@type":"VideoGame","name":"Jetpack Training","url":"https://www.roblox.com/games/95557214969049","image":"https://www.lazygames.dev/GameIcons/JetpackTraining.png"}},
+      {"@type":"ListItem","position":2,"item":{"@type":"VideoGame","name":"Lift a Pet","url":"https://www.roblox.com/games/16858182871","image":"https://www.lazygames.dev/GameIcons/LiftaPet.png"}},
+      {"@type":"ListItem","position":3,"item":{"@type":"VideoGame","name":"Click To Get Big Simulator","url":"https://www.roblox.com/games/15837046231","image":"https://www.lazygames.dev/GameIcons/CTG.png"}},
+      {"@type":"ListItem","position":4,"item":{"@type":"VideoGame","name":"Monster Training","url":"https://www.roblox.com/games/78263156263540","image":"https://www.lazygames.dev/GameIcons/MonsterTraining.png"}},
+      {"@type":"ListItem","position":5,"item":{"@type":"VideoGame","name":"Island Mansion Tycoon","url":"https://www.roblox.com/games/16369975263","image":"https://www.lazygames.dev/GameIcons/MansionTycoon.png"}}
+    ]
+  }
+  </script>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Intersection Observer for reveals
-      const observer = new IntersectionObserver((entries, obs) => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('active'); obs.unobserve(e.target); } });
-      }, { threshold: 0.1 });
-      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    // ===== Helpers =====
+    const $ = (s,root=document)=>root.querySelector(s);
+    const $$ = (s,root=document)=>Array.from(root.querySelectorAll(s));
 
-      // Hero H1 typewriter animation
-      const h1 = document.querySelector('.hero h1');
-      h1.addEventListener('animationend', e => {
-        if (e.animationName === 'typewriter') {
-          h1.style.borderRight = 'none';
-        }
-      });
+    // ===== Reveal on scroll =====
+    const io = new IntersectionObserver((entries)=>{
+      for (const e of entries){ if (e.isIntersecting){ e.target.classList.add('active'); io.unobserve(e.target); } }
+    },{threshold:.1});
+    $$('.reveal').forEach(el=>io.observe(el));
 
-      // Back to top button functionality
-      const back = document.getElementById('back-to-top');
-      window.addEventListener('scroll', () => back.classList.toggle('show', window.scrollY > 300));
-      back.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+    // ===== Typewriter (once) =====
+    const typeEl = $('#type');
+    function runType(){
+      const txt = typeEl.textContent.trim();
+      typeEl.textContent = '';
+      let i = 0; const speed = 18;
+      const id = setInterval(()=>{
+        typeEl.textContent = txt.slice(0, ++i);
+        if (i >= txt.length){ clearInterval(id); typeEl.classList.remove('type'); }
+      }, speed);
+    }
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches){ runType(); }
 
-      // Dynamic current year in footer
-      document.getElementById('current-year').textContent = new Date().getFullYear();
+    // ===== Scroll progress =====
+    const progress = $('#progress');
+    const onScroll = ()=>{
+      const h = document.documentElement;
+      const sc = h.scrollTop; const max = h.scrollHeight - h.clientHeight;
+      const pct = max > 0 ? (sc / max) * 100 : 0;
+      progress.style.width = pct + '%';
+      // back to top toggle
+      $('#backToTop').classList.toggle('show', window.scrollY > 300);
+    };
+    document.addEventListener('scroll', onScroll, {passive:true});
+    onScroll();
 
-      // Hamburger menu functionality
-      const hamburger = document.querySelector('.hamburger');
-      const nav = document.querySelector('nav');
-      const navLinks = document.querySelectorAll('nav ul li a');
+    // ===== Back to top =====
+    $('#backToTop').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 
-      hamburger.addEventListener('click', () => {
-        nav.classList.toggle('active');
-      });
+    // ===== Mobile nav =====
+    const links = $('#links');
+    $('#hamburger').addEventListener('click',()=>links.classList.toggle('open'));
+    $$('#links a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
 
-      // Close menu when a link is clicked (for single-page navigation)
-      navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-          nav.classList.remove('active');
-        });
-      });
-    });
+    // ===== Year =====
+    $('#year').textContent = new Date().getFullYear();
   </script>
+
+  <!-- Optional: lightweight analytics (uncomment and add your ID)
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"YOUR_TOKEN"}'></script>
+  -->
 </body>
 </html>
