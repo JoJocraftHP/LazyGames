@@ -25,7 +25,7 @@ a {
 :root {
     --primary: rgb(208, 24, 98); /* LazyGames Pink */
     --primary-dark: rgb(180, 20, 85);
-    --secondary: #00bcd4; /* ActiveGames Teal/Cyan - NEW */
+    --secondary: #00bcd4; /* Cyan/Teal */
     --background: #111;
     --card-bg: #1e1e1e;
     --text-color: #eee;
@@ -111,14 +111,6 @@ header {
     top: -1px;
 }
 
-.active-brand { /* Added style for new ActiveGames brand text */
-    font-size: 0.7em;
-    font-weight: 500;
-    color: var(--secondary);
-    margin-left: -0.5rem;
-    transform: translateY(4px);
-}
-
 nav ul {
     display: flex;
     list-style: none;
@@ -160,7 +152,7 @@ nav a:hover::after {
     box-shadow: 0 4px 10px rgba(208, 24, 98, 0.4);
 }
 
-.btn-secondary { /* Style for the new Hero CTA */
+.btn-secondary {
     background: var(--secondary);
     color: var(--background);
     box-shadow: 0 4px 10px rgba(0, 188, 212, 0.4);
@@ -194,7 +186,7 @@ nav a:hover::after {
     position: relative;
     height: 50vh;
     min-height: 350px;
-    max-height: 400px; /* Original max-height retained */
+    max-height: 400px;
     background: url('LazyGamesGameBanner.png') center/cover no-repeat fixed;
     display: flex;
     flex-direction: column;
@@ -209,7 +201,7 @@ nav a:hover::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.6); /* Original opacity retained */
+    background: rgba(0, 0, 0, 0.6);
 }
 
 .hero-content {
@@ -220,7 +212,7 @@ nav a:hover::after {
 
 .hero h1 {
     display: inline-block;
-    font-size: 3.5rem; /* Original font size retained */
+    font-size: 3.5rem;
     margin-bottom: 0.5rem;
     font-weight: 700;
     white-space: nowrap;
@@ -238,15 +230,22 @@ nav a:hover::after {
     margin-bottom: 1.5rem;
 }
 
+/* Anchor Scroll Fix */
+section[id],
+.hero[id] {
+    /* Ensures anchored content isn't hidden by the fixed header */
+    scroll-margin-top: 6rem; 
+}
+
 /* Sections */
 section {
-    padding: 4rem 2rem; /* Original padding retained */
+    padding: 4rem 2rem;
     max-width: 1200px;
     margin: auto;
 }
 
 h2 {
-    font-size: 2rem; /* Original font size retained */
+    font-size: 2rem;
     margin-bottom: 0.5rem;
     color: var(--primary);
     text-align: center;
@@ -258,10 +257,10 @@ h2 {
     margin-bottom: 2rem;
 }
 
-/* Games Grid - Improved to use CSS Grid */
+/* Games Grid */
 .games-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Adjusted for flexibility */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 2rem;
     justify-content: center;
 }
@@ -280,7 +279,7 @@ h2 {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
 }
 
-.game-card-image-wrapper { /* New wrapper for hover animation */
+.game-card-image-wrapper {
     aspect-ratio: 1/1;
     overflow: hidden;
 }
@@ -308,7 +307,7 @@ h2 {
 
 .game-card-content .btn {
     margin: 0.5rem auto 0;
-    padding: 0.6rem 1.2rem; /* Retained original button size in card */
+    padding: 0.6rem 1.2rem;
     font-weight: 500;
 }
 
@@ -343,20 +342,18 @@ h2 {
     width: 120px;
     aspect-ratio: 1/1;
     object-fit: cover;
-    border-radius: 8px; /* Retained original corner radius */
-    
-    /* MODIFIED: Default border is now white (#fff) */
+    border-radius: 8px;
+    /* UPDATED: Default border is now white */
     border: 3px solid #fff; 
-    
     transition: transform 0.3s, border-color 0.3s;
 }
 
 .group-card img:hover {
     transform: scale(1.1);
-    
-    /* MODIFIED: Hover border is now cyan (var(--secondary)) */
+    /* UPDATED: Hover border is cyan */
     border-color: var(--secondary);
 }
+
 
 /* Group Members Count */
 .group-members {
@@ -368,7 +365,7 @@ h2 {
 /* About */
 #about p {
     max-width: 800px;
-    margin: 0.5rem auto; /* Retained original margin */
+    margin: 0.5rem auto;
     color: #ccc;
     text-align: center;
 }
@@ -400,7 +397,7 @@ h2 {
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 0.75rem;
-    border: 3px solid var(--secondary); /* Added subtle border */
+    border: 3px solid var(--secondary);
 }
 
 .team-card h3 {
@@ -409,6 +406,7 @@ h2 {
 
 .team-link {
     color: var(--primary);
+    scroll-margin-top: 6rem; /* Ensures team links also don't hide behind header */
 }
 
 .team-card p {
@@ -456,7 +454,7 @@ footer nav a:hover {
     background: var(--secondary);
     color: var(--background);
     border: none;
-    padding: 0.75rem 1rem; /* Slightly larger padding */
+    padding: 0.75rem 1rem;
     border-radius: 50%;
     cursor: pointer;
     opacity: 0;
