@@ -162,28 +162,26 @@
   </section>
 
   <!-- Team -->
-<section id="team" class="reveal">
-  <h2>Meet the Team</h2>
-  <div class="team-grid">
-    <div class="team-card reveal">
-      <h3><a href="https://www.roblox.com/users/214865113/profile" class="team-link" target="_blank">JoJocraftHP</a></h3>
-      <img src="JoJoProfile.png" alt="JoJocraftHP" loading="lazy" decoding="async">
-      <p>Owner, Game Design &amp; Management</p>
+  <section id="team" class="reveal">
+    <h2>Meet the Team</h2>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <h3><a href="https://www.roblox.com/users/214865113/profile" class="team-link" target="_blank">JoJocraftHP</a></h3>
+        <img src="JoJoProfile.png" alt="JoJocraftHP" loading="lazy" decoding="async">
+        <p>Owner, Game Design &amp; Management</p>
+      </div>
+      <div class="team-card reveal">
+        <h3><a href="https://www.roblox.com/users/271040226/profile" class="team-link" target="_blank">mitex</a></h3>
+        <img src="MitexProfile.png" alt="mitex" loading="lazy" decoding="async">
+        <p>Co-Owner, Scripter</p>
+      </div>
+      <div class="team-card reveal">
+        <h3><a href="https://www.roblox.com/users/1441090007/profile" class="team-link" target="_blank">Lumpi</a></h3>
+        <img src="LumpiProfile.png" alt="Lumpi" loading="lazy" decoding="async">
+        <p>Developer, Builder &amp; Modeler</p>
+      </div>
     </div>
-    <div class="team-card reveal">
-      <h3><a href="https://www.roblox.com/users/271040226/profile" class="team-link" target="_blank">mitex</a></h3>
-      <img src="MitexProfile.png" alt="mitex" loading="lazy" decoding="async">
-      <p>Co-Owner, Scripter</p>
-    </div>
-    <div class="team-card reveal">
-      <h3><a href="https://www.roblox.com/users/1441090007/profile" class="team-link" target="_blank">Lumpi</a></h3>
-      <img src="LumpiProfile.png" alt="Lumpi" loading="lazy" decoding="async">
-      <p>Developer, Builder &amp; Modeler</p>
-    </div>
-  </div>
-</section>
-
-
+  </section>
 
   <!-- Contact -->
   <section id="contact" class="reveal">
@@ -221,7 +219,6 @@
     return String(n);
   };
 
-  // fetch with 1 retry + cache-bust
   const fetchJSON = async (url) => {
     for (let i = 0; i < 2; i++) {
       try {
@@ -235,6 +232,49 @@
       }
     }
   };
+
+  // ===== GAME ICONS (Roblox Thumbnails API with fallback to local) =====
+  async function fillGameIcons() {
+    const cards = qa('#games .game-card[data-universe-id]');
+    if (!cards.length) return;
+
+    // Map: universeId -> <img> element and fallback src
+    const idList = [];
+    const imgById = new Map();
+
+    cards.forEach(card => {
+      const uid = card.getAttribute('data-universe-id');
+      const img = card.querySelector('img');
+      if (!uid || !img) return;
+      // store current src as fallback
+      img.dataset.fallbackSrc = img.getAttribute('src');
+      // set robust onerror to fallback
+      img.onerror = () => { if (img.dataset.fallbackSrc) img.src = img.dataset.fallbackSrc; };
+      idList.push(uid);
+      imgById.set(String(uid), img);
+    });
+
+    if (!idList.length) return;
+
+    // Fetch thumbnails directly (CORS is open on thumbnails.roblox.com)
+    const url = `https://thumbnails.roblox.com/v1/games/icons?universeIds=${encodeURIComponent(idList.join(','))}&size=256x256&format=Png&isCircular=false`;
+
+    try {
+      const { data = [] } = await fetchJSON(url);
+      data.forEach(node => {
+        const uid = String(node.targetId);
+        const img = imgById.get(uid);
+        if (!img) return;
+        // Prefer returned imageUrl, otherwise keep fallback
+        if (node.imageUrl) {
+          img.src = node.imageUrl;
+        }
+      });
+    } catch (err) {
+      console.warn('[GameIcons] fetch failed, keeping fallbacks:', err);
+      // fallbacks remain set
+    }
+  }
 
   // ===== LIVE GAME STATS (Current CCU + Visits via Worker) =====
   async function fillLiveGameStats() {
@@ -289,48 +329,6 @@
     }));
   }
 
-  // ===== TEAM PROFILE PICS (via Worker → Roblox Thumbnails) =====
-  async function fillTeamProfilePics() {
-    const imgs = qa('#team img[data-user-id]');
-    if (!imgs.length) return;
-
-    // Local fallbacks per user id (keeps an image even if upstream fails)
-    const fallbackById = {
-      '214865113': 'JoJoProfile.png',   // JoJocraftHP
-      '271040226': 'MitexProfile.png',  // mitex
-      '1441090007': 'LumpiProfile.png', // Lumpi
-    };
-
-    const ids = imgs.map(img => img.getAttribute('data-user-id')).join(',');
-    const url = `${WORKER_URL}/?endpoint=userThumbs&ids=${encodeURIComponent(ids)}&size=420x420&format=Png&isCircular=false`;
-
-    try {
-      const { data = [] } = await fetchJSON(url);
-      const byId = new Map(data.map(d => [String(d.targetId), d])); // { targetId, imageUrl, state }
-
-      imgs.forEach(img => {
-        const uid = img.getAttribute('data-user-id');
-        const node = byId.get(uid);
-
-        if (node && node.state === 'Completed' && node.imageUrl) {
-          img.src = node.imageUrl;
-        } else {
-          // ensure valid fallback (avoid broken icon)
-          img.src = fallbackById[uid] || img.src;
-        }
-
-        // styling safety
-        img.width = 100;
-        img.height = 100;
-        img.style.objectFit = 'cover';
-        img.style.borderRadius = '50%';
-      });
-    } catch (err) {
-      console.error('[Team pics] fetch failed:', err);
-      // local fallbacks already set in HTML
-    }
-  }
-
   // ===== PAGE BEHAVIOR =====
   document.addEventListener('DOMContentLoaded', () => {
     // Reveal animations
@@ -364,15 +362,12 @@
       qa('nav ul li a').forEach(link => link.addEventListener('click', () => nav.classList.remove('active')));
     }
 
-    // Live data
+    // Live data + icons
+    fillGameIcons();
     fillLiveGameStats();
     fillGroupMembers();
   });
 </script>
-
-
-
-
 
 </body>
 </html>
