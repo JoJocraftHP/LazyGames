@@ -6,33 +6,50 @@
   <title>LazyGames</title>
 
   <link rel="icon" href="lgsdocument.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="canonical" href="https://www.lazygames.dev/">
 
   <!-- Open Graph -->
   <meta property="og:title" content="LazyGames - Innovative Roblox Game Development" />
-  <meta property="og:description" content="LazyGames is a Roblox studio specializing in simulators and innovative game concepts. Explore our top games like Jetpack Training and Lift a Pet, and join our community!" />
+  <meta property="og:description" content="LazyGames builds hit Roblox experiences like Crush for Brainrots, Jetpack Training, and Lift a Pet. Join our communities and play now." />
   <meta property="og:image" content="https://www.lazygames.dev/LGSCard.png" />
   <meta property="og:url" content="https://www.lazygames.dev/" />
   <meta property="og:type" content="website" />
-
+  <meta property="og:site_name" content="LazyGames" />
+  <meta property="og:locale" content="en_US" />
+  <meta name="description" content="LazyGames builds hit Roblox experiences like Crush for Brainrots, Jetpack Training, and Lift a Pet. Join our communities and play now.">
+  <meta name="theme-color" content="#D01862">
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@LazyGamesTeam" />
   <meta name="twitter:title" content="LazyGames - Innovative Roblox Game Development" />
-  <meta name="twitter:description" content="LazyGames is a Roblox studio specializing in simulators and innovative game concepts. Explore our top games like Jetpack Training and Lift a Pet, and join our community!" />
+  <meta name="twitter:description" content="LazyGames is a Roblox studio specializing in simulators and innovative game concepts." />
   <meta name="twitter:image" content="https://www.lazygames.dev/LGSCard.png" />
 </head>
 <body>
   <!-- Header -->
   <header class="reveal">
-    <a href="#hero" class="logo"><img src="LazyGamesBrandingMain.png" alt="LazyGames Logo" /><span>LazyGames</span></a>
-    <button class="hamburger" aria-label="Toggle navigation">&#9776;</button>
-    <nav>
+    <a href="#hero" class="logo">
+      <img src="LazyGamesBrandingMain.png" alt="LazyGames logo" width="40" height="40" />
+      <span>LazyGames</span>
+    </a>
+
+    <div class="brand-toggle" role="group" aria-label="Switch brand theme">
+      <button type="button" id="brand-lazy"   class="active">Lazy</button>
+      <button type="button" id="brand-active">Active</button>
+    </div>
+
+    <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="site-nav">&#9776;</button>
+
+    <nav id="site-nav" aria-label="Primary">
       <ul>
         <li><a href="#hero">Home</a></li>
         <li><a href="#games">Our Games</a></li>
         <li><a href="#about">About Us</a></li>
+        <li><a href="#groups">Groups</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
@@ -42,19 +59,21 @@
   <section id="hero" class="hero reveal">
     <div class="hero-content">
       <h1>Welcome to LazyGames</h1>
-      <p>We are an experienced Roblox studio specializing in simulators and innovative game concepts.</p>
+      <p>We create high-quality, addictive Roblox experiences.</p>
+      <a class="btn" href="https://www.roblox.com/communities/33472368/LazyGameStudios#!/about" target="_blank">Play on Roblox</a>
     </div>
   </section>
 
   <!-- Games -->
   <section id="games" class="reveal">
     <h2>Our Top Hits</h2>
-    <p class="section-subtitle">Here are some of our top games</p>
+    <p class="section-subtitle">Play our most popular Roblox games.</p>
+
     <div class="games-grid">
 
       <!-- Crush for Brainrots -->
       <div class="game-card reveal" data-universe-id="8357236286">
-        <img src="GameIcons/CrushforBrainrots.png" alt="Crush for Brainrots" loading="lazy" />
+        <img src="GameIcons/CrushforBrainrots.png" alt="Crush for Brainrots game icon" loading="lazy" decoding="async" width="512" height="512" />
         <div class="game-card-content">
           <h3>Crush for Brainrots</h3>
           <p class="stats live"><span class="live-ccu">Current CCU: —</span></p>
@@ -66,7 +85,7 @@
 
       <!-- Jetpack Training -->
       <div class="game-card reveal" data-universe-id="7017269091">
-        <img src="GameIcons/JetpackTraining.png" alt="Jetpack Training" loading="lazy" />
+        <img src="GameIcons/JetpackTraining.png" alt="Jetpack Training game icon" loading="lazy" decoding="async" width="512" height="512" />
         <div class="game-card-content">
           <h3>Jetpack Training</h3>
           <p class="stats live"><span class="live-ccu">Current CCU: —</span></p>
@@ -78,7 +97,7 @@
 
       <!-- Lift a Pet -->
       <div class="game-card reveal" data-universe-id="5792683386">
-        <img src="GameIcons/LiftaPet.png" alt="Lift a Pet" loading="lazy" />
+        <img src="GameIcons/LiftaPet.png" alt="Lift a Pet game icon" loading="lazy" decoding="async" width="512" height="512" />
         <div class="game-card-content">
           <h3>Lift a Pet</h3>
           <p class="stats live"><span class="live-ccu">Current CCU: —</span></p>
@@ -90,7 +109,7 @@
 
       <!-- Monster Training -->
       <div class="game-card reveal" data-universe-id="7676176341">
-        <img src="GameIcons/MonsterTraining.png" alt="Monster Training" loading="lazy" />
+        <img src="GameIcons/MonsterTraining.png" alt="Monster Training game icon" loading="lazy" decoding="async" width="512" height="512" />
         <div class="game-card-content">
           <h3>Monster Training</h3>
           <p class="stats live"><span class="live-ccu">Current CCU: —</span></p>
@@ -102,7 +121,7 @@
 
       <!-- Click To Get Big -->
       <div class="game-card reveal" data-universe-id="5476431443">
-        <img src="GameIcons/CTG.png" alt="Click To Get Big" loading="lazy" />
+        <img src="GameIcons/CTG.png" alt="Click To Get Big game icon" loading="lazy" decoding="async" width="512" height="512" />
         <div class="game-card-content">
           <h3>Click To Get Big</h3>
           <p class="stats live"><span class="live-ccu">Current CCU: —</span></p>
@@ -118,7 +137,7 @@
   <section id="about" class="reveal">
     <h2>About Us</h2>
     <p>LazyGames is a Roblox studio founded in 2023 by developers active since 2017.</p>
-    <p>We’re best known for our simulator games, but we’re expanding into new genres with fresh ideas. From concept to launch, we focus on creating fun, high-quality experiences for players worldwide.</p>
+    <p>We’re best known for our simulator games and we are expanding into new genres with fresh ideas.</p>
   </section>
 
   <!-- Groups -->
@@ -129,7 +148,7 @@
       <div class="group-card">
         <p>Main Group</p>
         <a href="https://www.roblox.com/communities/33472368/LazyGameStudios#!/about" target="_blank">
-          <img src="StudioIcons/LazyStudios.png" alt="Main Group" />
+          <img src="StudioIcons/LazyStudios.png" alt="LazyGames Studios group icon" width="120" height="120" loading="lazy" decoding="async" />
         </a>
         <p class="group-members" data-group-id="33472368">Members: —</p>
       </div>
@@ -137,7 +156,7 @@
       <div class="group-card">
         <p>Active Group</p>
         <a href="https://www.roblox.com/communities/35868694/ActiveGameStudios#!/about" target="_blank">
-          <img src="StudioIcons/ActiveGames.png" alt="Active Group" />
+          <img src="StudioIcons/ActiveGames.png" alt="ActiveGames Studios group icon" width="120" height="120" loading="lazy" decoding="async" />
         </a>
         <p class="group-members" data-group-id="35868694">Members: —</p>
       </div>
@@ -145,7 +164,7 @@
       <div class="group-card">
         <p>Tycoon Group</p>
         <a href="https://www.roblox.com/communities/33860522/LazyGames-Tycoons#!/about" target="_blank">
-          <img src="StudioIcons/LazyTycoons.png" alt="Tycoon Group" />
+          <img src="StudioIcons/LazyTycoons.png" alt="LazyGames Tycoons group icon" width="120" height="120" loading="lazy" decoding="async" />
         </a>
         <p class="group-members" data-group-id="33860522">Members: —</p>
       </div>
@@ -153,7 +172,7 @@
       <div class="group-card">
         <p>Obby Group</p>
         <a href="https://www.roblox.com/communities/33635810/LazyGamesObbys#!/about" target="_blank">
-          <img src="StudioIcons/LazyObbies.png" alt="Obby Group" />
+          <img src="StudioIcons/LazyObbies.png" alt="LazyGames Obbies group icon" width="120" height="120" loading="lazy" decoding="async" />
         </a>
         <p class="group-members" data-group-id="33635810">Members: —</p>
       </div>
@@ -166,17 +185,17 @@
     <div class="team-grid">
       <div class="team-card reveal">
         <h3><a href="https://www.roblox.com/users/214865113/profile" class="team-link" target="_blank">JoJocraftHP</a></h3>
-        <img src="JoJoProfile.png" alt="JoJocraftHP" loading="lazy" decoding="async" />
+        <img src="JoJoProfile.png" alt="JoJocraftHP" loading="lazy" decoding="async" width="100" height="100" />
         <p>Owner, Game Design &amp; Management</p>
       </div>
       <div class="team-card reveal">
         <h3><a href="https://www.roblox.com/users/271040226/profile" class="team-link" target="_blank">mitex</a></h3>
-        <img src="MitexProfile.png" alt="mitex" loading="lazy" decoding="async" />
+        <img src="MitexProfile.png" alt="mitex" loading="lazy" decoding="async" width="100" height="100" />
         <p>Co-Owner, Scripter</p>
       </div>
       <div class="team-card reveal">
         <h3><a href="https://www.roblox.com/users/1441090007/profile" class="team-link" target="_blank">Lumpi</a></h3>
-        <img src="LumpiProfile.png" alt="Lumpi" loading="lazy" decoding="async" />
+        <img src="LumpiProfile.png" alt="Lumpi" loading="lazy" decoding="async" width="100" height="100" />
         <p>Developer, Builder &amp; Modeler</p>
       </div>
     </div>
@@ -195,179 +214,221 @@
 
   <!-- Footer -->
   <footer class="reveal">
-    <nav><a href="#hero">Home</a> | <a href="#games">Our Games</a> | <a href="#about">About Us</a> | <a href="#groups">Groups</a> | <a href="#contact">Contact</a></nav>
+    <nav>
+      <a href="#hero">Home</a> |
+      <a href="#games">Our Games</a> |
+      <a href="#about">About Us</a> |
+      <a href="#groups">Groups</a> |
+      <a href="#contact">Contact</a>
+    </nav>
     <p>&copy; <span id="current-year"></span> LazyGames</p>
   </footer>
 
   <!-- Back to top -->
   <button id="back-to-top" aria-label="Back to top">↑</button>
 
-  <!-- Script -->
-<script>
-  // ===== CONFIG =====
-  const WORKER_URL = 'https://livestatsupdate.jojocrafthdyt.workers.dev';
-  const REFRESH_MS = 60_000;
+  <!-- App Script -->
+  <script>
+    // ===== CONFIG =====
+    const WORKER_URL = 'https://livestatsupdate.jojocrafthdyt.workers.dev';
+    const REFRESH_MS = 60_000;
 
-  // ===== HELPERS =====
-  const q  = (sel, root = document) => root.querySelector(sel);
-  const qa = (sel, root = document) => [...root.querySelectorAll(sel)];
+    // ===== HELPERS =====
+    const q  = (sel, root = document) => root.querySelector(sel);
+    const qa = (sel, root = document) => [...root.querySelectorAll(sel)];
+    const fmtAbbrev = (n) => {
+      if (typeof n !== 'number' || isNaN(n)) return '—';
+      if (n >= 1_000_000) return (Math.round((n / 1_000_000) * 10) / 10).toFixed(1) + 'M';
+      if (n >= 1_000)     return (Math.round((n / 1_000) * 10) / 10).toFixed(1) + 'K';
+      return String(n);
+    };
 
-  const fmtAbbrev = (n) => {
-    if (typeof n !== 'number' || isNaN(n)) return '—';
-    if (n >= 1_000_000) return (Math.round((n / 1_000_000) * 10) / 10).toFixed(1) + 'M';
-    if (n >= 1_000)     return (Math.round((n / 1_000) * 10) / 10).toFixed(1) + 'K';
-    return String(n);
-  };
-
-  async function fetchJSONWithTimeout(url, ms = 6000) {
-    const ctrl = new AbortController();
-    const t = setTimeout(() => ctrl.abort('timeout'), ms);
-    try {
-      const bust = (url.includes('?') ? '&' : '?') + '_ts=' + Date.now();
-      const res = await fetch(url + bust, { headers: { accept: 'application/json' }, signal: ctrl.signal });
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      return await res.json();
-    } finally {
-      clearTimeout(t);
-    }
-  }
-
-  async function getJSON(url) {
-    try {
-      return await fetchJSONWithTimeout(url, 6000);
-    } catch (e) {
-      await new Promise(r => setTimeout(r, 400));
-      return await fetchJSONWithTimeout(url, 6000);
-    }
-  }
-
-  // ===== LIVE GAME STATS =====
-  function renderGameStats(data) {
-    const cards = qa('#games .game-card[data-universe-id]');
-    const byId = new Map((data?.data || []).map(g => [String(g.id), g]));
-
-    cards.forEach(card => {
-      const uid = String(card.getAttribute('data-universe-id'));
-      const g = byId.get(uid);
-      const ccuEl    = q('.live-ccu', card);
-      const visitsEl = q('.live-visits', card);
-
-      if (!g) return;
-      if (ccuEl)    ccuEl.textContent    = 'Current CCU: ' + (typeof g.playing === 'number' ? g.playing.toLocaleString() : '—');
-      if (visitsEl) visitsEl.textContent = 'Visits: ' + fmtAbbrev(typeof g.visits === 'number' ? g.visits : NaN);
-    });
-  }
-
-  async function fillLiveGameStats() {
-    const cards = qa('#games .game-card[data-universe-id]');
-    if (!cards.length) return;
-
-    const ids = [...new Set(cards.map(c => c.getAttribute('data-universe-id')).filter(Boolean))];
-    if (!ids.length) return;
-
-    const url = WORKER_URL + '/?endpoint=games&ids=' + encodeURIComponent(ids.join(','));
-
-    // cached first
-    try {
-      const cached = sessionStorage.getItem('lg.games');
-      if (cached) renderGameStats(JSON.parse(cached));
-    } catch {}
-
-    try {
-      const json = await getJSON(url);
-      renderGameStats(json);
-      sessionStorage.setItem('lg.games', JSON.stringify(json));
-    } catch (err) {
-      console.warn('[LiveGames] fetch failed:', err);
-    }
-  }
-
-  // ===== LIVE GROUP MEMBERS =====
-  function renderGroup(el, data) {
-    if (typeof data?.memberCount === 'number') {
-      el.textContent = 'Members: ' + data.memberCount.toLocaleString();
-    } else {
-      el.textContent = 'Members: —';
-    }
-  }
-
-  async function fillGroupMembers() {
-    const els = qa('.group-members[data-group-id]');
-    if (!els.length) return;
-
-    await Promise.all(els.map(async el => {
-      const id = el.getAttribute('data-group-id');
-      if (!id) return;
-
-      const url = WORKER_URL + '/?endpoint=group&groupId=' + encodeURIComponent(id);
-
-      // cached first
+    async function fetchJSONWithTimeout(url, ms = 6000) {
+      const ctrl = new AbortController();
+      const t = setTimeout(() => ctrl.abort('timeout'), ms);
       try {
-        const cached = sessionStorage.getItem('lg.group.' + id);
-        if (cached) renderGroup(el, JSON.parse(cached));
-      } catch {}
+        const bust = (url.includes('?') ? '&' : '?') + '_ts=' + Date.now();
+        const res = await fetch(url + bust, { headers: { accept: 'application/json' }, signal: ctrl.signal });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return await res.json();
+      } finally { clearTimeout(t); }
+    }
+    async function getJSON(url) {
+      try { return await fetchJSONWithTimeout(url, 6000); }
+      catch { await new Promise(r => setTimeout(r, 400)); return await fetchJSONWithTimeout(url, 6000); }
+    }
 
+    // ===== LIVE GAME STATS =====
+    function renderGameStats(data) {
+      const cards = qa('#games .game-card[data-universe-id]');
+      const byId = new Map((data?.data || []).map(g => [String(g.id), g]));
+      cards.forEach(card => {
+        const uid = String(card.getAttribute('data-universe-id'));
+        const g = byId.get(uid);
+        const ccuEl    = q('.live-ccu', card);
+        const visitsEl = q('.live-visits', card);
+        if (!g) return;
+        if (ccuEl)    ccuEl.textContent    = 'Current CCU: ' + (typeof g.playing === 'number' ? g.playing.toLocaleString() : '—');
+        if (visitsEl) visitsEl.textContent = 'Visits: ' + fmtAbbrev(typeof g.visits === 'number' ? g.visits : NaN);
+      });
+    }
+    async function fillLiveGameStats() {
+      const cards = qa('#games .game-card[data-universe-id]');
+      if (!cards.length) return;
+      const ids = [...new Set(cards.map(c => c.getAttribute('data-universe-id')).filter(Boolean))];
+      if (!ids.length) return;
+      const url = WORKER_URL + '/?endpoint=games&ids=' + encodeURIComponent(ids.join(','));
+      try { const cached = sessionStorage.getItem('lg.games'); if (cached) renderGameStats(JSON.parse(cached)); } catch {}
       try {
         const json = await getJSON(url);
-        renderGroup(el, json);
-        sessionStorage.setItem('lg.group.' + id, JSON.stringify(json));
-      } catch (err) {
-        console.warn('[Group ' + id + '] fetch failed:', err);
+        renderGameStats(json);
+        sessionStorage.setItem('lg.games', JSON.stringify(json));
+      } catch (err) { console.warn('[LiveGames] fetch failed:', err); }
+    }
+
+    // ===== LIVE GROUP MEMBERS =====
+    function renderGroup(el, data) {
+      el.textContent = 'Members: ' + (typeof data?.memberCount === 'number' ? data.memberCount.toLocaleString() : '—');
+    }
+    async function fillGroupMembers() {
+      const els = qa('.group-members[data-group-id]');
+      if (!els.length) return;
+      await Promise.all(els.map(async el => {
+        const id = el.getAttribute('data-group-id');
+        if (!id) return;
+        const url = WORKER_URL + '/?endpoint=group&groupId=' + encodeURIComponent(id);
+        try { const cached = sessionStorage.getItem('lg.group.' + id); if (cached) renderGroup(el, JSON.parse(cached)); } catch {}
+        try {
+          const json = await getJSON(url);
+          renderGroup(el, json);
+          sessionStorage.setItem('lg.group.' + id, JSON.stringify(json));
+        } catch (err) { console.warn('[Group ' + id + '] fetch failed:', err); }
+      }));
+    }
+
+    // ===== BRAND THEME TOGGLER =====
+    function applyBrand(brand) {
+      document.documentElement.dataset.brand = brand;
+      try { localStorage.setItem('lg.brand', brand); } catch {}
+      q('#brand-lazy')?.classList.toggle('active', brand === 'lazy');
+      q('#brand-active')?.classList.toggle('active', brand === 'active');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Harden external links
+      qa('a[target="_blank"]').forEach(a => { a.rel = 'noopener'; });
+
+      // Reveal animations (reduced motion safe)
+      const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!prefersReduced) {
+        try {
+          const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('active'); obs.unobserve(e.target); } });
+          }, { threshold: 0.1 });
+          qa('.reveal').forEach(el => observer.observe(el));
+        } catch {}
+      } else {
+        qa('.reveal').forEach(el => el.classList.add('active'));
       }
-    }));
-  }
 
-  // ===== PAGE BEHAVIOR =====
-  document.addEventListener('DOMContentLoaded', () => {
-    // Reduced motion friendly reveals
-    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!prefersReduced) {
-      try {
-        const observer = new IntersectionObserver((entries, obs) => {
-          entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('active'); obs.unobserve(e.target); } });
-        }, { threshold: 0.1 });
-        qa('.reveal').forEach(el => observer.observe(el));
-      } catch {}
-    } else {
-      qa('.reveal').forEach(el => el.classList.add('active'));
-    }
+      // Typewriter caret off after anim
+      const h1 = q('.hero h1');
+      if (h1) h1.addEventListener('animationend', e => { if (e.animationName === 'typewriter') h1.style.borderRight = 'none'; });
 
-    // Header / UI niceties
-    const h1 = q('.hero h1');
-    if (h1) h1.addEventListener('animationend', e => { if (e.animationName === 'typewriter') h1.style.borderRight = 'none'; });
+      // Back to top
+      const back = q('#back-to-top');
+      if (back) {
+        window.addEventListener('scroll', () => back.classList.toggle('show', window.scrollY > 300));
+        back.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
 
-    const back = q('#back-to-top');
-    if (back) {
-      window.addEventListener('scroll', () => back.classList.toggle('show', window.scrollY > 300));
-      back.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+      // Year
+      const yearEl = q('#current-year'); if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    const yearEl = q('#current-year');
-    if (yearEl) yearEl.textContent = new Date().getFullYear();
+      // Mobile nav
+      const hamburger = q('.hamburger');
+      const nav = q('#site-nav');
+      if (hamburger && nav) {
+        const toggleNav = (state) => {
+          const open = state ?? !nav.classList.contains('active');
+          nav.classList.toggle('active', open);
+          hamburger.setAttribute('aria-expanded', String(open));
+        };
+        hamburger.addEventListener('click', () => toggleNav());
+        qa('#site-nav a').forEach(link => link.addEventListener('click', () => toggleNav(false)));
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') toggleNav(false); });
+        document.addEventListener('click', (e) => {
+          if (!nav.classList.contains('active')) return;
+          if (!nav.contains(e.target) && e.target !== hamburger) toggleNav(false);
+        });
+      }
 
-    const hamburger = q('.hamburger');
-    const nav = q('nav');
-    if (hamburger && nav) {
-      hamburger.addEventListener('click', () => nav.classList.toggle('active'));
-      qa('nav ul li a').forEach(link => link.addEventListener('click', () => nav.classList.remove('active')));
-    }
+      // Brand theme init + buttons
+      try { applyBrand(localStorage.getItem('lg.brand') || 'lazy'); } catch { applyBrand('lazy'); }
+      q('#brand-lazy')?.addEventListener('click', () => applyBrand('lazy'));
+      q('#brand-active')?.addEventListener('click', () => applyBrand('active'));
 
-    // Live data now + refresh while visible
-    const runLive = () => { fillLiveGameStats(); fillGroupMembers(); };
-    runLive();
-
-    let timer = setInterval(() => {
-      if (document.visibilityState === 'visible') runLive();
-    }, REFRESH_MS);
-
-    document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'visible') runLive();
+      // Live data refresh
+      const runLive = () => { fillLiveGameStats(); fillGroupMembers(); };
+      runLive();
+      let timer = setInterval(() => { if (document.visibilityState === 'visible') runLive(); }, REFRESH_MS);
+      document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') runLive(); });
+      window.addEventListener('pagehide', () => clearInterval(timer));
     });
+  </script>
 
-    window.addEventListener('pagehide', () => clearInterval(timer));
-  });
-</script>
-
-
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "LazyGames",
+        "url": "https://www.lazygames.dev/",
+        "logo": "https://www.lazygames.dev/LazyGamesBrandingMain.png",
+        "sameAs": [
+          "https://x.com/LazyGamesTeam",
+          "https://www.roblox.com/communities/33472368/LazyGameStudios#!/about",
+          "https://discord.gg/UnhZDUH93X"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "url": "https://www.lazygames.dev/",
+        "name": "LazyGames",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://www.lazygames.dev/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "VideoGame",
+        "name": "Crush for Brainrots",
+        "url": "https://www.roblox.com/games/117579798602171/UPD5-Crush-for-Brainrots",
+        "image": "https://www.lazygames.dev/GameIcons/CrushforBrainrots.png",
+        "applicationCategory": "Game",
+        "operatingSystem": "Roblox"
+      },
+      {
+        "@type": "VideoGame",
+        "name": "Jetpack Training",
+        "url": "https://www.roblox.com/games/95557214969049",
+        "image": "https://www.lazygames.dev/GameIcons/JetpackTraining.png",
+        "applicationCategory": "Game",
+        "operatingSystem": "Roblox"
+      },
+      {
+        "@type": "VideoGame",
+        "name": "Lift a Pet",
+        "url": "https://www.roblox.com/games/16858182871",
+        "image": "https://www.lazygames.dev/GameIcons/LiftaPet.png",
+        "applicationCategory": "Game",
+        "operatingSystem": "Roblox"
+      }
+    ]
+  }
+  </script>
 </body>
 </html>
