@@ -139,6 +139,14 @@ h2 { font-size: 2rem; margin-bottom: 0.5rem; color: var(--primary); text-align: 
 .group-card img { width: 120px; aspect-ratio: 1/1; object-fit: cover; border-radius: 8px; transition: transform 0.3s; }
 .group-card img:hover { transform: scale(1.1); }
 
+
+/* Group Members Count */
+.group-members {
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
 /* About */
 #about p { max-width: 800px; margin: 0.5rem auto; color: #ccc; text-align: center; }
 
