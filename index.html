@@ -239,45 +239,36 @@
         });
       });
     });
-  <script>
-  // ===== Helpers =====
-  function parseAbbrev(str) {
-    if (!str) return 0;
-    const cleaned = str.replace(/[^0-9.km+]/gi, '').toUpperCase();
-    const m = cleaned.match(/([\d.]+)\s*([KM])?/i);
-    if (!m) return 0;
-    const num = parseFloat(m[1]);
-    const unit = (m[2] || '').toUpperCase();
-    if (unit === 'M') return Math.round(num * 1_000_000);
-    if (unit === 'K') return Math.round(num * 1_000);
-    return Math.round(num);
-  }
+
+    
+<script>
+  // ========= helpers =========
   function formatAbbrev(n) {
+    if (typeof n !== 'number' || isNaN(n)) return '—';
     if (n >= 1_000_000) return (Math.round((n / 1_000_000) * 10) / 10).toFixed(1) + 'M';
-    if (n >= 1_000) return (Math.round((n / 1_000) * 10) / 10).toFixed(1) + 'K';
+    if (n >= 1_000)     return (Math.round((n / 1_000) * 10) / 10).toFixed(1) + 'K';
     return String(n);
   }
 
-  // ===== Live per-game stats (Visits + Current CCU) via Cloudflare Worker =====
-  const WORKER_URL = 'https://livestatsupdate.jojocrafthdyt.workers.dev'; // your Worker URL
+  // ========= LIVE STATS via Cloudflare Worker =========
+  const WORKER_URL = 'https://livestatsupdate.jojocrafthdyt.workers.dev';
 
   async function fillLiveGameStats() {
-    const cards = Array.from(document.querySelectorAll('#games .game-card[data-universe-id]'));
-    if (!cards.length) return;
-
-    // Collect unique universe IDs
-    const ids = [...new Set(cards.map(c => c.getAttribute('data-universe-id')).filter(Boolean))];
-    if (!ids.length) return;
-
     try {
-      const resp = await fetch(`${WORKER_URL}/?ids=${encodeURIComponent(ids.join(','))}`, {
+      const cards = Array.from(document.querySelectorAll('#games .game-card[data-universe-id]'));
+      if (!cards.length) return;
+
+      const ids = [...new Set(cards.map(c => c.getAttribute('data-universe-id')).filter(Boolean))];
+      if (!ids.length) return;
+
+      const resp = await fetch(WORKER_URL + '/?ids=' + encodeURIComponent(ids.join(',')), {
         headers: { 'accept': 'application/json' }
       });
-      const data = await resp.json();
+      if (!resp.ok) throw new Error('Worker HTTP ' + resp.status);
+      const payload = await resp.json();
       const byId = new Map();
-      (data.data || []).forEach(g => byId.set(String(g.id), g)); // g.id = universeId
+      (payload.data || []).forEach(g => byId.set(String(g.id), g)); // g.id = universeId
 
-      // Fill each card
       cards.forEach(card => {
         const uid = card.getAttribute('data-universe-id');
         const g = byId.get(String(uid));
@@ -287,25 +278,26 @@
         const liveCcuEl    = card.querySelector('.live-ccu');
 
         if (liveVisitsEl && typeof g.visits === 'number') {
-          liveVisitsEl.textContent = `Visits (Live): ${formatAbbrev(g.visits)}`;
+          liveVisitsEl.textContent = 'Visits (Live): ' + formatAbbrev(g.visits);
         }
         if (liveCcuEl && typeof g.playing === 'number') {
-          liveCcuEl.textContent = `Current CCU: ${g.playing.toLocaleString()}`;
+          liveCcuEl.textContent = 'Current CCU: ' + g.playing.toLocaleString();
         }
       });
-    } catch (e) {
-      console.warn('Live stats fetch failed:', e);
+    } catch (err) {
+      console.warn('Live stats fetch failed:', err);
     }
   }
 
+  // ========= site behavior =========
   document.addEventListener('DOMContentLoaded', () => {
-    // ===== Reveal on scroll =====
+    // Intersection Observer for reveals
     const observer = new IntersectionObserver((entries, obs) => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('active'); obs.unobserve(e.target); } });
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // ===== Hero H1 typewriter caret off after animation =====
+    // Hero H1 typewriter animation (null-safe)
     const h1 = document.querySelector('.hero h1');
     if (h1) {
       h1.addEventListener('animationend', e => {
@@ -313,16 +305,18 @@
       });
     }
 
-    // ===== Back to top =====
+    // Back to top button
     const back = document.getElementById('back-to-top');
-    window.addEventListener('scroll', () => back && back.classList.toggle('show', window.scrollY > 300));
-    if (back) back.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (back) {
+      window.addEventListener('scroll', () => back.classList.toggle('show', window.scrollY > 300));
+      back.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-    // ===== Footer year =====
+    // Dynamic current year in footer
     const yearEl = document.getElementById('current-year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    // ===== Mobile nav =====
+    // Hamburger menu
     const hamburger = document.querySelector('.hamburger');
     const nav = document.querySelector('nav');
     const navLinks = document.querySelectorAll('nav ul li a');
@@ -331,7 +325,7 @@
       navLinks.forEach(link => link.addEventListener('click', () => nav.classList.remove('active')));
     }
 
-    // ===== Live stats fill =====
+    // Live stats
     fillLiveGameStats();
   });
 </script>
