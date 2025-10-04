@@ -344,15 +344,19 @@ h2 {
     aspect-ratio: 1/1;
     object-fit: cover;
     border-radius: 8px; /* Retained original corner radius */
-    border: 3px solid var(--primary); /* Added border highlight */
+    
+    /* MODIFIED: Default border is now white (#fff) */
+    border: 3px solid #fff; 
+    
     transition: transform 0.3s, border-color 0.3s;
 }
 
 .group-card img:hover {
     transform: scale(1.1);
-    border-color: var(--secondary); /* Hover color change */
+    
+    /* MODIFIED: Hover border is now cyan (var(--secondary)) */
+    border-color: var(--secondary);
 }
-
 
 /* Group Members Count */
 .group-members {
