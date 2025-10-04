@@ -162,26 +162,26 @@
   </section>
 
   <!-- Team -->
-  <section id="team" class="reveal">
-    <h2>Meet the Team</h2>
-    <div class="team-grid">
-      <div class="team-card reveal">
-        <h3><a href="https://www.roblox.com/users/214865113/profile" class="team-link" target="_blank">JoJocraftHP</a></h3>
-        <img src="JoJoProfile.png" alt="JoJocraftHP" loading="lazy" decoding="async">
-        <p>Owner, Game Design &amp; Management</p>
-      </div>
-      <div class="team-card reveal">
-        <h3><a href="https://www.roblox.com/users/271040226/profile" class="team-link" target="_blank">mitex</a></h3>
-        <img src="MitexProfile.png" alt="mitex" loading="lazy" decoding="async">
-        <p>Co-Owner, Scripter</p>
-      </div>
-      <div class="team-card reveal">
-        <h3><a href="https://www.roblox.com/users/1441090007/profile" class="team-link" target="_blank">Lumpi</a></h3>
-        <img src="LumpiProfile.png" alt="Lumpi" loading="lazy" decoding="async">
-        <p>Developer, Builder &amp; Modeler</p>
-      </div>
+<section id="team" class="reveal">
+  <h2>Meet the Team</h2>
+  <div class="team-grid">
+    <div class="team-card reveal">
+      <h3><a href="https://www.roblox.com/users/214865113/profile" class="team-link" target="_blank">JoJocraftHP</a></h3>
+      <img src="JoJoProfile.png" alt="JoJocraftHP" loading="lazy" decoding="async">
+      <p>Owner, Game Design &amp; Management</p>
     </div>
-  </section>
+    <div class="team-card reveal">
+      <h3><a href="https://www.roblox.com/users/271040226/profile" class="team-link" target="_blank">mitex</a></h3>
+      <img src="MitexProfile.png" alt="mitex" loading="lazy" decoding="async">
+      <p>Co-Owner, Scripter</p>
+    </div>
+    <div class="team-card reveal">
+      <h3><a href="https://www.roblox.com/users/1441090007/profile" class="team-link" target="_blank">Lumpi</a></h3>
+      <img src="LumpiProfile.png" alt="Lumpi" loading="lazy" decoding="async">
+      <p>Developer, Builder &amp; Modeler</p>
+    </div>
+  </div>
+</section>
 
   <!-- Contact -->
   <section id="contact" class="reveal">
@@ -238,41 +238,41 @@
     const cards = qa('#games .game-card[data-universe-id]');
     if (!cards.length) return;
 
-    // Map: universeId -> <img> element and fallback src
-    const idList = [];
+    // Collect IDs + remember fallback srcs + onerror fallback
+    const ids = [];
     const imgById = new Map();
 
     cards.forEach(card => {
       const uid = card.getAttribute('data-universe-id');
       const img = card.querySelector('img');
       if (!uid || !img) return;
+
       // store current src as fallback
       img.dataset.fallbackSrc = img.getAttribute('src');
-      // set robust onerror to fallback
+      // robust fallback if remote image fails
       img.onerror = () => { if (img.dataset.fallbackSrc) img.src = img.dataset.fallbackSrc; };
-      idList.push(uid);
+
+      ids.push(uid);
       imgById.set(String(uid), img);
     });
 
-    if (!idList.length) return;
+    if (!ids.length) return;
 
-    // Fetch thumbnails directly (CORS is open on thumbnails.roblox.com)
-    const url = `https://thumbnails.roblox.com/v1/games/icons?universeIds=${encodeURIComponent(idList.join(','))}&size=256x256&format=Png&isCircular=false`;
+    // Fetch thumbnails (CORS open)
+    const thumbUrl = `https://thumbnails.roblox.com/v1/games/icons?universeIds=${encodeURIComponent(ids.join(','))}&size=512x512&format=Png&isCircular=false`;
 
     try {
-      const { data = [] } = await fetchJSON(url);
+      const { data = [] } = await fetchJSON(thumbUrl);
       data.forEach(node => {
         const uid = String(node.targetId);
         const img = imgById.get(uid);
         if (!img) return;
-        // Prefer returned imageUrl, otherwise keep fallback
-        if (node.imageUrl) {
-          img.src = node.imageUrl;
+        if (node && node.imageUrl) {
+          img.src = node.imageUrl; // swap to live icon
         }
       });
     } catch (err) {
-      console.warn('[GameIcons] fetch failed, keeping fallbacks:', err);
-      // fallbacks remain set
+      console.warn('[GameIcons] fetch failed; keeping fallbacks:', err);
     }
   }
 
