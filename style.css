@@ -247,3 +247,22 @@ footer nav a:hover { color: var(--primary); }
   .game-card-content .btn { padding: 0.5rem 1rem; font-size: 0.9rem; }
   .group-card img { width: 100px; }
 }
+/* Prevent any cross-section flex bleed if something ever nests wrong */
+section { display: block; width: 100%; }
+
+/* Team: force 3 cards in one row on desktop */
+@media (min-width: 900px) {
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(180px, 1fr));
+    gap: 2rem;
+  }
+}
+
+/* Groups grid already flexes; keep it row-wrapped only inside the section */
+#groups .groups-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
