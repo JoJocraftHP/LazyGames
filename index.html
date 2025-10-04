@@ -204,101 +204,122 @@
   <button id="back-to-top" aria-label="Back to top">↑</button>
 
   <!-- Script -->
-  <script>
-    const WORKER_URL = 'https://livestatsupdate.jojocrafthdyt.workers.dev';
+<script>
+  // ===== CONFIG =====
+  const WORKER_URL = 'https://livestatsupdate.jojocrafthdyt.workers.dev';
 
-    function formatAbbrev(n) {
-      if (typeof n !== 'number' || isNaN(n)) return '—';
-      if (n >= 1_000_000) return (Math.round((n / 1_000_000) * 10) / 10).toFixed(1) + 'M';
-      if (n >= 1_000)     return (Math.round((n / 1_000) * 10) / 10).toFixed(1) + 'K';
-      return String(n);
-    }
+  // ===== UTILS =====
+  const q = (sel, root = document) => root.querySelector(sel);
+  const qa = (sel, root = document) => [...root.querySelectorAll(sel)];
+  const fmtAbbrev = (n) => {
+    if (typeof n !== 'number' || isNaN(n)) return '—';
+    if (n >= 1_000_000) return (Math.round((n / 1_000_000) * 10) / 10).toFixed(1) + 'M';
+    if (n >= 1_000)     return (Math.round((n / 1_000) * 10) / 10).toFixed(1) + 'K';
+    return String(n);
+  };
+  const fetchJSON = async (url) => {
+    const cacheBust = (url.includes('?') ? '&' : '?') + '_ts=' + Date.now();
+    const res = await fetch(url + cacheBust, { headers: { 'accept':'application/json' } });
+    if (!res.ok) throw new Error(`HTTP ${res.status} @ ${url}`);
+    return res.json();
+  };
 
-    async function fillLiveGameStats() {
-      try {
-        const cards = [...document.querySelectorAll('#games .game-card[data-universe-id]')];
-        if (!cards.length) return;
+  // ===== LIVE GAMES =====
+  async function fillLiveGameStats() {
+    const cards = qa('#games .game-card[data-universe-id]');
+    if (!cards.length) return;
 
-        const ids = [...new Set(cards.map(c => c.getAttribute('data-universe-id')).filter(Boolean))];
-        const res = await fetch(`${WORKER_URL}/?ids=${encodeURIComponent(ids.join(','))}`);
-        if (!res.ok) throw new Error(`Worker HTTP ${res.status}`);
-        const { data = [] } = await res.json();
+    const ids = [...new Set(cards.map(c => c.getAttribute('data-universe-id')).filter(Boolean))];
+    if (!ids.length) return;
 
-        const byId = new Map(data.map(g => [String(g.id), g]));
-        cards.forEach(card => {
-          const uid = card.getAttribute('data-universe-id');
-          const g = byId.get(uid);
-          if (!g) return;
+    try {
+      const url = `${WORKER_URL}/?endpoint=games&ids=${encodeURIComponent(ids.join(','))}`;
+      const { data = [] } = await fetchJSON(url);
+      console.log('[LiveGames] worker data:', data);
 
-          const ccuEl = card.querySelector('.live-ccu');
-          const visitsEl = card.querySelector('.live-visits');
+      const byId = new Map(data.map(g => [String(g.id), g])); // g.id is universeId
+      cards.forEach(card => {
+        const uid = String(card.getAttribute('data-universe-id'));
+        const g = byId.get(uid);
+        if (!g) {
+          console.warn('[LiveGames] No data for universe', uid);
+          return;
+        }
+        const ccuEl = q('.live-ccu', card);
+        const visEl = q('.live-visits', card);
 
-          if (ccuEl) ccuEl.textContent = `Current CCU: ${g.playing?.toLocaleString() ?? '—'}`;
-          if (visitsEl) visitsEl.textContent = `Visits: ${formatAbbrev(g.visits)}`;
-        });
-      } catch (err) {
-        console.warn('Live stats fetch failed:', err);
-      }
-    }
-
-    async function fillGroupMembers() {
-      try {
-        const els = [...document.querySelectorAll('.group-members[data-group-id]')];
-        if (!els.length) return;
-
-        await Promise.all(els.map(async el => {
-          const id = el.getAttribute('data-group-id');
-          const res = await fetch(`https://groups.roblox.com/v1/groups/${id}`);
-          if (!res.ok) return;
-          const data = await res.json();
-          if (typeof data.memberCount === 'number') {
-            el.textContent = `Members: ${data.memberCount.toLocaleString()}`;
-          }
-        }));
-      } catch (err) {
-        console.warn('Group member fetch failed:', err);
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      // Scroll reveal
-      const observer = new IntersectionObserver((entries, obs) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) { e.target.classList.add('active'); obs.unobserve(e.target); }
-        });
-      }, { threshold: 0.1 });
-      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-      // Hero caret
-      const h1 = document.querySelector('.hero h1');
-      if (h1) h1.addEventListener('animationend', e => {
-        if (e.animationName === 'typewriter') h1.style.borderRight = 'none';
+        if (ccuEl) ccuEl.textContent = `Current CCU: ${typeof g.playing === 'number' ? g.playing.toLocaleString() : '—'}`;
+        if (visEl) visEl.textContent = `Visits: ${fmtAbbrev(typeof g.visits === 'number' ? g.visits : NaN)}`;
       });
+    } catch (err) {
+      console.error('[LiveGames] fetch failed:', err);
+    }
+  }
 
-      // Back to top
-      const back = document.getElementById('back-to-top');
-      if (back) {
-        window.addEventListener('scroll', () => back.classList.toggle('show', window.scrollY > 300));
-        back.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  // ===== LIVE GROUPS =====
+  async function fillGroupMembers() {
+    const els = qa('.group-members[data-group-id]');
+    if (!els.length) return;
+
+    await Promise.all(els.map(async el => {
+      const id = el.getAttribute('data-group-id');
+      if (!id) return;
+
+      const url = `${WORKER_URL}/?endpoint=group&groupId=${encodeURIComponent(id)}`;
+      try {
+        const data = await fetchJSON(url);
+        console.log(`[Group ${id}]`, data);
+        if (typeof data.memberCount === 'number') {
+          el.textContent = `Members: ${data.memberCount.toLocaleString()}`;
+        } else {
+          el.textContent = `Members: —`;
+          console.warn(`[Group ${id}] No memberCount in response`);
+        }
+      } catch (err) {
+        el.textContent = `Members: —`;
+        console.error(`[Group ${id}] fetch failed:`, err);
       }
+    }));
+  }
 
-      // Footer year
-      const yearEl = document.getElementById('current-year');
-      if (yearEl) yearEl.textContent = new Date().getFullYear();
+  // ===== EXISTING PAGE BEHAVIOR =====
+  document.addEventListener('DOMContentLoaded', () => {
+    // Reveal on scroll
+    try {
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('active'); obs.unobserve(e.target); } });
+      }, { threshold: 0.1 });
+      qa('.reveal').forEach(el => observer.observe(el));
+    } catch {}
 
-      // Hamburger nav
-      const hamburger = document.querySelector('.hamburger');
-      const nav = document.querySelector('nav');
-      const navLinks = document.querySelectorAll('nav ul li a');
-      if (hamburger && nav) {
-        hamburger.addEventListener('click', () => nav.classList.toggle('active'));
-        navLinks.forEach(link => link.addEventListener('click', () => nav.classList.remove('active')));
-      }
+    // Hero caret
+    const h1 = q('.hero h1');
+    if (h1) h1.addEventListener('animationend', e => { if (e.animationName === 'typewriter') h1.style.borderRight = 'none'; });
 
-      // Fill live data
-      fillLiveGameStats();
-      fillGroupMembers();
-    });
-  </script>
+    // Back to top
+    const back = q('#back-to-top');
+    if (back) {
+      window.addEventListener('scroll', () => back.classList.toggle('show', window.scrollY > 300));
+      back.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Footer year
+    const yearEl = q('#current-year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    // Mobile nav
+    const hamburger = q('.hamburger');
+    const nav = q('nav');
+    if (hamburger && nav) {
+      hamburger.addEventListener('click', () => nav.classList.toggle('active'));
+      qa('nav ul li a').forEach(link => link.addEventListener('click', () => nav.classList.remove('active')));
+    }
+
+    // Live data
+    fillLiveGameStats();
+    fillGroupMembers();
+  });
+</script>
+
 </body>
 </html>
