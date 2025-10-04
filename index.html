@@ -203,190 +203,125 @@
   <button id="back-to-top" aria-label="Back to top">↑</button>
 
   <!-- Script -->
-  <script>
-    // ===== CONFIG =====
-    const WORKER_URL = 'https://livestatsupdate.jojocrafthdyt.workers.dev';
-    const ICON_SIZE = '256x256'; // safe size
+ <script>
+  // ===== CONFIG =====
+  const WORKER_URL = 'https://livestatsupdate.jojocrafthdyt.workers.dev';
 
-    // ===== HELPERS =====
-    const q  = (sel, root = document) => root.querySelector(sel);
-    const qa = (sel, root = document) => [...root.querySelectorAll(sel)];
-    const fmtAbbrev = (n) => {
-      if (typeof n !== 'number' || isNaN(n)) return '—';
-      if (n >= 1_000_000) return (Math.round((n / 1_000_000) * 10) / 10).toFixed(1) + 'M';
-      if (n >= 1_000)     return (Math.round((n / 1_000) * 10) / 10).toFixed(1) + 'K';
-      return String(n);
-    };
-    const fetchJSON = async (url) => {
-      for (let i = 0; i < 2; i++) {
-        try {
-          const bust = (url.includes('?') ? '&' : '?') + '_ts=' + Date.now();
-          const res = await fetch(url + bust, { headers: { accept: 'application/json' } });
-          if (!res.ok) throw new Error(`HTTP ${res.status} @ ${url}`);
-          return await res.json();
-        } catch (err) {
-          if (i === 1) throw err;
-          await new Promise(r => setTimeout(r, 500));
-        }
-      }
-    };
+  // ===== HELPERS =====
+  const q  = (sel, root = document) => root.querySelector(sel);
+  const qa = (sel, root = document) => [...root.querySelectorAll(sel)];
 
-    // ===== GAME ICONS (Roblox Thumbnails API with fallback + retry) =====
-    async function fetchAndApplyIcons(ids, imgById) {
-      const thumbUrl = `https://thumbnails.roblox.com/v1/games/icons?universeIds=${encodeURIComponent(ids.join(','))}&size=${ICON_SIZE}&format=Png&isCircular=false`;
-      const { data = [] } = await fetchJSON(thumbUrl);
-      console.log('[Icons] response:', data);
+  const fmtAbbrev = (n) => {
+    if (typeof n !== 'number' || isNaN(n)) return '—';
+    if (n >= 1_000_000) return (Math.round((n / 1_000_000) * 10) / 10).toFixed(1) + 'M';
+    if (n >= 1_000)     return (Math.round((n / 1_000) * 10) / 10).toFixed(1) + 'K';
+    return String(n);
+  };
 
-      let pending = [];
-      data.forEach(node => {
-        const uid = String(node.targetId);
-        const img = imgById.get(uid);
-        if (!img) return;
-
-        if (node.state === 'Completed' && node.imageUrl) {
-          img.src = node.imageUrl;
-        } else if (node.state === 'Pending') {
-          pending.push(uid);
-        } // if Moderated or no imageUrl -> keep fallback
-      });
-
-      // Retry once for pending ones after a short delay
-      if (pending.length) {
-        console.log('[Icons] retry due to pending:', pending);
-        setTimeout(async () => {
-          try {
-            await fetchAndApplyIcons(pending, imgById);
-          } catch (e) {
-            console.warn('[Icons] retry failed:', e);
-          }
-        }, 2000);
+  const fetchJSON = async (url) => {
+    for (let i = 0; i < 2; i++) {
+      try {
+        const bust = (url.includes('?') ? '&' : '?') + '_ts=' + Date.now();
+        const res = await fetch(url + bust, { headers: { accept: 'application/json' } });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return await res.json();
+      } catch (err) {
+        if (i === 1) throw err;
+        await new Promise(r => setTimeout(r, 500));
       }
     }
+  };
 
-    async function fillGameIcons() {
-      const cards = qa('#games .game-card[data-universe-id]');
-      if (!cards.length) return;
+  // ===== LIVE GAME STATS =====
+  async function fillLiveGameStats() {
+    const cards = qa('#games .game-card[data-universe-id]');
+    if (!cards.length) return;
 
-      const ids = [];
-      const imgById = new Map();
+    const ids = [...new Set(cards.map(c => c.getAttribute('data-universe-id')).filter(Boolean))];
+    if (!ids.length) return;
+
+    try {
+      const url = `${WORKER_URL}/?endpoint=games&ids=${encodeURIComponent(ids.join(','))}`;
+      const { data = [] } = await fetchJSON(url);
+      const byId = new Map(data.map(g => [String(g.id), g]));
 
       cards.forEach(card => {
-        const uid = card.getAttribute('data-universe-id');
-        const img = card.querySelector('img');
-        if (!uid || !img) return;
+        const uid = String(card.getAttribute('data-universe-id'));
+        const g = byId.get(uid);
+        if (!g) return;
 
-        // remember fallback + set onerror fallback
-        img.dataset.fallbackSrc = img.getAttribute('src') || '';
-        img.onerror = () => {
-          if (img.dataset.fallbackSrc && img.src !== img.dataset.fallbackSrc) {
-            img.src = img.dataset.fallbackSrc;
-          }
-        };
+        const ccuEl    = q('.live-ccu', card);
+        const visitsEl = q('.live-visits', card);
 
-        ids.push(uid);
-        imgById.set(String(uid), img);
+        if (ccuEl)    ccuEl.textContent    = `Current CCU: ${typeof g.playing === 'number' ? g.playing.toLocaleString() : '—'}`;
+        if (visitsEl) visitsEl.textContent = `Visits: ${fmtAbbrev(typeof g.visits === 'number' ? g.visits : NaN)}`;
       });
-
-      if (!ids.length) return;
-
-      try {
-        await fetchAndApplyIcons(ids, imgById);
-      } catch (err) {
-        console.warn('[Icons] fetch failed; using fallbacks:', err);
-      }
+    } catch (err) {
+      console.warn('[LiveGames] fetch failed:', err);
     }
+  }
 
-    // ===== LIVE GAME STATS =====
-    async function fillLiveGameStats() {
-      const cards = qa('#games .game-card[data-universe-id]');
-      if (!cards.length) return;
+  // ===== LIVE GROUP MEMBERS =====
+  async function fillGroupMembers() {
+    const els = qa('.group-members[data-group-id]');
+    if (!els.length) return;
 
-      const ids = [...new Set(cards.map(c => c.getAttribute('data-universe-id')).filter(Boolean))];
-      if (!ids.length) return;
-
+    await Promise.all(els.map(async el => {
+      const id = el.getAttribute('data-group-id');
+      if (!id) return;
+      const url = `${WORKER_URL}/?endpoint=group&groupId=${encodeURIComponent(id)}`;
       try {
-        const url = `${WORKER_URL}/?endpoint=games&ids=${encodeURIComponent(ids.join(','))}`;
-        const { data = [] } = await fetchJSON(url);
-        const byId = new Map(data.map(g => [String(g.id), g])); // g.id = universeId
-
-        cards.forEach(card => {
-          const uid = String(card.getAttribute('data-universe-id'));
-          const g = byId.get(uid);
-          if (!g) return;
-
-          const ccuEl    = q('.live-ccu', card);
-          const visitsEl = q('.live-visits', card);
-
-          if (ccuEl)    ccuEl.textContent    = `Current CCU: ${typeof g.playing === 'number' ? g.playing.toLocaleString() : '—'}`;
-          if (visitsEl) visitsEl.textContent = `Visits: ${fmtAbbrev(typeof g.visits === 'number' ? g.visits : NaN)}`;
-        });
-      } catch (err) {
-        console.warn('[LiveGames] fetch failed:', err);
-      }
-    }
-
-    // ===== LIVE GROUP MEMBERS =====
-    async function fillGroupMembers() {
-      const els = qa('.group-members[data-group-id]');
-      if (!els.length) return;
-
-      await Promise.all(els.map(async el => {
-        const id = el.getAttribute('data-group-id');
-        if (!id) return;
-
-        const url = `${WORKER_URL}/?endpoint=group&groupId=${encodeURIComponent(id)}`;
-        try {
-          const data = await fetchJSON(url);
-          if (typeof data.memberCount === 'number') {
-            el.textContent = `Members: ${data.memberCount.toLocaleString()}`;
-          } else {
-            el.textContent = 'Members: —';
-          }
-        } catch (err) {
+        const data = await fetchJSON(url);
+        if (typeof data.memberCount === 'number') {
+          el.textContent = `Members: ${data.memberCount.toLocaleString()}`;
+        } else {
           el.textContent = 'Members: —';
-          console.warn(`[Group ${id}] fetch failed:`, err);
         }
-      }));
+      } catch (err) {
+        el.textContent = 'Members: —';
+        console.warn(`[Group ${id}] fetch failed:`, err);
+      }
+    }));
+  }
+
+  // ===== PAGE BEHAVIOR =====
+  document.addEventListener('DOMContentLoaded', () => {
+    // Reveal animations
+    try {
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('active'); obs.unobserve(e.target); } });
+      }, { threshold: 0.1 });
+      qa('.reveal').forEach(el => observer.observe(el));
+    } catch {}
+
+    // Hero caret remove after typewriter
+    const h1 = q('.hero h1');
+    if (h1) h1.addEventListener('animationend', e => { if (e.animationName === 'typewriter') h1.style.borderRight = 'none'; });
+
+    // Back to top
+    const back = q('#back-to-top');
+    if (back) {
+      window.addEventListener('scroll', () => back.classList.toggle('show', window.scrollY > 300));
+      back.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // ===== PAGE BEHAVIOR =====
-    document.addEventListener('DOMContentLoaded', () => {
-      // Reveal animations
-      try {
-        const observer = new IntersectionObserver((entries, obs) => {
-          entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('active'); obs.unobserve(e.target); } });
-        }, { threshold: 0.1 });
-        qa('.reveal').forEach(el => observer.observe(el));
-      } catch {}
+    // Footer year
+    const yearEl = q('#current-year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-      // Hero caret remove after typewriter
-      const h1 = q('.hero h1');
-      if (h1) h1.addEventListener('animationend', e => { if (e.animationName === 'typewriter') h1.style.borderRight = 'none'; });
+    // Mobile nav
+    const hamburger = q('.hamburger');
+    const nav = q('nav');
+    if (hamburger && nav) {
+      hamburger.addEventListener('click', () => nav.classList.toggle('active'));
+      qa('nav ul li a').forEach(link => link.addEventListener('click', () => nav.classList.remove('active')));
+    }
 
-      // Back to top
-      const back = q('#back-to-top');
-      if (back) {
-        window.addEventListener('scroll', () => back.classList.toggle('show', window.scrollY > 300));
-        back.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
+    // Live data
+    fillLiveGameStats();
+    fillGroupMembers();
+  });
+</script>
 
-      // Footer year
-      const yearEl = q('#current-year');
-      if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-      // Mobile nav
-      const hamburger = q('.hamburger');
-      const nav = q('nav');
-      if (hamburger && nav) {
-        hamburger.addEventListener('click', () => nav.classList.toggle('active'));
-        qa('nav ul li a').forEach(link => link.addEventListener('click', () => nav.classList.remove('active')));
-      }
-
-      // Live data + icons
-      fillGameIcons();
-      fillLiveGameStats();
-      fillGroupMembers();
-    });
-  </script>
 </body>
 </html>
