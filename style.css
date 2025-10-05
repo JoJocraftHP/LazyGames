@@ -233,14 +233,22 @@ nav a:hover::after {
 /* Anchor Scroll Fix */
 section[id],
 .hero[id] {
-    /* Change this value from 6rem to 8rem */
+    /* Set to 8rem to clear sticky header */
     scroll-margin-top: 8rem; 
 }
 
-/* ... also update here ... */
 .team-link {
     color: var(--primary);
-    scroll-margin-top: 8rem; /* Update here too */
+    /* Set to 8rem to clear sticky header */
+    scroll-margin-top: 8rem; 
+}
+
+/* Sections */
+section {
+    /* MODIFIED: Set a standard padding for all sections */
+    padding: 4rem 2rem; 
+    max-width: 1200px;
+    margin: auto;
 }
 
 h2 {
@@ -259,7 +267,8 @@ h2 {
 /* Games Grid */
 .games-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    /* MODIFIED: Made the min size for cards slightly smaller */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
     gap: 2rem;
     justify-content: center;
 }
@@ -271,6 +280,9 @@ h2 {
     flex-direction: column;
     overflow: hidden;
     transition: transform 0.3s, box-shadow 0.3s;
+    /* NEW: Constrain max width so cards don't get too wide on large screens */
+    max-width: 350px; 
+    margin: 0 auto; /* Center the card when max-width applies */
 }
 
 .game-card:hover {
@@ -372,9 +384,14 @@ h2 {
 /* Team Grid */
 .team-grid {
     display: grid;
+    /* Kept min size at 180px for a good mobile/tablet view */
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 2rem;
     margin-top: 2rem;
+    /* NEW: Constrain the team grid width so it doesn't hit edges */
+    max-width: 900px; 
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .team-card {
@@ -401,11 +418,6 @@ h2 {
 
 .team-card h3 {
     font-size: 1.1rem;
-}
-
-.team-link {
-    color: var(--primary);
-    scroll-margin-top: 6rem; /* Ensures team links also don't hide behind header */
 }
 
 .team-card p {
@@ -541,9 +553,10 @@ footer nav a:hover {
         font-size: 1.1rem;
     }
     
+    /* MODIFIED: Reduced padding for smaller screens */
     section {
         padding: 3rem 1.5rem;
-    }
+    } 
     
     .games-grid, .groups-grid {
         display: flex;
@@ -552,6 +565,7 @@ footer nav a:hover {
         gap: 2rem;
     }
     
+    /* MODIFIED: The max-width rule on .game-card handles this now */
     .game-card, .group-card {
         flex: 1 1 100%;
         max-width: 320px;
@@ -585,6 +599,7 @@ footer nav a:hover {
         font-size: 1rem;
     }
     
+    /* MODIFIED: Reduced padding for very small screens */
     section {
         padding: 2rem 1rem;
     }
@@ -618,5 +633,6 @@ footer nav a:hover {
         display: grid;
         grid-template-columns: repeat(3, minmax(180px, 1fr));
         gap: 2rem;
+        /* No need to override max-width/margin set in the main .team-grid rule */
     }
 }
