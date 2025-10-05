@@ -233,15 +233,14 @@ nav a:hover::after {
 /* Anchor Scroll Fix */
 section[id],
 .hero[id] {
-    /* Ensures anchored content isn't hidden by the fixed header */
-    scroll-margin-top: 6rem; 
+    /* Change this value from 6rem to 8rem */
+    scroll-margin-top: 8rem; 
 }
 
-/* Sections */
-section {
-    padding: 4rem 2rem;
-    max-width: 1200px;
-    margin: auto;
+/* ... also update here ... */
+.team-link {
+    color: var(--primary);
+    scroll-margin-top: 8rem; /* Update here too */
 }
 
 h2 {
