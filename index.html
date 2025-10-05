@@ -343,17 +343,16 @@
         qa('.reveal').forEach(el => el.classList.add('active'));
       }
 
-      // Hero caret: remove reliably after typing
-      const heroH1 = document.querySelector('.hero h1');
-      if (heroH1) {
-        const removeCaret = () => {
-          heroH1.style.animation = 'none';
-          heroH1.style.borderRight = 'none';
-          heroH1.classList.add('no-caret');
-        };
-        heroH1.addEventListener('animationend', removeCaret);
-        setTimeout(removeCaret, 4000); // safety
-      }
+     // Hero caret: remove reliably after typing
+const heroH1 = document.querySelector('.hero h1');
+if (heroH1) {
+  const removeCaret = () => {
+    heroH1.style.borderRight = 'none';
+  };
+  heroH1.addEventListener('animationend', e => {
+    if (e.animationName === 'typewriter') removeCaret();
+  });
+}
 
       // Back to top
       const back = q('#back-to-top');
