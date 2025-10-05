@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>LazyGames</title>
+
   <link rel="icon" href="lgsdocument.png" type="image/png" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
@@ -45,18 +46,19 @@
     <div class="hero-content">
       <h1>Welcome to LazyGames</h1>
       <p>We are an experienced Roblox studio specializing in simulators and innovative game concepts.</p>
-     <a href="#games" class="btn btn-secondary">Explore Our Games</a>
+      <a href="#games" class="btn btn-secondary">Explore Our Games</a>
 
-<div class="hero-stats">
-  <div class="stat">
-    <span class="label">Total CCU</span>
-    <span id="total-ccu">—</span>
-  </div>
-  <div class="stat">
-    <span class="label">Total Visits</span>
-    <span id="total-visits">—</span>
-  </div>
-</div>
+      <!-- Totals (live) -->
+      <div class="hero-stats" aria-live="polite">
+        <div class="stat">
+          <span class="label">Total CCU</span>
+          <span id="total-ccu">—</span>
+        </div>
+        <div class="stat">
+          <span class="label">Total Visits</span>
+          <span id="total-visits">—</span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -221,62 +223,69 @@
   <!-- Footer -->
   <footer class="reveal">
     <nav>
-      <a href="#hero">Home</a> | 
-      <a href="#games">Our Games</a> | 
-      <a href="#about">About Us</a> | 
-      <a href="#groups">Groups</a> | 
+      <a href="#hero">Home</a> |
+      <a href="#games">Our Games</a> |
+      <a href="#about">About Us</a> |
+      <a href="#groups">Groups</a> |
       <a href="#contact">Contact</a>
     </nav>
     <p>&copy; <span id="current-year"></span> LazyGames</p>
   </footer>
 
+  <!-- Back to top -->
   <button id="back-to-top" aria-label="Back to top">↑</button>
 
-  <!-- Script -->
+  <!-- Scripts -->
   <script>
+    // ===== CONFIG =====
     const WORKER_URL = 'https://livestatsupdate.jojocrafthdyt.workers.dev';
     const REFRESH_MS = 60000;
 
-    const q = (sel, root = document) => root.querySelector(sel);
+    // ===== HELPERS =====
+    const q  = (sel, root = document) => root.querySelector(sel);
     const qa = (sel, root = document) => [...root.querySelectorAll(sel)];
 
     const fmtAbbrev = (n) => {
       if (typeof n !== 'number' || isNaN(n)) return '—';
       if (n >= 1_000_000) return (Math.round((n / 1_000_000) * 10) / 10).toFixed(1) + 'M';
-      if (n >= 1_000) return (Math.round((n / 1_000) * 10) / 10).toFixed(1) + 'K';
+      if (n >= 1_000)     return (Math.round((n / 1_000) * 10) / 10).toFixed(1) + 'K';
       return n.toLocaleString();
     };
 
     async function getJSON(url) {
       const bust = (url.includes('?') ? '&' : '?') + '_ts=' + Date.now();
-      const res = await fetch(url + bust);
-      if (!res.ok) throw new Error(res.status);
+      const res = await fetch(url + bust, { headers: { accept: 'application/json' } });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
       return res.json();
     }
 
-    // Fill game stats
+    // ===== LIVE GAME STATS (per card + totals) =====
     function renderGameStats(data) {
+      const cards = qa('#games .game-card[data-universe-id]');
+      const byId = new Map((data?.data || []).map(g => [String(g.id), g]));
+
       let totalCCU = 0;
       let totalVisits = 0;
 
-      const byId = new Map((data?.data || []).map(g => [String(g.id), g]));
-      qa('#games .game-card[data-universe-id]').forEach(card => {
-        const uid = card.getAttribute('data-universe-id');
+      cards.forEach(card => {
+        const uid = String(card.getAttribute('data-universe-id'));
         const g = byId.get(uid);
         if (!g) return;
 
-        const ccuEl = q('.live-ccu', card);
+        const ccuEl    = q('.live-ccu', card);
         const visitsEl = q('.live-visits', card);
 
-        if (ccuEl) ccuEl.textContent = 'Current CCU: ' + (g.playing?.toLocaleString() || '—');
-        if (visitsEl) visitsEl.textContent = 'Visits: ' + fmtAbbrev(g.visits);
+        if (ccuEl)    ccuEl.textContent    = 'Current CCU: ' + (typeof g.playing === 'number' ? g.playing.toLocaleString() : '—');
+        if (visitsEl) visitsEl.textContent = 'Visits: ' + fmtAbbrev(typeof g.visits === 'number' ? g.visits : NaN);
 
-        if (typeof g.playing === 'number') totalCCU += g.playing;
-        if (typeof g.visits === 'number') totalVisits += g.visits;
+        if (typeof g.playing === 'number') totalCCU   += g.playing;
+        if (typeof g.visits  === 'number') totalVisits += g.visits;
       });
 
-      q('#total-ccu').textContent = fmtAbbrev(totalCCU);
-      q('#total-visits').textContent = fmtAbbrev(totalVisits);
+      const totalCCUEl    = q('#total-ccu');
+      const totalVisitsEl = q('#total-visits');
+      if (totalCCUEl)    totalCCUEl.textContent    = fmtAbbrev(totalCCU);
+      if (totalVisitsEl) totalVisitsEl.textContent = fmtAbbrev(totalVisits);
     }
 
     async function fillLiveGameStats() {
@@ -286,106 +295,104 @@
       try {
         const json = await getJSON(url);
         renderGameStats(json);
-      } catch (e) {
-        console.warn('Live stats failed', e);
+      } catch (err) {
+        console.warn('[LiveGames] fetch failed:', err);
+      }
+    }
+
+    // ===== LIVE GROUP MEMBERS =====
+    function renderGroup(el, data) {
+      if (typeof data?.memberCount === 'number') {
+        el.textContent = 'Members: ' + data.memberCount.toLocaleString();
+      } else {
+        el.textContent = 'Members: —';
       }
     }
 
     async function fillGroupMembers() {
       const els = qa('.group-members[data-group-id]');
+      if (!els.length) return;
+
       await Promise.all(els.map(async el => {
         const id = el.getAttribute('data-group-id');
+        if (!id) return;
         try {
-          const data = await getJSON(`${WORKER_URL}/?endpoint=group&groupId=${id}`);
-          el.textContent = 'Members: ' + (data.memberCount?.toLocaleString() || '—');
-        } catch {
-          el.textContent = 'Members: —';
+          const json = await getJSON(`${WORKER_URL}/?endpoint=group&groupId=${encodeURIComponent(id)}`);
+          renderGroup(el, json);
+        } catch (err) {
+          console.warn(`[Group ${id}] fetch failed:`, err);
+          renderGroup(el, null);
         }
       }));
     }
 
+    // ===== PAGE BOOT =====
     document.addEventListener('DOMContentLoaded', () => {
-    // ===== Reveal Animations =====
-    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!prefersReduced) {
+      // Reveal animations (reduced motion aware)
+      const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!prefersReduced) {
         try {
-            const observer = new IntersectionObserver((entries, obs) => {
-                entries.forEach(e => {
-                    if (e.isIntersecting) {
-                        e.target.classList.add('active');
-                        obs.unobserve(e.target);
-                    }
-                });
-            }, { threshold: 0.1 });
-            qa('.reveal').forEach(el => observer.observe(el));
+          const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(e => {
+              if (e.isIntersecting) { e.target.classList.add('active'); obs.unobserve(e.target); }
+            });
+          }, { threshold: 0.1 });
+          qa('.reveal').forEach(el => observer.observe(el));
         } catch {}
-    } else {
+      } else {
         qa('.reveal').forEach(el => el.classList.add('active'));
-    }
+      }
 
-    // ===== Hero Title Caret Fix =====
-    const heroH1 = document.querySelector('.hero h1');
-    if (heroH1) {
+      // Hero caret: remove reliably after typing
+      const heroH1 = document.querySelector('.hero h1');
+      if (heroH1) {
         const removeCaret = () => {
-            heroH1.style.animation = 'none';        // stop animations
-            heroH1.style.borderRight = 'none';      // remove the |
-            heroH1.classList.add('no-caret');       // CSS fallback
+          heroH1.style.animation = 'none';
+          heroH1.style.borderRight = 'none';
+          heroH1.classList.add('no-caret');
         };
         heroH1.addEventListener('animationend', removeCaret);
-        setTimeout(removeCaret, 4000); // safety fallback
-    }
+        setTimeout(removeCaret, 4000); // safety
+      }
 
-    // ===== Back to Top Button =====
-    const back = q('#back-to-top');
-    if (back) {
+      // Back to top
+      const back = q('#back-to-top');
+      if (back) {
         window.addEventListener('scroll', () => back.classList.toggle('show', window.scrollY > 300));
         back.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+      }
 
-    // ===== Footer Year =====
-    const yearEl = q('#current-year');
-    if (yearEl) yearEl.textContent = new Date().getFullYear();
+      // Footer year
+      const yearEl = q('#current-year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    // ===== Mobile Nav =====
-    const hamburger = q('.hamburger');
-    const nav = q('nav');
-    if (hamburger && nav) {
+      // Mobile nav
+      const hamburger = q('.hamburger');
+      const nav = q('nav');
+      if (hamburger && nav) {
         hamburger.addEventListener('click', () => {
-            nav.classList.toggle('active');
-            hamburger.classList.toggle('is-active');
+          nav.classList.toggle('active');
+          hamburger.classList.toggle('is-active');
         });
         qa('nav ul li a').forEach(link => link.addEventListener('click', () => {
-            nav.classList.remove('active');
-            hamburger.classList.remove('is-active');
+          nav.classList.remove('active');
+          hamburger.classList.remove('is-active');
         }));
-    }
+      }
 
-    // ===== Live Data Refresh =====
-    const runLive = () => { fillLiveGameStats(); fillGroupMembers(); };
-    runLive();
+      // Live data now + refresh
+      const runLive = () => { fillLiveGameStats(); fillGroupMembers(); };
+      runLive();
 
-    const REFRESH_MS = 60000;
-    let timer = setInterval(() => {
+      let timer = setInterval(() => {
         if (document.visibilityState === 'visible') runLive();
-    }, REFRESH_MS);
-
-    document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible') runLive();
-    });
-
-    window.addEventListener('pagehide', () => clearInterval(timer));
-});
-
-
-      fillLiveGameStats();
-      fillGroupMembers();
-
-      setInterval(() => {
-        if (document.visibilityState === 'visible') {
-          fillLiveGameStats();
-          fillGroupMembers();
-        }
       }, REFRESH_MS);
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') runLive();
+      });
+
+      window.addEventListener('pagehide', () => clearInterval(timer));
     });
   </script>
 </body>
