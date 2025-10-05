@@ -452,21 +452,24 @@ footer nav a:hover {
 #back-to-top:hover { transform: translateY(-3px); }
 #back-to-top.show { opacity: 1; visibility: visible; }
 
-/* Total stats under hero button */
+/* Hero button + live totals below */
 .hero .btn {
-    margin-bottom: 0.75rem;
+    margin-bottom: 1.5rem; /* more space between button and totals */
 }
 
 .total-stats {
-    display: flex;
+    display: inline-flex; /* keep them next to each other */
     justify-content: center;
     align-items: baseline;
     gap: 2rem;
-    margin-top: 0.25rem;
-    font-size: 1.25rem;
+    margin-top: 0;
+    padding: 0.75rem 1.5rem;
+    background: rgba(0, 0, 0, 0.5); /* translucent black background */
+    border-radius: 8px;
+    font-size: 1.3rem;
     font-weight: 700;
     color: #fff;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* allows stacking if really narrow */
 }
 
 .total-stats .stat-item {
@@ -478,19 +481,21 @@ footer nav a:hover {
 
 .total-stats .stat-item span {
     color: var(--secondary);
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     line-height: 1;
 }
 
-/* Mobile Tweaks */
-@media (max-width: 768px) {
-    header {
-        flex-direction: row;
-        align-items: center;
-        padding: 1rem 1.5rem;
-        position: relative;
-        flex-wrap: wrap;
+/* Mobile adjustments */
+@media (max-width: 480px) {
+    .total-stats {
+        gap: 1.25rem;
+        font-size: 1.1rem;
+        padding: 0.5rem 1rem;
     }
+    .total-stats .stat-item span {
+        font-size: 1.4rem;
+    }
+}
 
     .logo { margin-right: auto; }
 
