@@ -1,638 +1,572 @@
-/* Reset & Base */
+/* ========== RESET & BASE ========== */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-    scroll-behavior: smooth;
-    font-family: 'Poppins', sans-serif;
+  scroll-behavior: smooth;
+  font-family: 'Poppins', sans-serif;
 }
 
 body {
-    background: #111;
-    color: #eee;
-    line-height: 1.6;
+  background: #111;
+  color: #eee;
+  line-height: 1.6;
 }
 
 a {
-    text-decoration: none;
-    color: inherit;
-    cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }
 
 :root {
-    --primary: rgb(208, 24, 98); /* LazyGames Pink */
-    --primary-dark: rgb(180, 20, 85);
-    --secondary: #00bcd4; /* Cyan/Teal */
-    --background: #111;
-    --card-bg: #1e1e1e;
-    --text-color: #eee;
-    --text-muted: #aaa;
+  --primary: rgb(208, 24, 98);
+  --primary-dark: rgb(180, 20, 85);
+  --secondary: #00bcd4;
+  --background: #111;
+  --card-bg: #1e1e1e;
+  --text-color: #eee;
+  --text-muted: #aaa;
 }
 
-/* Animations */
+/* ========== ANIMATIONS ========== */
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes typewriter {
-    from {
-        width: 0;
-    }
-    to {
-        width: 100%;
-    }
+  from { width: 0; }
+  to { width: 100%; }
 }
 
 @keyframes blink-caret {
-    0%,
-    100% {
-        border-color: transparent;
-    }
-    50% {
-        border-color: var(--text-color);
-    }
+  0%, 100% { border-color: transparent; }
+  50% { border-color: var(--text-color); }
 }
 
 .reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: none;
+  opacity: 0;
+  transform: translateY(20px);
 }
 
 .reveal.active {
-    animation: fadeInUp 0.6s ease-out forwards;
+  animation: fadeInUp 0.6s ease-out forwards;
 }
 
-/* Header */
+/* ========== HEADER ========== */
 header {
-    position: sticky;
-    top: 0;
-    background: rgba(20, 20, 20, 0.95);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    z-index: 100;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  position: sticky;
+  top: 0;
+  background: rgba(20, 20, 20, 0.95);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .logo {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: var(--primary);
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-    transition: background 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--primary);
+  transition: background 0.2s;
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
 }
 
 .logo:hover {
-    background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .logo img {
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
-    object-fit: cover;
-    position: relative;
-    top: -1px;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  object-fit: cover;
+  position: relative;
+  top: -1px;
 }
 
 nav ul {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
+  display: flex;
+  list-style: none;
+  gap: 2rem;
 }
 
 nav a {
-    color: #ccc;
-    font-weight: 500;
-    position: relative;
-    padding-bottom: 5px;
+  color: #ccc;
+  font-weight: 500;
+  position: relative;
+  padding-bottom: 5px;
 }
 
 nav a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--primary);
-    transition: width 0.3s;
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: width 0.3s;
 }
 
 nav a:hover::after {
-    width: 100%;
+  width: 100%;
 }
 
-.btn {
-    font-weight: 600;
-    padding: 0.8rem 1.6rem;
-    border-radius: 6px;
-    background: var(--primary);
-    color: var(--background);
-    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
-    margin-left: 1rem;
-    border: none;
-    display: inline-block;
-    box-shadow: 0 4px 10px rgba(208, 24, 98, 0.4);
-}
-
-.btn-secondary {
-    background: var(--secondary);
-    color: var(--background);
-    box-shadow: 0 4px 10px rgba(0, 188, 212, 0.4);
-}
-
-.btn:hover {
-    background: var(--primary-dark);
-    transform: scale(1.05);
-    box-shadow: 0 6px 15px rgba(208, 24, 98, 0.6);
-}
-
-.btn-secondary:hover {
-    background: #0097a7;
-    box-shadow: 0 6px 15px rgba(0, 188, 212, 0.6);
-}
-
-/* Hamburger menu button */
+/* Hamburger menu */
 .hamburger {
-    display: none;
-    background: none;
-    border: none;
-    color: #eee;
-    font-size: 2rem;
-    cursor: pointer;
-    z-index: 101;
-    line-height: 1;
+  display: none;
+  background: none;
+  border: none;
+  color: #eee;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 101;
+  line-height: 1;
 }
 
-/* Hero */
+/* ========== HERO ========== */
 .hero {
-    position: relative;
-    height: 50vh;
-    min-height: 350px;
-    max-height: 400px;
-    background: url('LazyGamesGameBanner.png') center/cover no-repeat fixed;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: #fff;
-    padding: 2rem;
+  position: relative;
+  height: 50vh;
+  min-height: 350px;
+  max-height: 400px;
+  background: url('LazyGamesGameBanner.png') center/cover no-repeat fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  padding: 2rem;
 }
 
 .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6);
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
 }
 
 .hero-content {
-    position: relative;
-    z-index: 1;
-    padding: 0 2rem;
+  position: relative;
+  z-index: 1;
+  padding: 0 2rem;
 }
 
 .hero h1 {
-    display: inline-block;
-    font-size: 3.5rem;
-    margin-bottom: 0.5rem;
-    font-weight: 700;
-    white-space: nowrap;
-    overflow: hidden;
-    border-right: .15em solid #fff;
-    width: 0;
-    animation:
-        typewriter 3s steps(40) 0.5s forwards,
-        blink-caret 0.75s step-end 0.5s 4;
+  display: inline-block;
+  font-size: 3.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: .15em solid #fff;
+  width: 0;
+  animation:
+    typewriter 3s steps(40) 0.5s forwards,
+    blink-caret 0.75s step-end 0.5s 4;
 }
 
 .hero p {
-    font-size: 1.2rem;
-    color: #ddd;
-    margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+  color: #ddd;
+  margin-bottom: 1.5rem;
 }
 
-/* Anchor Scroll Fix */
-section[id],
-.hero[id] {
-    /* Set to 8rem to clear sticky header */
-    scroll-margin-top: 8rem; 
+/* NEW: Hero Stats */
+.hero-stats {
+  margin-top: 1rem;
+  display: inline-grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 0.75rem 1.5rem;
+  background: rgba(0,0,0,0.35);
+  padding: 0.6rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: saturate(140%) blur(2px);
+}
+.hero-stats .stat {
+  display: grid;
+  gap: 0.15rem;
+  justify-items: start;
+}
+.hero-stats .label {
+  font-size: 0.75rem;
+  color: #ccc;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+}
+#total-ccu, #total-visits {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #fff;
 }
 
-.team-link {
-    color: var(--primary);
-    /* Set to 8rem to clear sticky header */
-    scroll-margin-top: 8rem; 
+/* ========== BUTTONS ========== */
+.btn {
+  font-weight: 600;
+  padding: 0.8rem 1.6rem;
+  border-radius: 6px;
+  background: var(--primary);
+  color: var(--background);
+  transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+  margin-left: 1rem;
+  border: none;
+  display: inline-block;
+  box-shadow: 0 4px 10px rgba(208, 24, 98, 0.4);
 }
 
-/* Sections */
+.btn-secondary {
+  background: var(--secondary);
+  color: var(--background);
+  box-shadow: 0 4px 10px rgba(0, 188, 212, 0.4);
+}
+
+.btn:hover {
+  background: var(--primary-dark);
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(208, 24, 98, 0.6);
+}
+
+.btn-secondary:hover {
+  background: #0097a7;
+  box-shadow: 0 6px 15px rgba(0, 188, 212, 0.6);
+}
+
+/* ========== SECTIONS ========== */
 section {
-    /* MODIFIED: Set a standard padding for all sections */
-    padding: 4rem 2rem; 
-    max-width: 1200px;
-    margin: auto;
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: auto;
 }
 
 h2 {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-    color: var(--primary);
-    text-align: center;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary);
+  text-align: center;
 }
 
 .section-subtitle {
-    text-align: center;
-    color: #ccc;
-    margin-bottom: 2rem;
+  text-align: center;
+  color: #ccc;
+  margin-bottom: 2rem;
 }
 
-/* Games Grid */
+/* ========== GAMES GRID ========== */
 .games-grid {
-    display: grid;
-    /* MODIFIED: Made the min size for cards slightly smaller */
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
-    gap: 2rem;
-    justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  justify-content: center;
 }
 
 .game-card {
-    background: var(--card-bg);
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s;
-    /* NEW: Constrain max width so cards don't get too wide on large screens */
-    max-width: 350px; 
-    margin: 0 auto; /* Center the card when max-width applies */
+  background: var(--card-bg);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  max-width: 350px;
+  margin: 0 auto;
 }
 
 .game-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
 }
 
 .game-card-image-wrapper {
-    aspect-ratio: 1/1;
-    overflow: hidden;
+  aspect-ratio: 1/1;
+  overflow: hidden;
 }
 
 .game-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-    transform-origin: center center;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
 }
 
 .game-card:hover img {
-    transform: scale(1.08);
+  transform: scale(1.08);
 }
 
 .game-card-content {
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    flex: 1;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
 }
 
 .game-card-content .btn {
-    margin: 0.5rem auto 0;
-    padding: 0.6rem 1.2rem;
-    font-weight: 500;
+  margin: 0.5rem auto 0;
+  padding: 0.6rem 1.2rem;
+  font-weight: 500;
 }
 
 .game-card h3 {
-    font-size: 1rem;
-    color: #fff;
+  font-size: 1rem;
+  color: #fff;
 }
 
 .stats {
-    font-size: 0.85rem;
-    color: #aaa;
+  font-size: 0.85rem;
+  color: #aaa;
 }
 
-/* Roblox Groups */
+/* ========== GROUPS GRID ========== */
 .groups-grid {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 2rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
 }
 
 .group-card {
-    text-align: center;
+  text-align: center;
 }
 
 .group-card p {
-    margin-bottom: 0.5rem;
-    color: #ccc;
+  margin-bottom: 0.5rem;
+  color: #ccc;
 }
 
 .group-card img {
-    width: 120px;
-    aspect-ratio: 1/1;
-    object-fit: cover;
-    border-radius: 8px;
-    /* UPDATED: Default border is now white */
-    border: 3px solid #fff; 
-    transition: transform 0.3s, border-color 0.3s;
+  width: 120px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 3px solid #fff;
+  transition: transform 0.3s, border-color 0.3s;
 }
 
 .group-card img:hover {
-    transform: scale(1.1);
-    /* UPDATED: Hover border is cyan */
-    border-color: var(--secondary);
+  transform: scale(1.1);
+  border-color: var(--secondary);
 }
 
-
-/* Group Members Count */
 .group-members {
-    margin-top: 0.4rem;
-    font-size: 0.85rem;
-    color: #aaa;
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  color: #aaa;
 }
 
-/* About */
+/* ========== ABOUT ========== */
 #about p {
-    max-width: 800px;
-    margin: 0.5rem auto;
-    color: #ccc;
-    text-align: center;
+  max-width: 800px;
+  margin: 0.5rem auto;
+  color: #ccc;
+  text-align: center;
 }
 
-/* Team Grid */
+/* ========== TEAM ========== */
 .team-grid {
-    display: grid;
-    /* Kept min size at 180px for a good mobile/tablet view */
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-    /* NEW: Constrain the team grid width so it doesn't hit edges */
-    max-width: 900px; 
-    margin-left: auto;
-    margin-right: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .team-card {
-    background: #1e1e1e;
-    border-radius: 8px;
-    padding: 1.5rem;
-    text-align: center;
-    transition: background 0.3s, transform 0.3s;
+  background: #1e1e1e;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: background 0.3s, transform 0.3s;
 }
 
 .team-card:hover {
-    background: #272727;
-    transform: translateY(-3px);
+  background: #272727;
+  transform: translateY(-3px);
 }
 
 .team-card img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 1.5rem; 
-    border: 3px solid var(--secondary);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1.5rem;
+  border: 3px solid var(--secondary);
 }
 
 .team-card h3 {
-    font-size: 1.1rem;
+  font-size: 1.1rem;
 }
 
 .team-card p {
-    color: #aaa;
+  color: #aaa;
 }
 
-/* Contact */
+/* ========== CONTACT ========== */
 .contact-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 1rem;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
 }
 
-/* Footer */
+/* ========== FOOTER ========== */
 footer {
-    background: #181818;
-    padding: 2rem 1rem;
-    text-align: center;
-    color: #666;
-    position: relative;
-    z-index: 10;
+  background: #181818;
+  padding: 2rem 1rem;
+  text-align: center;
+  color: #666;
 }
 
 footer nav {
-    margin-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 footer nav a {
-    margin: 0 0.5rem;
-    color: #666;
-    font-weight: 500;
+  margin: 0 0.5rem;
+  color: #666;
+  font-weight: 500;
 }
 
 footer nav a:hover {
-    color: var(--primary);
+  color: var(--primary);
 }
 
-/* Back-to-top button */
+/* ========== BACK TO TOP ========== */
 #back-to-top {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    background: var(--secondary);
-    color: var(--background);
-    border: none;
-    padding: 0.75rem 1rem;
-    border-radius: 50%;
-    cursor: pointer;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s, visibility 0.3s, transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    font-size: 1.2rem;
-    font-weight: 700;
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--secondary);
+  color: var(--background);
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s, transform 0.2s;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  font-size: 1.2rem;
+  font-weight: 700;
 }
 #back-to-top:hover {
-    transform: translateY(-3px);
+  transform: translateY(-3px);
 }
-
 #back-to-top.show {
-    opacity: 1;
-    visibility: visible;
+  opacity: 1;
+  visibility: visible;
 }
 
-/* Mobile - Medium Screens (e.g., Tablets, larger phones) */
+/* ========== MEDIA QUERIES ========== */
 @media (max-width: 768px) {
-    header {
-        flex-direction: row;
-        align-items: center;
-        padding: 1rem 1.5rem;
-        position: relative;
-        flex-wrap: wrap;
-    }
-    
-    .logo {
-        margin-right: auto;
-    }
-    
-    nav {
-        width: 100%;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        background: rgba(20, 20, 20, 0.98);
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease-out;
-        z-index: 90;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.7);
-    }
-    
-    nav.active {
-        max-height: 300px;
-    }
-    
-    nav ul {
-        flex-direction: column;
-        gap: 0;
-        padding: 1rem 1rem 0.5rem 1rem;
-    }
-    
-    nav ul li {
-        width: 100%;
-        padding: 0.75rem 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    
-    nav ul li:last-child {
-        border-bottom: none;
-    }
-    
-    nav a {
-        display: block;
-        padding: 0.5rem 0;
-        text-align: center;
-    }
-    
-    nav a::after {
-        display: none;
-    }
-    
-    .hamburger {
-        display: block;
-    }
-    
-    .hero h1 {
-        font-size: 2.5rem;
-    }
-    
-    .hero p {
-        font-size: 1.1rem;
-    }
-    
-    /* MODIFIED: Reduced padding for smaller screens */
-    section {
-        padding: 3rem 1.5rem;
-    } 
-    
-    .games-grid, .groups-grid {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 2rem;
-    }
-    
-    /* MODIFIED: The max-width rule on .game-card handles this now */
-    .game-card, .group-card {
-        flex: 1 1 100%;
-        max-width: 320px;
-    }
-    
-    .team-grid {
-        grid-template-columns: 1fr;
-    }
+  header {
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 1rem 1.5rem;
+    position: relative;
+  }
+
+  .logo { margin-right: auto; }
+
+  nav {
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: rgba(20, 20, 20, 0.98);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    z-index: 90;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.7);
+  }
+
+  nav.active { max-height: 300px; }
+
+  nav ul {
+    flex-direction: column;
+    gap: 0;
+    padding: 1rem 1rem 0.5rem 1rem;
+  }
+
+  nav ul li {
+    width: 100%;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  nav ul li:last-child { border-bottom: none; }
+
+  nav a { display: block; text-align: center; }
+  nav a::after { display: none; }
+
+  .hamburger { display: block; }
+
+  .hero h1 { font-size: 2.5rem; }
+  .hero p { font-size: 1.1rem; }
+
+  section { padding: 3rem 1.5rem; }
+
+  .games-grid, .groups-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .game-card, .group-card {
+    flex: 1 1 100%;
+    max-width: 320px;
+  }
+
+  .team-grid { grid-template-columns: 1fr; }
+
+  .hero-stats {
+    grid-template-columns: 1fr;
+    width: 100%;
+    text-align: left;
+  }
 }
 
-/* Mobile - Small Screens (e.g., Phones) */
 @media (max-width: 480px) {
-    header {
-        padding: 0.5rem 0.75rem;
-    }
-    
-    .logo {
-        font-size: 1.5rem;
-    }
-    
-    .logo img {
-        width: 35px;
-        height: 35px;
-    }
-    
-    .hero h1 {
-        font-size: 2rem;
-    }
-    
-    .hero p {
-        font-size: 1rem;
-    }
-    
-    /* MODIFIED: Reduced padding for very small screens */
-    section {
-        padding: 2rem 1rem;
-    }
-    
-    h2 {
-        font-size: 1.75rem;
-    }
-    
-    .game-card-content h3 {
-        font-size: 0.95rem;
-    }
-    
-    .game-card-content .btn {
-        padding: 0.5rem 1rem;
-        font-size: 0.9rem;
-    }
-    
-    .group-card img {
-        width: 100px;
-    }
-    
-    .contact-buttons a {
-        width: 100%;
-        margin-left: 0;
-        text-align: center;
-    }
+  header { padding: 0.5rem 0.75rem; }
+  .logo { font-size: 1.5rem; }
+  .logo img { width: 35px; height: 35px; }
+  .hero h1 { font-size: 2rem; }
+  .hero p { font-size: 1rem; }
+  section { padding: 2rem 1rem; }
+  h2 { font-size: 1.75rem; }
+  .game-card-content h3 { font-size: 0.95rem; }
+  .game-card-content .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+  .group-card img { width: 100px; }
+  .contact-buttons a {
+    width: 100%;
+    margin-left: 0;
+    text-align: center;
+  }
 }
-/* Team: force 3 cards in one row on desktop */
+
 @media (min-width: 900px) {
-    .team-grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(180px, 1fr));
-        gap: 2rem;
-        /* No need to override max-width/margin set in the main .team-grid rule */
-    }
+  .team-grid {
+    grid-template-columns: repeat(3, minmax(180px, 1fr));
+    gap: 2rem;
+  }
 }
