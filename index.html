@@ -26,10 +26,7 @@
 <body>
   <!-- Header -->
   <header class="reveal" role="banner">
-    <a href="#hero" class="logo">
-      <img src="LazyGamesBrandingMain.png" alt="LazyGames Logo" />
-      <span>LazyGames</span>
-    </a>
+    <a href="#hero" class="logo"><img src="LazyGamesBrandingMain.png" alt="LazyGames Logo" /><span>LazyGames</span></a>
     <button class="hamburger" aria-label="Toggle navigation">&#9776;</button>
     <nav aria-label="Main navigation">
       <ul>
@@ -47,17 +44,10 @@
       <h1>Welcome to LazyGames</h1>
       <p>We are an experienced Roblox studio specializing in simulators and innovative game concepts.</p>
       <a href="#games" class="btn btn-secondary">Explore Our Games</a>
-
-      <!-- Totals (live) -->
-      <div class="hero-stats" aria-live="polite">
-        <div class="stat">
-          <span class="label">Total CCU</span>
-          <span id="total-ccu">—</span>
-        </div>
-        <div class="stat">
-          <span class="label">Total Visits</span>
-          <span id="total-visits">—</span>
-        </div>
+      <!-- Totals under the button -->
+      <div class="total-stats" aria-live="polite">
+        <div class="stat-item"><span id="total-ccu">—</span> Total CCU</div>
+        <div class="stat-item"><span id="total-visits">—</span> Total Visits</div>
       </div>
     </div>
   </section>
@@ -244,7 +234,6 @@
     // ===== HELPERS =====
     const q  = (sel, root = document) => root.querySelector(sel);
     const qa = (sel, root = document) => [...root.querySelectorAll(sel)];
-
     const fmtAbbrev = (n) => {
       if (typeof n !== 'number' || isNaN(n)) return '—';
       if (n >= 1_000_000) return (Math.round((n / 1_000_000) * 10) / 10).toFixed(1) + 'M';
@@ -252,17 +241,37 @@
       return n.toLocaleString();
     };
 
-    async function getJSON(url) {
-      const bust = (url.includes('?') ? '&' : '?') + '_ts=' + Date.now();
-      const res = await fetch(url + bust, { headers: { accept: 'application/json' } });
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      return res.json();
+    // robust fetch with timeout + backoff + cache bypass
+    async function fetchJSON(url, { timeout = 8000, retries = 2 } = {}) {
+      let attempt = 0, lastErr;
+      while (attempt <= retries) {
+        const ctrl = new AbortController();
+        const t = setTimeout(() => ctrl.abort('timeout'), timeout);
+        try {
+          const bust = (url.includes('?') ? '&' : '?') + '_ts=' + Date.now();
+          const res = await fetch(url + bust, {
+            headers: { accept: 'application/json' },
+            signal: ctrl.signal,
+            cache: 'no-store'
+          });
+          clearTimeout(t);
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          return await res.json();
+        } catch (e) {
+          clearTimeout(t);
+          lastErr = e;
+          await new Promise(r => setTimeout(r, 300 + attempt * 400));
+          attempt++;
+        }
+      }
+      throw lastErr;
     }
 
-    // ===== LIVE GAME STATS (per card + totals) =====
-    function renderGameStats(data) {
+    // ===== LIVE GAME STATS (per-card + totals) =====
+    function renderGameStats(payload) {
+      const data = payload?.data || [];
+      const byId = new Map(data.map(g => [String(g.id), g]));
       const cards = qa('#games .game-card[data-universe-id]');
-      const byId = new Map((data?.data || []).map(g => [String(g.id), g]));
 
       let totalCCU = 0;
       let totalVisits = 0;
@@ -275,11 +284,11 @@
         const ccuEl    = q('.live-ccu', card);
         const visitsEl = q('.live-visits', card);
 
+        if (typeof g.playing === 'number') totalCCU += g.playing;
+        if (typeof g.visits  === 'number') totalVisits += g.visits;
+
         if (ccuEl)    ccuEl.textContent    = 'Current CCU: ' + (typeof g.playing === 'number' ? g.playing.toLocaleString() : '—');
         if (visitsEl) visitsEl.textContent = 'Visits: ' + fmtAbbrev(typeof g.visits === 'number' ? g.visits : NaN);
-
-        if (typeof g.playing === 'number') totalCCU   += g.playing;
-        if (typeof g.visits  === 'number') totalVisits += g.visits;
       });
 
       const totalCCUEl    = q('#total-ccu');
@@ -289,14 +298,16 @@
     }
 
     async function fillLiveGameStats() {
-      const ids = qa('#games .game-card[data-universe-id]').map(c => c.getAttribute('data-universe-id')).filter(Boolean);
+      const ids = qa('#games .game-card[data-universe-id]')
+        .map(c => c.getAttribute('data-universe-id'))
+        .filter(Boolean);
       if (!ids.length) return;
       const url = `${WORKER_URL}/?endpoint=games&ids=${encodeURIComponent(ids.join(','))}`;
       try {
-        const json = await getJSON(url);
+        const json = await fetchJSON(url, { timeout: 9000, retries: 3 });
         renderGameStats(json);
-      } catch (err) {
-        console.warn('[LiveGames] fetch failed:', err);
+      } catch (e) {
+        console.warn('[LiveGames] fetch failed:', e);
       }
     }
 
@@ -317,7 +328,7 @@
         const id = el.getAttribute('data-group-id');
         if (!id) return;
         try {
-          const json = await getJSON(`${WORKER_URL}/?endpoint=group&groupId=${encodeURIComponent(id)}`);
+          const json = await fetchJSON(`${WORKER_URL}/?endpoint=group&groupId=${encodeURIComponent(id)}`, { timeout: 9000, retries: 3 });
           renderGroup(el, json);
         } catch (err) {
           console.warn(`[Group ${id}] fetch failed:`, err);
@@ -343,16 +354,15 @@
         qa('.reveal').forEach(el => el.classList.add('active'));
       }
 
-     // Hero caret: remove reliably after typing
-const heroH1 = document.querySelector('.hero h1');
-if (heroH1) {
-  const removeCaret = () => {
-    heroH1.style.borderRight = 'none';
-  };
-  heroH1.addEventListener('animationend', e => {
-    if (e.animationName === 'typewriter') removeCaret();
-  });
-}
+      // Hero typewriter caret: remove ONLY the caret when typing ends
+      const h1 = q('.hero h1');
+      if (h1) {
+        h1.addEventListener('animationend', (e) => {
+          if (e.animationName === 'typewriter') {
+            h1.style.borderRight = 'none';
+          }
+        });
+      }
 
       // Back to top
       const back = q('#back-to-top');
@@ -391,6 +401,7 @@ if (heroH1) {
         if (document.visibilityState === 'visible') runLive();
       });
 
+      window.addEventListener('online', runLive);
       window.addEventListener('pagehide', () => clearInterval(timer));
     });
   </script>
