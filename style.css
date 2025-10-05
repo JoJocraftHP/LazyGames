@@ -573,6 +573,8 @@ footer nav a:hover {
   }
 }
 
+.hero h1.no-caret { border-right: none !important; }
+
 @media (min-width: 900px) {
   .team-grid {
     grid-template-columns: repeat(3, minmax(180px, 1fr));
