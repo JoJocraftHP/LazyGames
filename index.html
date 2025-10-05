@@ -305,22 +305,77 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      // reveal
-      try {
-        const observer = new IntersectionObserver((entries, obs) => {
-          entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('active'); obs.unobserve(e.target); } });
-        }, { threshold: 0.1 });
-        qa('.reveal').forEach(el => observer.observe(el));
-      } catch {}
+    // ===== Reveal Animations =====
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!prefersReduced) {
+        try {
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        e.target.classList.add('active');
+                        obs.unobserve(e.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            qa('.reveal').forEach(el => observer.observe(el));
+        } catch {}
+    } else {
+        qa('.reveal').forEach(el => el.classList.add('active'));
+    }
 
-      q('#current-year').textContent = new Date().getFullYear();
+    // ===== Hero Title Caret Fix =====
+    const heroH1 = document.querySelector('.hero h1');
+    if (heroH1) {
+        const removeCaret = () => {
+            heroH1.style.animation = 'none';        // stop animations
+            heroH1.style.borderRight = 'none';      // remove the |
+            heroH1.classList.add('no-caret');       // CSS fallback
+        };
+        heroH1.addEventListener('animationend', removeCaret);
+        setTimeout(removeCaret, 4000); // safety fallback
+    }
 
-      const hamburger = q('.hamburger');
-      const nav = q('nav');
-      if (hamburger) {
-        hamburger.addEventListener('click', () => nav.classList.toggle('active'));
-        qa('nav ul li a').forEach(link => link.addEventListener('click', () => nav.classList.remove('active')));
-      }
+    // ===== Back to Top Button =====
+    const back = q('#back-to-top');
+    if (back) {
+        window.addEventListener('scroll', () => back.classList.toggle('show', window.scrollY > 300));
+        back.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ===== Footer Year =====
+    const yearEl = q('#current-year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    // ===== Mobile Nav =====
+    const hamburger = q('.hamburger');
+    const nav = q('nav');
+    if (hamburger && nav) {
+        hamburger.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            hamburger.classList.toggle('is-active');
+        });
+        qa('nav ul li a').forEach(link => link.addEventListener('click', () => {
+            nav.classList.remove('active');
+            hamburger.classList.remove('is-active');
+        }));
+    }
+
+    // ===== Live Data Refresh =====
+    const runLive = () => { fillLiveGameStats(); fillGroupMembers(); };
+    runLive();
+
+    const REFRESH_MS = 60000;
+    let timer = setInterval(() => {
+        if (document.visibilityState === 'visible') runLive();
+    }, REFRESH_MS);
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') runLive();
+    });
+
+    window.addEventListener('pagehide', () => clearInterval(timer));
+});
+
 
       fillLiveGameStats();
       fillGroupMembers();
