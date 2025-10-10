@@ -68,7 +68,7 @@
         <div class="game-card-content">
           <h3>Crush for Brainrots</h3>
           <p class="stats live"><span class="live-ccu">Current CCU: —</span></p>
-          <p class="stats live"><span class="peak-ccu">Peak CCU: —</span></p>
+          <p class="stats live"><span class="live-peak">Peak CCU: —</span></p>
           <p class="stats live"><span class="live-visits">Visits: —</span></p>
           <a href="https://www.roblox.com/games/117579798602171/UPD5-Crush-for-Brainrots" class="btn" target="_blank" rel="noopener noreferrer">View Game</a>
         </div>
@@ -84,7 +84,7 @@
         <div class="game-card-content">
           <h3>Jetpack Training</h3>
           <p class="stats live"><span class="live-ccu">Current CCU: —</span></p>
-          <p class="stats live"><span class="peak-ccu">Peak CCU: —</span></p>
+          <p class="stats live"><span class="live-peak">Peak CCU: —</span></p>
           <p class="stats live"><span class="live-visits">Visits: —</span></p>
           <a href="https://www.roblox.com/games/95557214969049" class="btn" target="_blank" rel="noopener noreferrer">View Game</a>
         </div>
@@ -100,7 +100,7 @@
         <div class="game-card-content">
           <h3>Lift a Pet</h3>
           <p class="stats live"><span class="live-ccu">Current CCU: —</span></p>
-          <p class="stats live"><span class="peak-ccu">Peak CCU: —</span></p>
+          <p class="stats live"><span class="live-peak">Peak CCU: —</span></p>
           <p class="stats live"><span class="live-visits">Visits: —</span></p>
           <a href="https://www.roblox.com/games/16858182871" class="btn" target="_blank" rel="noopener noreferrer">View Game</a>
         </div>
@@ -116,7 +116,7 @@
         <div class="game-card-content">
           <h3>Monster Training</h3>
           <p class="stats live"><span class="live-ccu">Current CCU: —</span></p>
-          <p class="stats live"><span class="peak-ccu">Peak CCU: —</span></p>
+          <p class="stats live"><span class="live-peak">Peak CCU: —</span></p>
           <p class="stats live"><span class="live-visits">Visits: —</span></p>
           <a href="https://www.roblox.com/games/78263156263540" class="btn" target="_blank" rel="noopener noreferrer">View Game</a>
         </div>
@@ -268,36 +268,47 @@
     }
 
     // ===== LIVE GAME STATS (per-card + totals) =====
-    function renderGameStats(payload) {
-      const data = payload?.data || [];
-      const byId = new Map(data.map(g => [String(g.id), g]));
-      const cards = qa('#games .game-card[data-universe-id]');
+// Renders per-card stats + hero totals (CCU + Visits + Peak)
+function renderGameStats(payload) {
+  const data = Array.isArray(payload?.data) ? payload.data : [];
+  const byId = new Map(data.map(g => [String(g.id), g]));
+  const cards = qa('#games .game-card[data-universe-id]');
 
-      let totalCCU = 0;
-      let totalVisits = 0;
+  let totalCCU = 0;
+  let totalVisits = 0;
+  let totalPeak = 0; // optional: aggregate peak across games (max)
 
-      cards.forEach(card => {
-        const uid = String(card.getAttribute('data-universe-id'));
-        const g = byId.get(uid);
-        if (!g) return;
+  cards.forEach(card => {
+    const uid = String(card.getAttribute('data-universe-id'));
+    const g = byId.get(uid);
+    if (!g) return;
 
-        const ccuEl    = q('.live-ccu', card);
-        const peakEl   = q('.peak-ccu', card);   // NEW (live)
-        const visitsEl = q('.live-visits', card);
+    const ccuEl    = q('.live-ccu', card);
+    const peakEl   = q('.live-peak', card);   // make sure each card has <span class="live-peak">
+    const visitsEl = q('.live-visits', card);
 
-        if (typeof g.playing === 'number') totalCCU += g.playing;
-        if (typeof g.visits  === 'number') totalVisits += g.visits;
+    // per-card
+    if (ccuEl)    ccuEl.textContent    = 'Current CCU: ' + (typeof g.playing      === 'number' ? g.playing.toLocaleString()      : '—');
+    if (peakEl)   peakEl.textContent   = 'Peak CCU: '    + (typeof g.peakPlaying === 'number' ? g.peakPlaying.toLocaleString() : '—');
+    if (visitsEl) visitsEl.textContent = 'Visits: '      + (typeof g.visits      === 'number' ? fmtAbbrev(g.visits)             : '—');
 
-        if (ccuEl)   ccuEl.textContent   = 'Current CCU: ' + (typeof g.playing === 'number' ? g.playing.toLocaleString() : '—');
-        if (peakEl)  peakEl.textContent  = 'Peak CCU: ' + (typeof g.peakPlaying === 'number' ? g.peakPlaying.toLocaleString() : '—');
-        if (visitsEl) visitsEl.textContent = 'Visits: ' + fmtAbbrev(typeof g.visits === 'number' ? g.visits : NaN);
-      });
+    // totals
+    if (typeof g.playing      === 'number') totalCCU   += g.playing;
+    if (typeof g.visits       === 'number') totalVisits += g.visits;
+    if (typeof g.peakPlaying  === 'number') totalPeak    = Math.max(totalPeak, g.peakPlaying);
+  });
 
-      const totalCCUEl    = q('#total-ccu');
-      const totalVisitsEl = q('#total-visits');
-      if (totalCCUEl)    totalCCUEl.textContent    = fmtAbbrev(totalCCU);
-      if (totalVisitsEl) totalVisitsEl.textContent = fmtAbbrev(totalVisits);
-    }
+  // hero totals
+  const totalCCUEl    = q('#total-ccu');
+  const totalVisitsEl = q('#total-visits');
+  if (totalCCUEl)    totalCCUEl.textContent    = fmtAbbrev(totalCCU);
+  if (totalVisitsEl) totalVisitsEl.textContent = fmtAbbrev(totalVisits);
+
+  // (Optional) expose overall peak somewhere:
+  // const overallPeakEl = q('#overall-peak');
+  // if (overallPeakEl) overallPeakEl.textContent = (totalPeak ? totalPeak.toLocaleString() : '—');
+}
+
 
     async function fillLiveGameStats() {
       const ids = qa('#games .game-card[data-universe-id]')
