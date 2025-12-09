@@ -1,421 +1,570 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>LazyGames</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LazyGames - Innovative Roblox Game Development</title>
 
-  <link rel="icon" href="lgsdocument.png" type="image/png" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <!-- Meta Description for SEO -->
+  <meta name="description" content="LazyGames is a Roblox studio specializing in simulators and innovative game concepts. Play our top games like Jetpack Training and Lift a Pet!">
+
+  <!-- Favicon -->
+  <link rel="icon" href="lgsdocument.png" type="image/png">
+
+  <!-- Preconnect to external origins for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="LazyGames - Innovative Roblox Game Development" />
-  <meta property="og:description" content="LazyGames is a Roblox studio specializing in simulators and innovative game concepts. Explore our top games like Jetpack Training and Lift a Pet, and join our community!" />
-  <meta property="og:image" content="https://www.lazygames.dev/LGSCard.png" />
-  <meta property="og:url" content="https://www.lazygames.dev/" />
-  <meta property="og:type" content="website" />
+  <meta property="og:title" content="LazyGames - Innovative Roblox Game Development">
+  <meta property="og:description" content="LazyGames is a Roblox studio specializing in simulators and innovative game concepts. Explore our top games like Jetpack Training and Lift a Pet!">
+  <meta property="og:image" content="https://www.lazygames.dev/LGSCard.png">
+  <meta property="og:url" content="https://www.lazygames.dev/">
+  <meta property="og:type" content="website">
 
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:site" content="@LazyGamesTeam" />
-  <meta name="twitter:title" content="LazyGames - Innovative Roblox Game Development" />
-  <meta name="twitter:description" content="LazyGames is a Roblox studio specializing in simulators and innovative game concepts. Explore our top games like Jetpack Training and Lift a Pet, and join our community!" />
-  <meta name="twitter:image" content="https://www.lazygames.dev/LGSCard.png" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@LazyGamesTeam">
+  <meta name="twitter:title" content="LazyGames - Innovative Roblox Game Development">
+  <meta name="twitter:description" content="LazyGames is a Roblox studio specializing in simulators and innovative game concepts. Explore our top games!">
+  <meta name="twitter:image" content="https://www.lazygames.dev/LGSCard.png">
 </head>
 <body>
+  <!-- Skip Link for Accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <!-- Header -->
-  <header class="reveal" role="banner">
-    <a href="#hero" class="logo"><img src="LazyGamesBrandingMain.png" alt="LazyGames Logo" /><span>LazyGames</span></a>
-    <button class="hamburger" aria-label="Toggle navigation">&#9776;</button>
-    <nav aria-label="Main navigation">
-      <ul>
-        <li><a href="#hero">Home</a></li>
-        <li><a href="#games">Our Games</a></li>
-        <li><a href="#about">About Us</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+  <header class="header reveal" role="banner">
+    <div class="header__container">
+      <a href="#hero" class="logo">
+        <img src="LazyGamesBrandingMain.png" alt="" class="logo__image">
+        <span>LazyGames</span>
+      </a>
+
+      <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="main-nav">
+        &#9776;
+      </button>
+
+      <nav id="main-nav" class="nav" aria-label="Main navigation">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="#hero" class="nav__link">Home</a></li>
+          <li class="nav__item"><a href="#games" class="nav__link">Our Games</a></li>
+          <li class="nav__item"><a href="#about" class="nav__link">About Us</a></li>
+          <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <!-- Hero -->
-  <section id="hero" class="hero reveal">
-    <div class="hero-content">
-      <h1>Welcome to LazyGames</h1>
-      <p>We are an experienced Roblox studio specializing in simulators and innovative game concepts.</p>
-      <a href="#games" class="btn btn-secondary">Explore Our Games</a>
-      <!-- Totals under the button -->
-      <div class="total-stats" aria-live="polite">
-        <div class="stat-item"><span id="total-ccu">—</span> Total CCU</div>
-        <div class="stat-item"><span id="total-visits">—</span> Total Visits</div>
-      </div>
-    </div>
-  </section>
+  <!-- Main Content -->
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section id="hero" class="hero reveal">
+      <div class="hero__content">
+        <h1 class="hero__title">Welcome to LazyGames</h1>
+        <p class="hero__subtitle">We are an experienced Roblox studio specializing in simulators and innovative game concepts.</p>
 
-  <!-- Games -->
-  <section id="games" class="reveal">
-    <h2>Our Top Hits</h2>
-    <p class="section-subtitle">Here are some of our top games</p>
-    <div class="games-grid">
+        <div class="hero__cta">
+          <a href="#games" class="btn btn--secondary">Explore Our Games</a>
+        </div>
 
-      <!-- Crush for Brainrots -->
-      <div class="game-card reveal" data-universe-id="8357236286">
-        <a href="https://www.roblox.com/games/117579798602171/UPD5-Crush-for-Brainrots" target="_blank" rel="noopener noreferrer">
-          <div class="game-card-image-wrapper">
-            <img src="GameIcons/CrushUdin.png" alt="Crush for Brainrots" loading="lazy" />
+        <!-- Live Stats -->
+        <div class="hero-stats" aria-live="polite" aria-label="Live game statistics">
+          <div class="hero-stats__item">
+            <span id="total-ccu" class="hero-stats__value">—</span>
+            <span class="hero-stats__label">Total CCU</span>
           </div>
-        </a>
-        <div class="game-card-content">
-          <h3>Crush for Brainrots</h3>
-          <p class="stats live"><span class="live-ccu">Current CCU: —</span></p>
-          <p class="stats live"><span class="live-peak">Peak CCU: —</span></p>
-          <p class="stats live"><span class="live-visits">Visits: —</span></p>
-          <a href="https://www.roblox.com/games/117579798602171/UPD5-Crush-for-Brainrots" class="btn" target="_blank" rel="noopener noreferrer">View Game</a>
+          <div class="hero-stats__item">
+            <span id="total-visits" class="hero-stats__value">—</span>
+            <span class="hero-stats__label">Total Visits</span>
+          </div>
         </div>
       </div>
+    </section>
 
-      <!-- Jetpack Training -->
-      <div class="game-card reveal" data-universe-id="7017269091">
-        <a href="https://www.roblox.com/games/95557214969049" target="_blank" rel="noopener noreferrer">
-          <div class="game-card-image-wrapper">
-            <img src="GameIcons/JetpackTraining2.png" alt="Jetpack Training" loading="lazy" />
+    <!-- Games Section -->
+    <section id="games" class="section reveal">
+      <header class="section__header">
+        <h2 class="section__title">Our Top Hits</h2>
+        <p class="section__subtitle">Check out some of our most popular games</p>
+      </header>
+
+      <div class="games-grid">
+        <!-- Crush for Brainrots -->
+        <article class="game-card reveal" data-universe-id="8357236286">
+          <a href="https://www.roblox.com/games/117579798602171/UPD5-Crush-for-Brainrots" target="_blank" rel="noopener noreferrer" class="game-card__image-wrapper">
+            <img src="GameIcons/CrushUdin.png" alt="Crush for Brainrots game thumbnail" class="game-card__image" loading="lazy">
+          </a>
+          <div class="game-card__content">
+            <h3 class="game-card__title">Crush for Brainrots</h3>
+            <div class="game-card__stats">
+              <span class="game-card__stat live-ccu">Current CCU: —</span>
+              <span class="game-card__stat live-peak">Peak CCU: —</span>
+              <span class="game-card__stat live-visits">Visits: —</span>
+            </div>
+            <div class="game-card__actions">
+              <a href="https://www.roblox.com/games/117579798602171/UPD5-Crush-for-Brainrots" class="btn btn--primary btn--sm" target="_blank" rel="noopener noreferrer">
+                Play Now
+              </a>
+            </div>
           </div>
-        </a>
-        <div class="game-card-content">
-          <h3>Jetpack Training</h3>
-          <p class="stats live"><span class="live-ccu">Current CCU: —</span></p>
-          <p class="stats live"><span class="live-peak">Peak CCU: —</span></p>
-          <p class="stats live"><span class="live-visits">Visits: —</span></p>
-          <a href="https://www.roblox.com/games/95557214969049" class="btn" target="_blank" rel="noopener noreferrer">View Game</a>
+        </article>
+
+        <!-- Jetpack Training -->
+        <article class="game-card reveal" data-universe-id="7017269091">
+          <a href="https://www.roblox.com/games/95557214969049" target="_blank" rel="noopener noreferrer" class="game-card__image-wrapper">
+            <img src="GameIcons/JetpackTraining2.png" alt="Jetpack Training game thumbnail" class="game-card__image" loading="lazy">
+          </a>
+          <div class="game-card__content">
+            <h3 class="game-card__title">Jetpack Training</h3>
+            <div class="game-card__stats">
+              <span class="game-card__stat live-ccu">Current CCU: —</span>
+              <span class="game-card__stat live-peak">Peak CCU: —</span>
+              <span class="game-card__stat live-visits">Visits: —</span>
+            </div>
+            <div class="game-card__actions">
+              <a href="https://www.roblox.com/games/95557214969049" class="btn btn--primary btn--sm" target="_blank" rel="noopener noreferrer">
+                Play Now
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Lift a Pet -->
+        <article class="game-card reveal" data-universe-id="5792683386">
+          <a href="https://www.roblox.com/games/16858182871" target="_blank" rel="noopener noreferrer" class="game-card__image-wrapper">
+            <img src="GameIcons/LiftaPet.png" alt="Lift a Pet game thumbnail" class="game-card__image" loading="lazy">
+          </a>
+          <div class="game-card__content">
+            <h3 class="game-card__title">Lift a Pet</h3>
+            <div class="game-card__stats">
+              <span class="game-card__stat live-ccu">Current CCU: —</span>
+              <span class="game-card__stat live-peak">Peak CCU: —</span>
+              <span class="game-card__stat live-visits">Visits: —</span>
+            </div>
+            <div class="game-card__actions">
+              <a href="https://www.roblox.com/games/16858182871" class="btn btn--primary btn--sm" target="_blank" rel="noopener noreferrer">
+                Play Now
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Monster Training -->
+        <article class="game-card reveal" data-universe-id="7676176341">
+          <a href="https://www.roblox.com/games/78263156263540" target="_blank" rel="noopener noreferrer" class="game-card__image-wrapper">
+            <img src="GameIcons/MonsterTraining.png" alt="Monster Training game thumbnail" class="game-card__image" loading="lazy">
+          </a>
+          <div class="game-card__content">
+            <h3 class="game-card__title">Monster Training</h3>
+            <div class="game-card__stats">
+              <span class="game-card__stat live-ccu">Current CCU: —</span>
+              <span class="game-card__stat live-peak">Peak CCU: —</span>
+              <span class="game-card__stat live-visits">Visits: —</span>
+            </div>
+            <div class="game-card__actions">
+              <a href="https://www.roblox.com/games/78263156263540" class="btn btn--primary btn--sm" target="_blank" rel="noopener noreferrer">
+                Play Now
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section reveal">
+      <header class="section__header">
+        <h2 class="section__title">About Us</h2>
+      </header>
+      <div class="about__content">
+        <p class="about__text">LazyGames is a Roblox studio founded in 2023 by developers active since 2017.</p>
+        <p class="about__text">We're best known for our simulator games, but we're expanding into new genres with fresh ideas. From concept to launch, we focus on creating fun, high-quality experiences for players worldwide.</p>
+      </div>
+    </section>
+
+    <!-- Groups Section -->
+    <section id="groups" class="section reveal">
+      <header class="section__header">
+        <h2 class="section__title">Our Roblox Groups</h2>
+        <p class="section__subtitle">Join our communities and stay updated</p>
+      </header>
+
+      <div class="groups-grid">
+        <div class="group-card">
+          <a href="https://www.roblox.com/communities/33472368/LazyGameStudios#!/about" target="_blank" rel="noopener noreferrer" class="group-card__image-wrapper">
+            <img src="StudioIcons/LazyStudios.png" alt="LazyGameStudios group" class="group-card__image">
+          </a>
+          <h3 class="group-card__title">Main Group</h3>
+          <p class="group-card__members" data-group-id="33472368">Members: —</p>
+        </div>
+
+        <div class="group-card">
+          <a href="https://www.roblox.com/communities/35868694/ActiveGameStudios#!/about" target="_blank" rel="noopener noreferrer" class="group-card__image-wrapper">
+            <img src="StudioIcons/ActiveGames.png" alt="ActiveGameStudios group" class="group-card__image">
+          </a>
+          <h3 class="group-card__title">Active Games</h3>
+          <p class="group-card__members" data-group-id="35868694">Members: —</p>
+        </div>
+
+        <div class="group-card">
+          <a href="https://www.roblox.com/communities/33860522/LazyGames-Tycoons#!/about" target="_blank" rel="noopener noreferrer" class="group-card__image-wrapper">
+            <img src="StudioIcons/LazyTycoons.png" alt="LazyGames Tycoons group" class="group-card__image">
+          </a>
+          <h3 class="group-card__title">Tycoon Group</h3>
+          <p class="group-card__members" data-group-id="33860522">Members: —</p>
+        </div>
+
+        <div class="group-card">
+          <a href="https://www.roblox.com/communities/33635810/LazyGamesObbys#!/about" target="_blank" rel="noopener noreferrer" class="group-card__image-wrapper">
+            <img src="StudioIcons/LazyObbies.png" alt="LazyGamesObbys group" class="group-card__image">
+          </a>
+          <h3 class="group-card__title">Obby Group</h3>
+          <p class="group-card__members" data-group-id="33635810">Members: —</p>
         </div>
       </div>
+    </section>
 
-      <!-- Lift a Pet -->
-      <div class="game-card reveal" data-universe-id="5792683386">
-        <a href="https://www.roblox.com/games/16858182871" target="_blank" rel="noopener noreferrer">
-          <div class="game-card-image-wrapper">
-            <img src="GameIcons/LiftaPet.png" alt="Lift a Pet" loading="lazy" />
-          </div>
-        </a>
-        <div class="game-card-content">
-          <h3>Lift a Pet</h3>
-          <p class="stats live"><span class="live-ccu">Current CCU: —</span></p>
-          <p class="stats live"><span class="live-peak">Peak CCU: —</span></p>
-          <p class="stats live"><span class="live-visits">Visits: —</span></p>
-          <a href="https://www.roblox.com/games/16858182871" class="btn" target="_blank" rel="noopener noreferrer">View Game</a>
-        </div>
+    <!-- Team Section -->
+    <section id="team" class="section reveal">
+      <header class="section__header">
+        <h2 class="section__title">Meet the Team</h2>
+      </header>
+
+      <div class="team-grid">
+        <article class="team-card reveal">
+          <a href="https://www.roblox.com/users/214865113/profile" class="team-card__link" target="_blank" rel="noopener noreferrer">
+            <img src="JoJoProfile.png" alt="JoJocraftHP profile picture" class="team-card__avatar" loading="lazy">
+            <h3 class="team-card__name">JoJocraftHP</h3>
+          </a>
+          <p class="team-card__role">Owner, Game Design &amp; Management</p>
+        </article>
+
+        <article class="team-card reveal">
+          <a href="https://www.roblox.com/users/271040226/profile" class="team-card__link" target="_blank" rel="noopener noreferrer">
+            <img src="MitexProfile.png" alt="mitex profile picture" class="team-card__avatar" loading="lazy">
+            <h3 class="team-card__name">mitex</h3>
+          </a>
+          <p class="team-card__role">Co-Owner, Scripter</p>
+        </article>
+
+        <article class="team-card reveal">
+          <a href="https://www.roblox.com/users/1441090007/profile" class="team-card__link" target="_blank" rel="noopener noreferrer">
+            <img src="LumpiProfile.png" alt="Lumpi profile picture" class="team-card__avatar" loading="lazy">
+            <h3 class="team-card__name">Lumpi</h3>
+          </a>
+          <p class="team-card__role">Developer, Builder &amp; Modeler</p>
+        </article>
       </div>
+    </section>
 
-      <!-- Monster Training -->
-      <div class="game-card reveal" data-universe-id="7676176341">
-        <a href="https://www.roblox.com/games/78263156263540" target="_blank" rel="noopener noreferrer">
-          <div class="game-card-image-wrapper">
-            <img src="GameIcons/MonsterTraining.png" alt="Monster Training" loading="lazy" />
-          </div>
+    <!-- Contact Section -->
+    <section id="contact" class="section reveal">
+      <header class="section__header">
+        <h2 class="section__title">Get in Touch</h2>
+        <p class="section__subtitle">Join our community on Discord, Twitter, or our Roblox group</p>
+      </header>
+
+      <div class="contact-buttons">
+        <a href="https://discord.gg/UnhZDUH93X" class="btn btn--primary" target="_blank" rel="noopener noreferrer">
+          Discord
         </a>
-        <div class="game-card-content">
-          <h3>Monster Training</h3>
-          <p class="stats live"><span class="live-ccu">Current CCU: —</span></p>
-          <p class="stats live"><span class="live-peak">Peak CCU: —</span></p>
-          <p class="stats live"><span class="live-visits">Visits: —</span></p>
-          <a href="https://www.roblox.com/games/78263156263540" class="btn" target="_blank" rel="noopener noreferrer">View Game</a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- About -->
-  <section id="about" class="reveal">
-    <h2>About Us</h2>
-    <p>LazyGames is a Roblox studio founded in 2023 by developers active since 2017.</p>
-    <p>We’re best known for our simulator games, but we’re expanding into new genres with fresh ideas. From concept to launch, we focus on creating fun, high-quality experiences for players worldwide.</p>
-  </section>
-
-  <!-- Groups -->
-  <section id="groups" class="reveal">
-    <h2>Our Roblox Groups</h2>
-    <p class="section-subtitle">Join our Roblox communities:</p>
-    <div class="groups-grid">
-      <div class="group-card">
-        <p>Main Group</p>
-        <a href="https://www.roblox.com/communities/33472368/LazyGameStudios#!/about" target="_blank" rel="noopener noreferrer">
-          <img src="StudioIcons/LazyStudios.png" alt="Main Group" />
+        <a href="https://x.com/LazyGamesTeam" class="btn btn--primary" target="_blank" rel="noopener noreferrer">
+          Twitter/X
         </a>
-        <p class="group-members" data-group-id="33472368">Members: —</p>
-      </div>
-
-      <div class="group-card">
-        <p>Active Games</p>
-        <a href="https://www.roblox.com/communities/35868694/ActiveGameStudios#!/about" target="_blank" rel="noopener noreferrer">
-          <img src="StudioIcons/ActiveGames.png" alt="Active Games" />
+        <a href="https://www.roblox.com/communities/33472368/LazyGameStudios#!/about" class="btn btn--primary" target="_blank" rel="noopener noreferrer">
+          Roblox Group
         </a>
-        <p class="group-members" data-group-id="35868694">Members: —</p>
       </div>
-
-      <div class="group-card">
-        <p>Tycoon Group</p>
-        <a href="https://www.roblox.com/communities/33860522/LazyGames-Tycoons#!/about" target="_blank" rel="noopener noreferrer">
-          <img src="StudioIcons/LazyTycoons.png" alt="Tycoon Group" />
-        </a>
-        <p class="group-members" data-group-id="33860522">Members: —</p>
-      </div>
-
-      <div class="group-card">
-        <p>Obby Group</p>
-        <a href="https://www.roblox.com/communities/33635810/LazyGamesObbys#!/about" target="_blank" rel="noopener noreferrer">
-          <img src="StudioIcons/LazyObbies.png" alt="Obby Group" />
-        </a>
-        <p class="group-members" data-group-id="33635810">Members: —</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Team -->
-  <section id="team" class="reveal">
-    <h2>Meet the Team</h2>
-    <div class="team-grid">
-      <div class="team-card reveal">
-        <a href="https://www.roblox.com/users/214865113/profile" class="team-link" target="_blank" rel="noopener noreferrer">
-          <img src="JoJoProfile.png" alt="JoJocraftHP" loading="lazy" decoding="async" />
-          <h3>JoJocraftHP</h3>
-        </a>
-        <p>Owner, Game Design &amp; Management</p>
-      </div>
-      <div class="team-card reveal">
-        <a href="https://www.roblox.com/users/271040226/profile" class="team-link" target="_blank" rel="noopener noreferrer">
-          <img src="MitexProfile.png" alt="mitex" loading="lazy" decoding="async" />
-          <h3>mitex</h3>
-        </a>
-        <p>Co-Owner, Scripter</p>
-      </div>
-      <div class="team-card reveal">
-        <a href="https://www.roblox.com/users/1441090007/profile" class="team-link" target="_blank" rel="noopener noreferrer">
-          <img src="LumpiProfile.png" alt="Lumpi" loading="lazy" decoding="async" />
-          <h3>Lumpi</h3>
-        </a>
-        <p>Developer, Builder &amp; Modeler</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="reveal">
-    <h2>Get in Touch</h2>
-    <p class="section-subtitle">Join our community on Discord, Twitter, or our Roblox group:</p>
-    <div class="contact-buttons">
-      <a href="https://discord.gg/UnhZDUH93X" class="btn" target="_blank" rel="noopener noreferrer">Discord</a>
-      <a href="https://x.com/LazyGamesTeam" class="btn" target="_blank" rel="noopener noreferrer">Twitter/X</a>
-      <a href="https://www.roblox.com/communities/33472368/LazyGameStudios#!/about" class="btn" target="_blank" rel="noopener noreferrer">Roblox Group</a>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <!-- Footer -->
-  <footer class="reveal">
-    <nav>
-      <a href="#hero">Home</a> |
-      <a href="#games">Our Games</a> |
-      <a href="#about">About Us</a> |
-      <a href="#groups">Groups</a> |
-      <a href="#contact">Contact</a>
+  <footer class="footer reveal">
+    <nav class="footer__nav" aria-label="Footer navigation">
+      <a href="#hero" class="footer__link">Home</a>
+      <a href="#games" class="footer__link">Our Games</a>
+      <a href="#about" class="footer__link">About Us</a>
+      <a href="#groups" class="footer__link">Groups</a>
+      <a href="#contact" class="footer__link">Contact</a>
     </nav>
-    <p>&copy; <span id="current-year"></span> LazyGames</p>
+    <p class="footer__copyright">&copy; <span id="current-year"></span> LazyGames. All rights reserved.</p>
   </footer>
 
-  <!-- Back to top -->
-  <button id="back-to-top" aria-label="Back to top">↑</button>
+  <!-- Back to Top Button -->
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>
 
-  <!-- Scripts -->
+  <!-- JavaScript -->
   <script>
-    // ===== CONFIG =====
-    const WORKER_URL = 'https://livestatsupdate.jojocrafthdyt.workers.dev';
-    const REFRESH_MS = 60000;
+    // ==========================================================================
+    // Configuration
+    // ==========================================================================
+    const CONFIG = {
+      WORKER_URL: 'https://livestatsupdate.jojocrafthdyt.workers.dev',
+      REFRESH_MS: 60000,
+      FETCH_TIMEOUT: 9000,
+      FETCH_RETRIES: 3
+    };
 
-    // ===== HELPERS =====
-    const q  = (sel, root = document) => root.querySelector(sel);
-    const qa = (sel, root = document) => [...root.querySelectorAll(sel)];
-    const fmtAbbrev = (n) => {
+    // ==========================================================================
+    // Utility Functions
+    // ==========================================================================
+    const $ = (sel, root = document) => root.querySelector(sel);
+    const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
+
+    /**
+     * Format large numbers with abbreviations (K, M)
+     */
+    const formatNumber = (n) => {
       if (typeof n !== 'number' || isNaN(n)) return '—';
-      if (n >= 1_000_000) return (Math.round((n / 1_000_000) * 10) / 10).toFixed(1) + 'M';
-      if (n >= 1_000)     return (Math.round((n / 1_000) * 10) / 10).toFixed(1) + 'K';
+      if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + 'M';
+      if (n >= 1_000) return (n / 1_000).toFixed(1) + 'K';
       return n.toLocaleString();
     };
 
-    // robust fetch with timeout + backoff + cache bypass
+    /**
+     * Robust fetch with timeout, retries, and cache bypass
+     */
     async function fetchJSON(url, { timeout = 8000, retries = 2 } = {}) {
-      let attempt = 0, lastErr;
+      let attempt = 0;
+      let lastError;
+
       while (attempt <= retries) {
-        const ctrl = new AbortController();
-        const t = setTimeout(() => ctrl.abort('timeout'), timeout);
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort('timeout'), timeout);
+
         try {
-          const bust = (url.includes('?') ? '&' : '?') + '_ts=' + Date.now();
-          const res = await fetch(url + bust, {
+          const separator = url.includes('?') ? '&' : '?';
+          const response = await fetch(`${url}${separator}_ts=${Date.now()}`, {
             headers: { accept: 'application/json' },
-            signal: ctrl.signal,
+            signal: controller.signal,
             cache: 'no-store'
           });
-          clearTimeout(t);
-          if (!res.ok) throw new Error('HTTP ' + res.status);
-          return await res.json();
-        } catch (e) {
-          clearTimeout(t);
-          lastErr = e;
-          await new Promise(r => setTimeout(r, 300 + attempt * 400));
+
+          clearTimeout(timeoutId);
+
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+          }
+
+          return await response.json();
+        } catch (error) {
+          clearTimeout(timeoutId);
+          lastError = error;
+          await new Promise(resolve => setTimeout(resolve, 300 + attempt * 400));
           attempt++;
         }
       }
-      throw lastErr;
+
+      throw lastError;
     }
 
-    // ===== LIVE GAME STATS (per-card + totals) =====
-// Renders per-card stats + hero totals (CCU + Visits + Peak)
-function renderGameStats(payload) {
-  const data = Array.isArray(payload?.data) ? payload.data : [];
-  const byId = new Map(data.map(g => [String(g.id), g]));
-  const cards = qa('#games .game-card[data-universe-id]');
+    // ==========================================================================
+    // Live Game Stats
+    // ==========================================================================
+    function renderGameStats(payload) {
+      const data = Array.isArray(payload?.data) ? payload.data : [];
+      const byId = new Map(data.map(g => [String(g.id), g]));
+      const cards = $$('#games .game-card[data-universe-id]');
 
-  let totalCCU = 0;
-  let totalVisits = 0;
-  let totalPeak = 0; // optional: aggregate peak across games (max)
+      let totalCCU = 0;
+      let totalVisits = 0;
 
-  cards.forEach(card => {
-    const uid = String(card.getAttribute('data-universe-id'));
-    const g = byId.get(uid);
-    if (!g) return;
+      cards.forEach(card => {
+        const uid = String(card.getAttribute('data-universe-id'));
+        const game = byId.get(uid);
+        if (!game) return;
 
-    const ccuEl    = q('.live-ccu', card);
-    const peakEl   = q('.live-peak', card);   // make sure each card has <span class="live-peak">
-    const visitsEl = q('.live-visits', card);
+        const ccuEl = $('.live-ccu', card);
+        const peakEl = $('.live-peak', card);
+        const visitsEl = $('.live-visits', card);
 
-    // per-card
-    if (ccuEl)    ccuEl.textContent    = 'Current CCU: ' + (typeof g.playing      === 'number' ? g.playing.toLocaleString()      : '—');
-    if (peakEl)   peakEl.textContent   = 'Peak CCU: '    + (typeof g.peakPlaying === 'number' ? g.peakPlaying.toLocaleString() : '—');
-    if (visitsEl) visitsEl.textContent = 'Visits: '      + (typeof g.visits      === 'number' ? fmtAbbrev(g.visits)             : '—');
+        if (ccuEl) {
+          ccuEl.textContent = 'Current CCU: ' + (typeof game.playing === 'number' ? game.playing.toLocaleString() : '—');
+        }
+        if (peakEl) {
+          peakEl.textContent = 'Peak CCU: ' + (typeof game.peakPlaying === 'number' ? game.peakPlaying.toLocaleString() : '—');
+        }
+        if (visitsEl) {
+          visitsEl.textContent = 'Visits: ' + (typeof game.visits === 'number' ? formatNumber(game.visits) : '—');
+        }
 
-    // totals
-    if (typeof g.playing      === 'number') totalCCU   += g.playing;
-    if (typeof g.visits       === 'number') totalVisits += g.visits;
-    if (typeof g.peakPlaying  === 'number') totalPeak    = Math.max(totalPeak, g.peakPlaying);
-  });
+        if (typeof game.playing === 'number') totalCCU += game.playing;
+        if (typeof game.visits === 'number') totalVisits += game.visits;
+      });
 
-  // hero totals
-  const totalCCUEl    = q('#total-ccu');
-  const totalVisitsEl = q('#total-visits');
-  if (totalCCUEl)    totalCCUEl.textContent    = fmtAbbrev(totalCCU);
-  if (totalVisitsEl) totalVisitsEl.textContent = fmtAbbrev(totalVisits);
+      // Update hero totals
+      const totalCCUEl = $('#total-ccu');
+      const totalVisitsEl = $('#total-visits');
+      if (totalCCUEl) totalCCUEl.textContent = formatNumber(totalCCU);
+      if (totalVisitsEl) totalVisitsEl.textContent = formatNumber(totalVisits);
+    }
 
-  // (Optional) expose overall peak somewhere:
-  // const overallPeakEl = q('#overall-peak');
-  // if (overallPeakEl) overallPeakEl.textContent = (totalPeak ? totalPeak.toLocaleString() : '—');
-}
-
-
-    async function fillLiveGameStats() {
-      const ids = qa('#games .game-card[data-universe-id]')
-        .map(c => c.getAttribute('data-universe-id'))
+    async function fetchGameStats() {
+      const ids = $$('#games .game-card[data-universe-id]')
+        .map(card => card.getAttribute('data-universe-id'))
         .filter(Boolean);
+
       if (!ids.length) return;
-      const url = `${WORKER_URL}/?endpoint=games&ids=${encodeURIComponent(ids.join(','))}`;
+
+      const url = `${CONFIG.WORKER_URL}/?endpoint=games&ids=${encodeURIComponent(ids.join(','))}`;
+
       try {
-        const json = await fetchJSON(url, { timeout: 9000, retries: 3 });
+        const json = await fetchJSON(url, {
+          timeout: CONFIG.FETCH_TIMEOUT,
+          retries: CONFIG.FETCH_RETRIES
+        });
         renderGameStats(json);
-      } catch (e) {
-        console.warn('[LiveGames] fetch failed:', e);
+      } catch (error) {
+        console.warn('[LiveGames] fetch failed:', error);
       }
     }
 
-    // ===== LIVE GROUP MEMBERS =====
-    function renderGroup(el, data) {
+    // ==========================================================================
+    // Live Group Members
+    // ==========================================================================
+    function renderGroupMembers(element, data) {
       if (typeof data?.memberCount === 'number') {
-        el.textContent = 'Members: ' + data.memberCount.toLocaleString();
+        element.textContent = 'Members: ' + data.memberCount.toLocaleString();
       } else {
-        el.textContent = 'Members: —';
+        element.textContent = 'Members: —';
       }
     }
 
-    async function fillGroupMembers() {
-      const els = qa('.group-members[data-group-id]');
-      if (!els.length) return;
+    async function fetchGroupMembers() {
+      const elements = $$('.group-card__members[data-group-id]');
+      if (!elements.length) return;
 
-      await Promise.all(els.map(async el => {
+      await Promise.all(elements.map(async (el) => {
         const id = el.getAttribute('data-group-id');
         if (!id) return;
+
         try {
-          const json = await fetchJSON(`${WORKER_URL}/?endpoint=group&groupId=${encodeURIComponent(id)}`, { timeout: 9000, retries: 3 });
-          renderGroup(el, json);
-        } catch (err) {
-          console.warn(`[Group ${id}] fetch failed:`, err);
-          renderGroup(el, null);
+          const json = await fetchJSON(
+            `${CONFIG.WORKER_URL}/?endpoint=group&groupId=${encodeURIComponent(id)}`,
+            { timeout: CONFIG.FETCH_TIMEOUT, retries: CONFIG.FETCH_RETRIES }
+          );
+          renderGroupMembers(el, json);
+        } catch (error) {
+          console.warn(`[Group ${id}] fetch failed:`, error);
+          renderGroupMembers(el, null);
         }
       }));
     }
 
-    // ===== PAGE BOOT =====
+    // ==========================================================================
+    // Page Initialization
+    // ==========================================================================
     document.addEventListener('DOMContentLoaded', () => {
-      // Reveal animations (reduced motion aware)
-      const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (!prefersReduced) {
+      // Reduced motion preference
+      const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
+      // Reveal animations with Intersection Observer
+      if (!prefersReducedMotion) {
         try {
           const observer = new IntersectionObserver((entries, obs) => {
-            entries.forEach(e => {
-              if (e.isIntersecting) { e.target.classList.add('active'); obs.unobserve(e.target); }
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                obs.unobserve(entry.target);
+              }
             });
           }, { threshold: 0.1 });
-          qa('.reveal').forEach(el => observer.observe(el));
-        } catch {}
+
+          $$('.reveal').forEach(el => observer.observe(el));
+        } catch (e) {
+          // Fallback: show all elements
+          $$('.reveal').forEach(el => el.classList.add('active'));
+        }
       } else {
-        qa('.reveal').forEach(el => el.classList.add('active'));
+        $$('.reveal').forEach(el => el.classList.add('active'));
       }
 
-      // Hero typewriter caret: remove ONLY the caret when typing ends
-      const h1 = q('.hero h1');
-      if (h1) {
-        h1.addEventListener('animationend', (e) => {
+      // Hero typewriter animation end handler
+      const heroTitle = $('.hero__title');
+      if (heroTitle) {
+        heroTitle.addEventListener('animationend', (e) => {
           if (e.animationName === 'typewriter') {
-            h1.style.borderRight = 'none';
+            heroTitle.style.borderRight = 'none';
           }
         });
       }
 
-      // Back to top
-      const back = q('#back-to-top');
-      if (back) {
-        window.addEventListener('scroll', () => back.classList.toggle('show', window.scrollY > 300));
-        back.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+      // Back to top button
+      const backToTop = $('#back-to-top');
+      if (backToTop) {
+        window.addEventListener('scroll', () => {
+          backToTop.classList.toggle('show', window.scrollY > 300);
+        }, { passive: true });
+
+        backToTop.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
       }
 
       // Footer year
-      const yearEl = q('#current-year');
-      if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-      // Mobile nav
-      const hamburger = q('.hamburger');
-      const nav = q('nav');
-      if (hamburger && nav) {
-        hamburger.addEventListener('click', () => {
-          nav.classList.toggle('active');
-          hamburger.classList.toggle('is-active');
-        });
-        qa('nav ul li a').forEach(link => link.addEventListener('click', () => {
-          nav.classList.remove('active');
-          hamburger.classList.remove('is-active');
-        }));
+      const yearEl = $('#current-year');
+      if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
       }
 
-      // Live data now + refresh
-      const runLive = () => { fillLiveGameStats(); fillGroupMembers(); };
-      runLive();
+      // Mobile navigation
+      const hamburger = $('.hamburger');
+      const nav = $('.nav');
 
-      let timer = setInterval(() => {
-        if (document.visibilityState === 'visible') runLive();
-      }, REFRESH_MS);
+      if (hamburger && nav) {
+        hamburger.addEventListener('click', () => {
+          const isActive = nav.classList.toggle('active');
+          hamburger.classList.toggle('is-active', isActive);
+          hamburger.setAttribute('aria-expanded', isActive);
+        });
 
+        // Close nav on link click
+        $$('.nav__link').forEach(link => {
+          link.addEventListener('click', () => {
+            nav.classList.remove('active');
+            hamburger.classList.remove('is-active');
+            hamburger.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+
+      // Live data fetching
+      const fetchAllLiveData = () => {
+        fetchGameStats();
+        fetchGroupMembers();
+      };
+
+      // Initial fetch
+      fetchAllLiveData();
+
+      // Periodic refresh (only when visible)
+      let refreshTimer = setInterval(() => {
+        if (document.visibilityState === 'visible') {
+          fetchAllLiveData();
+        }
+      }, CONFIG.REFRESH_MS);
+
+      // Refresh on visibility change
       document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible') runLive();
+        if (document.visibilityState === 'visible') {
+          fetchAllLiveData();
+        }
       });
 
-      window.addEventListener('online', runLive);
-      window.addEventListener('pagehide', () => clearInterval(timer));
+      // Refresh when coming back online
+      window.addEventListener('online', fetchAllLiveData);
+
+      // Cleanup on page hide
+      window.addEventListener('pagehide', () => {
+        clearInterval(refreshTimer);
+      });
     });
   </script>
 </body>
