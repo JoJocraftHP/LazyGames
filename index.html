@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;800&display=swap" rel="stylesheet">
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="style.css">
@@ -48,7 +48,9 @@
       </a>
 
       <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="main-nav">
-        &#9776;
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
 
       <nav id="main-nav" class="nav" aria-label="Main navigation">
@@ -56,6 +58,8 @@
           <li class="nav__item"><a href="#hero" class="nav__link">Home</a></li>
           <li class="nav__item"><a href="#games" class="nav__link">Our Games</a></li>
           <li class="nav__item"><a href="#about" class="nav__link">About Us</a></li>
+          <li class="nav__item"><a href="#groups" class="nav__link">Groups</a></li>
+          <li class="nav__item"><a href="#team" class="nav__link">Team</a></li>
           <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
         </ul>
       </nav>
@@ -65,23 +69,35 @@
   <!-- Main Content -->
   <main id="main-content">
     <!-- Hero Section -->
-    <section id="hero" class="hero reveal">
-      <div class="hero__content">
+    <section id="hero" class="hero">
+      <!-- Floating Orbs for Visual Effect -->
+      <div class="hero__orb hero__orb--1" aria-hidden="true"></div>
+      <div class="hero__orb hero__orb--2" aria-hidden="true"></div>
+      <div class="hero__orb hero__orb--3" aria-hidden="true"></div>
+
+      <div class="hero__content reveal">
+        <!-- Badge -->
+        <div class="hero__badge">
+          <span class="hero__badge-dot" aria-hidden="true"></span>
+          Roblox Game Studio
+        </div>
+
         <h1 class="hero__title">Welcome to LazyGames</h1>
-        <p class="hero__subtitle">We are an experienced Roblox studio specializing in simulators and innovative game concepts.</p>
+        <p class="hero__subtitle">We are an experienced Roblox studio specializing in simulators and innovative game concepts. Join millions of players in our immersive gaming experiences.</p>
 
         <div class="hero__cta">
-          <a href="#games" class="btn btn--secondary">Explore Our Games</a>
+          <a href="#games" class="btn btn--primary btn--lg">Explore Our Games</a>
+          <a href="https://discord.gg/UnhZDUH93X" class="btn btn--secondary btn--lg" target="_blank" rel="noopener noreferrer">Join Discord</a>
         </div>
 
         <!-- Live Stats -->
         <div class="hero-stats" aria-live="polite" aria-label="Live game statistics">
           <div class="hero-stats__item">
-            <span id="total-ccu" class="hero-stats__value">—</span>
-            <span class="hero-stats__label">Total CCU</span>
+            <span id="total-ccu" class="hero-stats__value">--</span>
+            <span class="hero-stats__label">Players Online</span>
           </div>
           <div class="hero-stats__item">
-            <span id="total-visits" class="hero-stats__value">—</span>
+            <span id="total-visits" class="hero-stats__value">--</span>
             <span class="hero-stats__label">Total Visits</span>
           </div>
         </div>
@@ -91,22 +107,27 @@
     <!-- Games Section -->
     <section id="games" class="section reveal">
       <header class="section__header">
-        <h2 class="section__title">Our Top Hits</h2>
-        <p class="section__subtitle">Check out some of our most popular games</p>
+        <span class="section__eyebrow">Featured</span>
+        <h2 class="section__title section__title--gradient">Our Top Hits</h2>
+        <p class="section__subtitle">Discover our most popular games loved by millions of players worldwide</p>
       </header>
 
       <div class="games-grid">
         <!-- Crush for Brainrots -->
         <article class="game-card reveal" data-universe-id="8357236286">
           <a href="https://www.roblox.com/games/117579798602171/UPD5-Crush-for-Brainrots" target="_blank" rel="noopener noreferrer" class="game-card__image-wrapper">
+            <div class="game-card__live-badge">
+              <span class="game-card__live-dot" aria-hidden="true"></span>
+              LIVE
+            </div>
             <img src="GameIcons/CrushUdin.png" alt="Crush for Brainrots game thumbnail" class="game-card__image" loading="lazy">
           </a>
           <div class="game-card__content">
             <h3 class="game-card__title">Crush for Brainrots</h3>
             <div class="game-card__stats">
-              <span class="game-card__stat live-ccu">Current CCU: —</span>
-              <span class="game-card__stat live-peak">Peak CCU: —</span>
-              <span class="game-card__stat live-visits">Visits: —</span>
+              <span class="game-card__stat live-ccu">CCU: --</span>
+              <span class="game-card__stat live-peak">Peak: --</span>
+              <span class="game-card__stat live-visits">Visits: --</span>
             </div>
             <div class="game-card__actions">
               <a href="https://www.roblox.com/games/117579798602171/UPD5-Crush-for-Brainrots" class="btn btn--primary btn--sm" target="_blank" rel="noopener noreferrer">
@@ -119,14 +140,18 @@
         <!-- Jetpack Training -->
         <article class="game-card reveal" data-universe-id="7017269091">
           <a href="https://www.roblox.com/games/95557214969049" target="_blank" rel="noopener noreferrer" class="game-card__image-wrapper">
+            <div class="game-card__live-badge">
+              <span class="game-card__live-dot" aria-hidden="true"></span>
+              LIVE
+            </div>
             <img src="GameIcons/JetpackTraining2.png" alt="Jetpack Training game thumbnail" class="game-card__image" loading="lazy">
           </a>
           <div class="game-card__content">
             <h3 class="game-card__title">Jetpack Training</h3>
             <div class="game-card__stats">
-              <span class="game-card__stat live-ccu">Current CCU: —</span>
-              <span class="game-card__stat live-peak">Peak CCU: —</span>
-              <span class="game-card__stat live-visits">Visits: —</span>
+              <span class="game-card__stat live-ccu">CCU: --</span>
+              <span class="game-card__stat live-peak">Peak: --</span>
+              <span class="game-card__stat live-visits">Visits: --</span>
             </div>
             <div class="game-card__actions">
               <a href="https://www.roblox.com/games/95557214969049" class="btn btn--primary btn--sm" target="_blank" rel="noopener noreferrer">
@@ -139,14 +164,18 @@
         <!-- Lift a Pet -->
         <article class="game-card reveal" data-universe-id="5792683386">
           <a href="https://www.roblox.com/games/16858182871" target="_blank" rel="noopener noreferrer" class="game-card__image-wrapper">
+            <div class="game-card__live-badge">
+              <span class="game-card__live-dot" aria-hidden="true"></span>
+              LIVE
+            </div>
             <img src="GameIcons/LiftaPet.png" alt="Lift a Pet game thumbnail" class="game-card__image" loading="lazy">
           </a>
           <div class="game-card__content">
             <h3 class="game-card__title">Lift a Pet</h3>
             <div class="game-card__stats">
-              <span class="game-card__stat live-ccu">Current CCU: —</span>
-              <span class="game-card__stat live-peak">Peak CCU: —</span>
-              <span class="game-card__stat live-visits">Visits: —</span>
+              <span class="game-card__stat live-ccu">CCU: --</span>
+              <span class="game-card__stat live-peak">Peak: --</span>
+              <span class="game-card__stat live-visits">Visits: --</span>
             </div>
             <div class="game-card__actions">
               <a href="https://www.roblox.com/games/16858182871" class="btn btn--primary btn--sm" target="_blank" rel="noopener noreferrer">
@@ -159,14 +188,18 @@
         <!-- Monster Training -->
         <article class="game-card reveal" data-universe-id="7676176341">
           <a href="https://www.roblox.com/games/78263156263540" target="_blank" rel="noopener noreferrer" class="game-card__image-wrapper">
+            <div class="game-card__live-badge">
+              <span class="game-card__live-dot" aria-hidden="true"></span>
+              LIVE
+            </div>
             <img src="GameIcons/MonsterTraining.png" alt="Monster Training game thumbnail" class="game-card__image" loading="lazy">
           </a>
           <div class="game-card__content">
             <h3 class="game-card__title">Monster Training</h3>
             <div class="game-card__stats">
-              <span class="game-card__stat live-ccu">Current CCU: —</span>
-              <span class="game-card__stat live-peak">Peak CCU: —</span>
-              <span class="game-card__stat live-visits">Visits: —</span>
+              <span class="game-card__stat live-ccu">CCU: --</span>
+              <span class="game-card__stat live-peak">Peak: --</span>
+              <span class="game-card__stat live-visits">Visits: --</span>
             </div>
             <div class="game-card__actions">
               <a href="https://www.roblox.com/games/78263156263540" class="btn btn--primary btn--sm" target="_blank" rel="noopener noreferrer">
@@ -181,19 +214,21 @@
     <!-- About Section -->
     <section id="about" class="section reveal">
       <header class="section__header">
-        <h2 class="section__title">About Us</h2>
+        <span class="section__eyebrow">Our Story</span>
+        <h2 class="section__title section__title--gradient">About Us</h2>
       </header>
       <div class="about__content">
-        <p class="about__text">LazyGames is a Roblox studio founded in 2023 by developers active since 2017.</p>
-        <p class="about__text">We're best known for our simulator games, but we're expanding into new genres with fresh ideas. From concept to launch, we focus on creating fun, high-quality experiences for players worldwide.</p>
+        <p class="about__text">LazyGames is a <span class="about__highlight">Roblox studio founded in 2023</span> by developers active since 2017. With years of experience in game development, we bring creativity and quality to every project.</p>
+        <p class="about__text">We're best known for our <span class="about__highlight">simulator games</span>, but we're expanding into new genres with fresh ideas. From concept to launch, we focus on creating fun, high-quality experiences for players worldwide.</p>
       </div>
     </section>
 
     <!-- Groups Section -->
     <section id="groups" class="section reveal">
       <header class="section__header">
-        <h2 class="section__title">Our Roblox Groups</h2>
-        <p class="section__subtitle">Join our communities and stay updated</p>
+        <span class="section__eyebrow">Community</span>
+        <h2 class="section__title section__title--gradient">Our Roblox Groups</h2>
+        <p class="section__subtitle">Join our communities and stay updated with the latest news and releases</p>
       </header>
 
       <div class="groups-grid">
@@ -202,7 +237,7 @@
             <img src="StudioIcons/LazyStudios.png" alt="LazyGameStudios group" class="group-card__image">
           </a>
           <h3 class="group-card__title">Main Group</h3>
-          <p class="group-card__members" data-group-id="33472368">Members: —</p>
+          <p class="group-card__members" data-group-id="33472368">Members: --</p>
         </div>
 
         <div class="group-card">
@@ -210,7 +245,7 @@
             <img src="StudioIcons/ActiveGames.png" alt="ActiveGameStudios group" class="group-card__image">
           </a>
           <h3 class="group-card__title">Active Games</h3>
-          <p class="group-card__members" data-group-id="35868694">Members: —</p>
+          <p class="group-card__members" data-group-id="35868694">Members: --</p>
         </div>
 
         <div class="group-card">
@@ -218,7 +253,7 @@
             <img src="StudioIcons/LazyTycoons.png" alt="LazyGames Tycoons group" class="group-card__image">
           </a>
           <h3 class="group-card__title">Tycoon Group</h3>
-          <p class="group-card__members" data-group-id="33860522">Members: —</p>
+          <p class="group-card__members" data-group-id="33860522">Members: --</p>
         </div>
 
         <div class="group-card">
@@ -226,7 +261,7 @@
             <img src="StudioIcons/LazyObbies.png" alt="LazyGamesObbys group" class="group-card__image">
           </a>
           <h3 class="group-card__title">Obby Group</h3>
-          <p class="group-card__members" data-group-id="33635810">Members: —</p>
+          <p class="group-card__members" data-group-id="33635810">Members: --</p>
         </div>
       </div>
     </section>
@@ -234,7 +269,9 @@
     <!-- Team Section -->
     <section id="team" class="section reveal">
       <header class="section__header">
-        <h2 class="section__title">Meet the Team</h2>
+        <span class="section__eyebrow">The Creators</span>
+        <h2 class="section__title section__title--gradient">Meet the Team</h2>
+        <p class="section__subtitle">The talented individuals behind LazyGames</p>
       </header>
 
       <div class="team-grid">
@@ -265,40 +302,51 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="section reveal">
-      <header class="section__header">
-        <h2 class="section__title">Get in Touch</h2>
-        <p class="section__subtitle">Join our community on Discord, Twitter, or our Roblox group</p>
-      </header>
+    <section id="contact" class="contact reveal">
+      <div class="contact__content">
+        <header class="section__header">
+          <span class="section__eyebrow">Connect</span>
+          <h2 class="section__title section__title--gradient">Get in Touch</h2>
+          <p class="section__subtitle">Join our community on Discord, follow us on Twitter, or become a member of our Roblox group</p>
+        </header>
 
-      <div class="contact-buttons">
-        <a href="https://discord.gg/UnhZDUH93X" class="btn btn--primary" target="_blank" rel="noopener noreferrer">
-          Discord
-        </a>
-        <a href="https://x.com/LazyGamesTeam" class="btn btn--primary" target="_blank" rel="noopener noreferrer">
-          Twitter/X
-        </a>
-        <a href="https://www.roblox.com/communities/33472368/LazyGameStudios#!/about" class="btn btn--primary" target="_blank" rel="noopener noreferrer">
-          Roblox Group
-        </a>
+        <div class="contact-buttons">
+          <a href="https://discord.gg/UnhZDUH93X" class="btn btn--primary btn--lg" target="_blank" rel="noopener noreferrer">
+            Join Discord
+          </a>
+          <a href="https://x.com/LazyGamesTeam" class="btn btn--secondary btn--lg" target="_blank" rel="noopener noreferrer">
+            Follow on X
+          </a>
+          <a href="https://www.roblox.com/communities/33472368/LazyGameStudios#!/about" class="btn btn--secondary btn--lg" target="_blank" rel="noopener noreferrer">
+            Roblox Group
+          </a>
+        </div>
       </div>
     </section>
   </main>
 
   <!-- Footer -->
   <footer class="footer reveal">
-    <nav class="footer__nav" aria-label="Footer navigation">
-      <a href="#hero" class="footer__link">Home</a>
-      <a href="#games" class="footer__link">Our Games</a>
-      <a href="#about" class="footer__link">About Us</a>
-      <a href="#groups" class="footer__link">Groups</a>
-      <a href="#contact" class="footer__link">Contact</a>
-    </nav>
-    <p class="footer__copyright">&copy; <span id="current-year"></span> LazyGames. All rights reserved.</p>
+    <div class="footer__container">
+      <nav class="footer__nav" aria-label="Footer navigation">
+        <a href="#hero" class="footer__link">Home</a>
+        <a href="#games" class="footer__link">Our Games</a>
+        <a href="#about" class="footer__link">About Us</a>
+        <a href="#groups" class="footer__link">Groups</a>
+        <a href="#team" class="footer__link">Team</a>
+        <a href="#contact" class="footer__link">Contact</a>
+      </nav>
+      <div class="footer__divider" aria-hidden="true"></div>
+      <p class="footer__copyright">&copy; <span id="current-year"></span> LazyGames. All rights reserved.</p>
+    </div>
   </footer>
 
   <!-- Back to Top Button -->
-  <button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
 
   <!-- JavaScript -->
   <script>
@@ -322,7 +370,7 @@
      * Format large numbers with abbreviations (K, M)
      */
     const formatNumber = (n) => {
-      if (typeof n !== 'number' || isNaN(n)) return '—';
+      if (typeof n !== 'number' || isNaN(n)) return '--';
       if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + 'M';
       if (n >= 1_000) return (n / 1_000).toFixed(1) + 'K';
       return n.toLocaleString();
@@ -386,13 +434,13 @@
         const visitsEl = $('.live-visits', card);
 
         if (ccuEl) {
-          ccuEl.textContent = 'Current CCU: ' + (typeof game.playing === 'number' ? game.playing.toLocaleString() : '—');
+          ccuEl.textContent = 'CCU: ' + (typeof game.playing === 'number' ? game.playing.toLocaleString() : '--');
         }
         if (peakEl) {
-          peakEl.textContent = 'Peak CCU: ' + (typeof game.peakPlaying === 'number' ? game.peakPlaying.toLocaleString() : '—');
+          peakEl.textContent = 'Peak: ' + (typeof game.peakPlaying === 'number' ? game.peakPlaying.toLocaleString() : '--');
         }
         if (visitsEl) {
-          visitsEl.textContent = 'Visits: ' + (typeof game.visits === 'number' ? formatNumber(game.visits) : '—');
+          visitsEl.textContent = 'Visits: ' + (typeof game.visits === 'number' ? formatNumber(game.visits) : '--');
         }
 
         if (typeof game.playing === 'number') totalCCU += game.playing;
@@ -433,7 +481,7 @@
       if (typeof data?.memberCount === 'number') {
         element.textContent = 'Members: ' + data.memberCount.toLocaleString();
       } else {
-        element.textContent = 'Members: —';
+        element.textContent = 'Members: --';
       }
     }
 
@@ -496,6 +544,16 @@
         });
       }
 
+      // Header scroll effect
+      const header = $('.header');
+      if (header) {
+        let lastScrollY = window.scrollY;
+        window.addEventListener('scroll', () => {
+          header.classList.toggle('scrolled', window.scrollY > 50);
+          lastScrollY = window.scrollY;
+        }, { passive: true });
+      }
+
       // Back to top button
       const backToTop = $('#back-to-top');
       if (backToTop) {
@@ -523,6 +581,8 @@
           const isActive = nav.classList.toggle('active');
           hamburger.classList.toggle('is-active', isActive);
           hamburger.setAttribute('aria-expanded', isActive);
+          // Prevent body scroll when nav is open
+          document.body.style.overflow = isActive ? 'hidden' : '';
         });
 
         // Close nav on link click
@@ -531,7 +591,18 @@
             nav.classList.remove('active');
             hamburger.classList.remove('is-active');
             hamburger.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
           });
+        });
+
+        // Close nav on escape key
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && nav.classList.contains('active')) {
+            nav.classList.remove('active');
+            hamburger.classList.remove('is-active');
+            hamburger.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+          }
         });
       }
 
