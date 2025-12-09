@@ -534,16 +534,6 @@
         $$('.reveal').forEach(el => el.classList.add('active'));
       }
 
-      // Hero typewriter animation end handler
-      const heroTitle = $('.hero__title');
-      if (heroTitle) {
-        heroTitle.addEventListener('animationend', (e) => {
-          if (e.animationName === 'typewriter') {
-            heroTitle.style.borderRight = 'none';
-          }
-        });
-      }
-
       // Header scroll effect
       const header = $('.header');
       if (header) {
