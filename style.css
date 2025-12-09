@@ -599,11 +599,11 @@ img {
 }
 
 .hero__content {
-  max-width: 900px;
+  max-width: 1100px;
   z-index: 1;
 }
 
-/* Badge */
+/* Badge - no animation, always visible */
 .hero__badge {
   display: inline-flex;
   align-items: center;
@@ -617,8 +617,6 @@ img {
   color: var(--color-text-secondary);
   margin-bottom: var(--space-xl);
   backdrop-filter: blur(10px);
-  opacity: 1;
-  animation: none;
 }
 
 .hero__badge-dot {
@@ -630,19 +628,13 @@ img {
 }
 
 .hero__title {
-  font-size: clamp(var(--text-4xl), 10vw, var(--text-7xl));
+  font-size: clamp(var(--text-4xl), 8vw, var(--text-6xl));
   font-weight: 700;
   line-height: var(--leading-tight);
   margin-bottom: var(--space-lg);
   display: block;
-  animation: fadeInUp 0.8s ease-out 0.3s both;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .hero__title {
-    animation: none;
-  }
-}
 
 .hero__subtitle {
   font-size: clamp(var(--text-lg), 3vw, var(--text-xl));
@@ -896,17 +888,34 @@ img {
 }
 
 .game-card__stats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-sm) var(--space-lg);
-  font-size: var(--text-sm);
-  color: var(--color-text-muted);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--color-surface-border);
 }
 
 .game-card__stat {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: var(--space-xs);
+  gap: var(--space-2xs);
+  text-align: center;
+}
+
+.game-card__stat-value {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.game-card__stat-label {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .game-card__actions {
