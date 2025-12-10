@@ -843,6 +843,51 @@ img {
   pointer-events: none;
 }
 
+/* Play overlay on hover */
+.game-card__image-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 26, 108, 0.4);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  z-index: 1;
+}
+
+.game-card:hover .game-card__image-wrapper::before {
+  opacity: 1;
+}
+
+.game-card__play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  width: 60px;
+  height: 60px;
+  background: var(--color-text-on-primary);
+  border-radius: var(--border-radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all var(--transition-base);
+  z-index: 2;
+  box-shadow: var(--shadow-lg);
+}
+
+.game-card__play-icon svg {
+  width: 24px;
+  height: 24px;
+  color: var(--color-primary);
+  margin-left: 4px; /* Visual centering for play icon */
+}
+
+.game-card:hover .game-card__play-icon {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
 .game-card__image {
   width: 100%;
   height: 100%;
