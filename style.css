@@ -123,6 +123,8 @@ html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  /* Offset for fixed header when navigating to anchors */
+  scroll-padding-top: var(--header-height);
 }
 
 body {
@@ -257,6 +259,11 @@ img {
 @keyframes shimmer {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
+}
+
+@keyframes loadingPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
 }
 
 @keyframes float {
@@ -1155,6 +1162,7 @@ img {
 }
 
 .footer__link {
+  position: relative;
   color: var(--color-text-muted);
   font-weight: 500;
   padding: var(--space-xs) var(--space-sm);
@@ -1162,10 +1170,28 @@ img {
   transition: all var(--transition-fast);
 }
 
+.footer__link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--gradient-primary);
+  transition: all var(--transition-fast);
+  transform: translateX(-50%);
+  border-radius: 1px;
+}
+
 .footer__link:hover,
 .footer__link:focus-visible {
   color: var(--color-primary);
   background: rgba(255, 26, 108, 0.1);
+}
+
+.footer__link:hover::after,
+.footer__link:focus-visible::after {
+  width: calc(100% - var(--space-md));
 }
 
 .footer__divider {
@@ -1179,6 +1205,46 @@ img {
 .footer__copyright {
   color: var(--color-text-muted);
   font-size: var(--text-sm);
+}
+
+/* Footer Social Links */
+.footer__social {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.footer__social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--color-surface-border);
+  border-radius: var(--border-radius-full);
+  color: var(--color-text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.footer__social-link:hover {
+  background: var(--gradient-primary);
+  border-color: transparent;
+  color: var(--color-text-on-primary);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md), 0 0 20px var(--color-primary-glow);
+}
+
+.footer__social-link svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Loading State for Stats */
+.stat-loading {
+  animation: loadingPulse 1.5s ease-in-out infinite;
+  color: var(--color-text-muted);
 }
 
 /* --------------------------------------------------------------------------
