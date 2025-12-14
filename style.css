@@ -896,7 +896,7 @@ img {
 
 .game-card__stats {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: var(--space-sm);
   padding: var(--space-md);
   background: rgba(255, 255, 255, 0.03);
