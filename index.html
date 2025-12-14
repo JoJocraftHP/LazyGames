@@ -610,25 +610,24 @@
       const elements = $$('.group-card__members[data-group-id]');
       if (!elements.length) return;
 
-      let totalMembers = 0;
-
-      await Promise.all(elements.map(async (el) => {
+      const results = await Promise.all(elements.map(async (el) => {
         const id = el.getAttribute('data-group-id');
-        if (!id) return;
+        if (!id) return 0;
 
         try {
           const json = await fetchJSON(
             `${CONFIG.WORKER_URL}/?endpoint=group&groupId=${encodeURIComponent(id)}`,
             { timeout: CONFIG.FETCH_TIMEOUT, retries: CONFIG.FETCH_RETRIES }
           );
-          const count = renderGroupMembers(el, json);
-          totalMembers += count;
+          return renderGroupMembers(el, json);
         } catch (error) {
           console.warn(`[Group ${id}] fetch failed:`, error);
           renderGroupMembers(el, null);
+          return 0;
         }
       }));
 
+      const totalMembers = results.reduce((sum, count) => sum + count, 0);
       updateTotalGroupMembers(totalMembers);
     }
 
