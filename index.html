@@ -141,6 +141,10 @@
             <span class="hero-stats__label">Total Visits</span>
           </div>
           <div class="hero-stats__item">
+            <span id="total-favourites" class="hero-stats__value">--</span>
+            <span class="hero-stats__label">Total Favourites</span>
+          </div>
+          <div class="hero-stats__item">
             <span id="total-group-members" class="hero-stats__value">--</span>
             <span class="hero-stats__label">Group Members</span>
           </div>
@@ -181,6 +185,10 @@
                 <span class="game-card__stat-value live-visits">--</span>
                 <span class="game-card__stat-label">Visits</span>
               </div>
+              <div class="game-card__stat">
+                <span class="game-card__stat-value live-favourites">--</span>
+                <span class="game-card__stat-label">Favourites</span>
+              </div>
             </div>
             <div class="game-card__actions">
               <a href="https://www.roblox.com/games/117579798602171/UPD5-Crush-for-Brainrots" class="btn btn--primary btn--sm" target="_blank" rel="noopener noreferrer">
@@ -213,6 +221,10 @@
               <div class="game-card__stat">
                 <span class="game-card__stat-value live-visits">--</span>
                 <span class="game-card__stat-label">Visits</span>
+              </div>
+              <div class="game-card__stat">
+                <span class="game-card__stat-value live-favourites">--</span>
+                <span class="game-card__stat-label">Favourites</span>
               </div>
             </div>
             <div class="game-card__actions">
@@ -247,6 +259,10 @@
                 <span class="game-card__stat-value live-visits">--</span>
                 <span class="game-card__stat-label">Visits</span>
               </div>
+              <div class="game-card__stat">
+                <span class="game-card__stat-value live-favourites">--</span>
+                <span class="game-card__stat-label">Favourites</span>
+              </div>
             </div>
             <div class="game-card__actions">
               <a href="https://www.roblox.com/games/16858182871" class="btn btn--primary btn--sm" target="_blank" rel="noopener noreferrer">
@@ -279,6 +295,10 @@
               <div class="game-card__stat">
                 <span class="game-card__stat-value live-visits">--</span>
                 <span class="game-card__stat-label">Visits</span>
+              </div>
+              <div class="game-card__stat">
+                <span class="game-card__stat-value live-favourites">--</span>
+                <span class="game-card__stat-label">Favourites</span>
               </div>
             </div>
             <div class="game-card__actions">
@@ -535,6 +555,7 @@
 
       let totalCCU = 0;
       let totalVisits = 0;
+      let totalFavourites = 0;
 
       cards.forEach(card => {
         const uid = String(card.getAttribute('data-universe-id'));
@@ -544,6 +565,7 @@
         const ccuEl = $('.live-ccu', card);
         const peakEl = $('.live-peak', card);
         const visitsEl = $('.live-visits', card);
+        const favouritesEl = $('.live-favourites', card);
 
         if (ccuEl) {
           ccuEl.textContent = typeof game.playing === 'number' ? game.playing.toLocaleString() : '--';
@@ -554,16 +576,22 @@
         if (visitsEl) {
           visitsEl.textContent = typeof game.visits === 'number' ? formatNumber(game.visits) : '--';
         }
+        if (favouritesEl) {
+          favouritesEl.textContent = typeof game.favoritedCount === 'number' ? formatNumber(game.favoritedCount) : '--';
+        }
 
         if (typeof game.playing === 'number') totalCCU += game.playing;
         if (typeof game.visits === 'number') totalVisits += game.visits;
+        if (typeof game.favoritedCount === 'number') totalFavourites += game.favoritedCount;
       });
 
       // Update hero totals
       const totalCCUEl = $('#total-ccu');
       const totalVisitsEl = $('#total-visits');
+      const totalFavouritesEl = $('#total-favourites');
       if (totalCCUEl) totalCCUEl.textContent = formatNumber(totalCCU);
       if (totalVisitsEl) totalVisitsEl.textContent = formatNumber(totalVisits);
+      if (totalFavouritesEl) totalFavouritesEl.textContent = formatNumber(totalFavourites);
     }
 
     async function fetchGameStats() {
