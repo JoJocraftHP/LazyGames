@@ -87,6 +87,16 @@
         <span>LazyGames</span>
       </a>
 
+      <div class="header__stats">
+        <span class="header__stat" id="total-group-members" aria-label="Total group members">
+          <svg class="header__stat-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+          </svg>
+          <span class="header__stat-value">--</span>
+          <span class="header__stat-label">Members</span>
+        </span>
+      </div>
+
       <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="main-nav">
         <span></span>
         <span></span>
@@ -588,14 +598,25 @@
     function renderGroupMembers(element, data) {
       if (typeof data?.memberCount === 'number') {
         element.textContent = 'Members: ' + data.memberCount.toLocaleString();
+        return data.memberCount;
       } else {
         element.textContent = 'Members: --';
+        return 0;
+      }
+    }
+
+    function updateTotalGroupMembers(total) {
+      const valueEl = $('#total-group-members .header__stat-value');
+      if (valueEl) {
+        valueEl.textContent = total > 0 ? total.toLocaleString() : '--';
       }
     }
 
     async function fetchGroupMembers() {
       const elements = $$('.group-card__members[data-group-id]');
       if (!elements.length) return;
+
+      let totalMembers = 0;
 
       await Promise.all(elements.map(async (el) => {
         const id = el.getAttribute('data-group-id');
@@ -606,12 +627,15 @@
             `${CONFIG.WORKER_URL}/?endpoint=group&groupId=${encodeURIComponent(id)}`,
             { timeout: CONFIG.FETCH_TIMEOUT, retries: CONFIG.FETCH_RETRIES }
           );
-          renderGroupMembers(el, json);
+          const count = renderGroupMembers(el, json);
+          totalMembers += count;
         } catch (error) {
           console.warn(`[Group ${id}] fetch failed:`, error);
           renderGroupMembers(el, null);
         }
       }));
+
+      updateTotalGroupMembers(totalMembers);
     }
 
     // ==========================================================================
