@@ -144,6 +144,10 @@
             <span id="total-group-members" class="hero-stats__value">--</span>
             <span class="hero-stats__label">Group Members</span>
           </div>
+          <div class="hero-stats__item">
+            <span id="total-favourites" class="hero-stats__value">--</span>
+            <span class="hero-stats__label">Total Favourites</span>
+          </div>
         </div>
       </div>
     </section>
@@ -535,6 +539,7 @@
 
       let totalCCU = 0;
       let totalVisits = 0;
+      let totalFavourites = 0;
 
       cards.forEach(card => {
         const uid = String(card.getAttribute('data-universe-id'));
@@ -557,13 +562,16 @@
 
         if (typeof game.playing === 'number') totalCCU += game.playing;
         if (typeof game.visits === 'number') totalVisits += game.visits;
+        if (typeof game.favoritedCount === 'number') totalFavourites += game.favoritedCount;
       });
 
       // Update hero totals
       const totalCCUEl = $('#total-ccu');
       const totalVisitsEl = $('#total-visits');
+      const totalFavouritesEl = $('#total-favourites');
       if (totalCCUEl) totalCCUEl.textContent = formatNumber(totalCCU);
       if (totalVisitsEl) totalVisitsEl.textContent = formatNumber(totalVisits);
+      if (totalFavouritesEl) totalFavouritesEl.textContent = formatNumber(totalFavourites);
     }
 
     async function fetchGameStats() {
