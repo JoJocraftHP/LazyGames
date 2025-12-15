@@ -1026,8 +1026,9 @@ img {
    Team Section - Premium Cards
    -------------------------------------------------------------------------- */
 .team-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: var(--space-xl);
   max-width: var(--max-width-narrow);
   margin: 0 auto;
@@ -1042,6 +1043,8 @@ img {
   text-align: center;
   transition: all var(--transition-base);
   overflow: hidden;
+  width: 280px;
+  flex-shrink: 0;
 }
 
 .team-card::before {
@@ -1136,7 +1139,7 @@ img {
 }
 
 .team-grid--founders {
-  max-width: 600px;
+  max-width: 620px;
 }
 
 /* --------------------------------------------------------------------------
@@ -1328,17 +1331,6 @@ img {
   .games-grid {
     grid-template-columns: repeat(4, 1fr);
   }
-
-  .team-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-/* Desktop */
-@media (min-width: 900px) {
-  .team-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
 }
 
 /* Tablet and below */
@@ -1479,9 +1471,9 @@ img {
   }
 
   /* Team Grid */
-  .team-grid {
-    grid-template-columns: 1fr;
-    gap: var(--space-lg);
+  .team-card {
+    width: 100%;
+    max-width: 320px;
   }
 
   /* Contact */
@@ -1543,10 +1535,6 @@ img {
 /* Tablet Portrait */
 @media (min-width: 600px) and (max-width: 768px) {
   .games-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .team-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
