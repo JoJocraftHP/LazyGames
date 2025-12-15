@@ -1105,6 +1105,40 @@ img {
   line-height: var(--leading-relaxed);
 }
 
+/* Team Category Styles */
+.team-category {
+  margin-bottom: var(--space-3xl);
+}
+
+.team-category:last-child {
+  margin-bottom: 0;
+}
+
+.team-category__title {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: var(--space-xl);
+  color: var(--color-text);
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.team-category__title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--gradient-primary);
+  margin: var(--space-sm) auto 0;
+  border-radius: var(--border-radius-full);
+}
+
+.team-grid--founders {
+  max-width: 600px;
+}
+
 /* --------------------------------------------------------------------------
    Contact Section - Call to Action
    -------------------------------------------------------------------------- */
